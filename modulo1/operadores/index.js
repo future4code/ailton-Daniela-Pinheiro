@@ -61,7 +61,7 @@
     console.log("O primeiro numero é divisível pelo segundo?", numero1 % numero2 === 0)
     console.log("O segundo numero é divisível pelo primeiro?", numero2 % numero1 === 0)
 
-// Desafio
+// Desafios
 
 /*
 // 1.
@@ -86,5 +86,33 @@
 
 // 2.
 
+/*
 // 3.
+    const libra = 20
+    const libraParaKg = libra / 2.205
+    console.log(`${libra}lb equivalem a ${libraParaKg} kg.`)
 
+    const onca = 10.5
+    const oncaParaKg = onca / 35.274
+    console.log(`${onca}oz equivalem a ${oncaParaKg} kg.`)
+
+    const milha = 100
+    const milhaParaMetro = milha * 1609
+    console.log(`${milha}mi equivalem a ${milhaParaMetro} m.`)
+
+    const pe = 50
+    const peParaMetro = pe / 3.281
+    console.log(`${pe}ft equivalem a ${peParaMetro} m.`)
+
+    const galao = 103.56
+    const galaoParaLitro = galao * 379
+    console.log(`${galao}gal equivalem a ${galaoParaLitro} l.`)
+
+    // const xicara = 450
+    // const xicaraParaLitro = xicara * 0.24
+    // console.log(`${xicara}xic equivalem a ${xicaraParaLitro} l.`)
+
+    const xicara = Number(prompt("Digite o número de xícaras a ser convertido para litros."))
+    const xicaraParaLitro = xicara * 0.24
+    console.log(`${xicara}xic equivalem a ${xicaraParaLitro} l.`)
+*/
