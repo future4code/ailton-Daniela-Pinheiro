@@ -123,9 +123,9 @@ b.
             }
         }
         if(numeroChutado === numeroEscolhido) {
-            console.log("Parabains, você acertou!!!")
-            console.log(`Número escolhido: ${numeroEscolhido}`)
-            console.log(`Total de tentativas: ${repeticoes + 1}`)
+            console.log(`Parabains, você acertou!!!
+Número escolhido: ${numeroEscolhido}
+Total de tentativas: ${repeticoes + 1}`)
         }
     }
     else {
@@ -134,3 +134,36 @@ b.
 */
 
 // 2.
+const numeroEscolhido = Math.floor((Math.random() * 100) + 1);  //Sortear o número
+let repeticoes = 0
+
+// Verificação de Number
+// if(!isNaN(numeroEscolhido)) {  
+
+console.log("Vamos jogar!")
+let numeroChutado = Number(prompt("Hora de chutar! Qual foi o número escolhido?"))
+for(repeticoes = 0; numeroChutado !== numeroEscolhido; repeticoes ++) {
+    if(numeroChutado > numeroEscolhido) {
+        console.log(`Número chutado: ${numeroChutado}`)
+        console.log("Errou! O número é menor.")
+        numeroChutado = Number(prompt("Tente outra vez!"))
+    } else {
+        console.log(`Número chutado: ${numeroChutado}`)
+        console.log("Errou! O número é maior.")
+        numeroChutado = Number(prompt("Tente outra vez!"))
+    }
+}
+if(numeroChutado === numeroEscolhido) {
+    console.log(`Parabains, você acertou!!!
+Número escolhido: ${numeroEscolhido}
+Total de tentativas: ${repeticoes + 1}`)
+}
+
+// Verificação de Number
+// }   
+// else {
+//     console.log("Algo deu errado... É para digitar um número!")
+// }
+
+// Foi suficiente trocar o valor atribuído a numeroEscolhido por um valor gerado aleatoriamente
+// e retirar do código a verificação de Number, uma vez que Math sempre retorna um número
