@@ -103,5 +103,34 @@ b.
     }
 
 // Desafios
+/*
 // 1.
+    const numeroEscolhido = Number(prompt("Escolha um número pra começar a jogar."))
+    let repeticoes = 0
+
+    if(!isNaN(numeroEscolhido)) {
+        console.log("Vamos jogar!")
+        let numeroChutado = Number(prompt("Hora de chutar! Qual foi o número escolhido?"))
+        for(repeticoes = 0; numeroChutado !== numeroEscolhido; repeticoes ++) {
+            if(numeroChutado > numeroEscolhido) {
+                console.log(`Número chutado: ${numeroChutado}`)
+                console.log("Errou! O número é menor.")
+                numeroChutado = Number(prompt("Tente outra vez!"))
+            } else {
+                console.log(`Número chutado: ${numeroChutado}`)
+                console.log("Errou! O número é maior.")
+                numeroChutado = Number(prompt("Tente outra vez!"))
+            }
+        }
+        if(numeroChutado === numeroEscolhido) {
+            console.log("Parabains, você acertou!!!")
+            console.log(`Número escolhido: ${numeroEscolhido}`)
+            console.log(`Total de tentativas: ${repeticoes + 1}`)
+        }
+    }
+    else {
+        console.log("Algo deu errado... É para digitar um número!")
+    }
+*/
+
 // 2.
