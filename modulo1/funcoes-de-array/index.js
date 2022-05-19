@@ -102,39 +102,29 @@
 
 // Desafio
 // 1.
-const pokemons = [
-    { nome: "Bulbasaur", tipo: "grama" },
-    { nome: "Bellsprout", tipo: "grama" },
-    { nome: "Charmander", tipo: "fogo" },
-    { nome: "Vulpix", tipo: "fogo" },
-    { nome: "Squirtle", tipo: "água" },
-    { nome: "Psyduck", tipo: "água" },
- ]
+    const pokemons = [
+        { nome: "Bulbasaur", tipo: "grama" },
+        { nome: "Bellsprout", tipo: "grama" },
+        { nome: "Charmander", tipo: "fogo" },
+        { nome: "Vulpix", tipo: "fogo" },
+        { nome: "Squirtle", tipo: "água" },
+        { nome: "Psyduck", tipo: "água" },
+    ]
 
-// a.
-const nomesOrdemAlfabetica = pokemons.map((pokemons) => {
-    return pokemons.nome
-}).sort()
-console.log(nomesOrdemAlfabetica)
+    // a.
+    const nomesOrdemAlfabetica = pokemons.map((pokemons) => {
+        return pokemons.nome
+    }).sort()
+    console.log(nomesOrdemAlfabetica)
 
-// b.
-// const tiposDiferentes = []
+    // b.
+    const tiposPokemons = pokemons.map((pokemons) => {
+        return pokemons.tipo
+        // Após o map: ['grama', 'grama', 'fogo', 'fogo', 'água', 'água']
+    }).filter((tipo, index, pokemons) => {
+        return pokemons.indexOf(tipo) === index
+        //indexOf retorna apenas a primeira ocorrência 
+    })
+    console.log(tiposPokemons)
 
-// const tiposPokemons = pokemons.map((pokemons) => {
-//     return pokemons.tipo
-// }).filter((pokemons) => {
-//     // retirar valores repetidos
-//     if(tiposPokemons.includes(pokemons)) {
-
-//     }
-// })
-// console.log(tiposPokemons)
-// Após o map: ['grama', 'grama', 'fogo', 'fogo', 'agua', 'agua']
-
-/*
-criar novo array que receberá os valores
-percorrer o array e guardar os valores  >filter
-    condição: se o novo valor já existir, não guarda
-retornar esse novo array  >filter
-*/ 
 
