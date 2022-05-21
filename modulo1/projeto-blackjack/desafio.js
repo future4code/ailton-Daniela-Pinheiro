@@ -32,5 +32,5 @@ if(confirm("Boas vindas ao jogo de BlackJack!" +
    // 11.
    // 12.
 } else {
-   confirm("O jogo acabou.")
+   alert("O jogo acabou.")
 }
