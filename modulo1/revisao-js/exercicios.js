@@ -56,7 +56,13 @@ function retornaNumerosPares(array) {
 
 // EXERCÍCIO 05
 function retornaNumerosParesElevadosADois(array) {
-
+    return array.filter((numero, indice, array) => {
+        if(array[indice] % 2 === 0) {
+            return array[indice]
+        }
+    }).map((numero, indice, array) => {
+        return array[indice] ** 2
+    })
 }
 
 // EXERCÍCIO 06
