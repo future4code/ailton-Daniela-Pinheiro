@@ -21,7 +21,20 @@ function retornaArrayInvertido(array) {
 
 // EXERCÍCIO 03
 function retornaArrayOrdenado(array) {
-
+    return array.sort((num1, num2) => {
+        return num1 - num2
+    })
+  //   Desafio
+    // for(let i = 0; i < array.length; i++) {
+    //     for(let j = 0; j < array.length; j++) {
+    //         if(array[i] < array[j]) {
+    //             let troca = array[i]
+    //             array[i] = array[j]
+    //             array[j] = troca
+    //         }
+    //     }
+    // }
+    // return array
 }
 
 // EXERCÍCIO 04
