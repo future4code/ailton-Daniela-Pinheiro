@@ -67,12 +67,15 @@ function retornaNumerosParesElevadosADois(array) {
 
 // EXERCÍCIO 06
 function retornaMaiorNumero(array) {
-  
+    array.sort((num1, num2) => {
+        return num1 - num2
+    })
+    return array[array.length - 1]
 }
 
 // EXERCÍCIO 07
 function retornaObjetoEntreDoisNumeros(num1, num2) {
-
+    
 }
 
 // EXERCÍCIO 08
