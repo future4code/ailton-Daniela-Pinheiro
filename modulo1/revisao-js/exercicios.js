@@ -133,12 +133,20 @@ function retornaPessoaAnonimizada(pessoa) {
 
 // EXERCÍCIO 13A
 function retornaPessoasAutorizadas(pessoas) {
-   
+    return pessoas.filter((pessoa, indice, pessoas) => {
+        if((pessoas[indice].altura >= 1.5) && (pessoas[indice].idade > 14) && (pessoas[indice].idade < 60)) {
+            return pessoas[indice]
+        }
+    })
 }
 
 // EXERCÍCIO 13B
 function retornaPessoasNaoAutorizadas(pessoas) {
-  
+    return pessoas.filter((pessoa, indice, pessoas) => {
+        if((pessoas[indice].altura < 1.5) || (pessoas[indice].idade <= 14) || (pessoas[indice].idade >= 60)) {
+            return pessoas[indice]
+        }
+    })
 }
 
 // EXERCÍCIO 14
