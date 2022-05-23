@@ -175,5 +175,17 @@ function retornaArrayOrdenadoAlfabeticamente(consultas) {
 
 // EXERCÍCIO 15B
 function retornaArrayOrdenadoPorData(consultas) {
-   
+    return consultas.sort((num1, num2) => {
+        let dia1 = Number(num1.dataDaConsulta.slice(0, 2))
+        let dia2 = Number(num2.dataDaConsulta.slice(0, 2))
+        return dia1 - dia2
+    }).sort((num1, num2) => {
+            let mes1 = Number(num1.dataDaConsulta.slice(3, 5))
+            let mes2 = Number(num2.dataDaConsulta.slice(3, 5))
+            return mes1 - mes2
+    }).sort((num1, num2) => {
+        let ano1 = Number(num1.dataDaConsulta.slice(6))
+        let ano2 = Number(num2.dataDaConsulta.slice(6))
+        return ano1 - ano2
+    })
 }
