@@ -151,12 +151,18 @@ function retornaPessoasNaoAutorizadas(pessoas) {
 
 // EXERCÍCIO 14
 function retornaContasComSaldoAtualizado(contas) {
-
+    for(let i = 0; i < contas.length; i++) {
+        for(let j = 0; j < contas[i].compras.length; j++) {
+            contas[i].saldoTotal -= contas[i].compras[j]
+        }
+        contas[i].compras = []
+    }
+    return contas
 }
 
 // EXERCÍCIO 15A
 function retornaArrayOrdenadoAlfabeticamente(consultas) {
-  
+    // consultas.forEach()
 }
 
 // EXERCÍCIO 15B
