@@ -1,0 +1,99 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    background-image: url(./img/pattern.png);
+    color: #339bdb;
+    text-shadow: 2px 2px white;
+}
+
+header {
+    background-color: ghostwhite;
+    padding: 16px;
+    margin-bottom: 20px;
+    border-bottom: 2px dotted crimson;
+}
+
+#titulo-inicio {
+    font-size: 40px;
+    color: crimson;
+    text-shadow: 2px 2px white;
+}
+.titulos {
+    margin: 20px 8px;
+    color: crimson;
+}
+
+a {
+    background-color: lightskyblue;
+    color: mintcream;
+    text-decoration: none;
+    text-shadow: none;
+    padding: 8px;
+}
+
+table{
+    background-color: #339bdb;
+    margin: 16px;
+}
+tr {
+    background-color: ghostwhite;
+}
+th {
+    padding: 8px;
+}
+td {
+    padding: 4px 4px 0 4px;
+    text-align: center;
+}
+.imagem-tabela {
+    height: 140px;
+    width: auto;
+}
+
+form {
+    display: inline-block;
+    text-align: end;
+    margin: 16px;
+}
+label {
+    background-color: ghostwhite;
+}
+input {
+    margin: 4px;
+    border: 1px solid #339bdb;
+}
+button {
+    margin: 4px;
+    padding: 4px;
+    font-family: 'Courier New', monospace;
+    color: mintcream;
+    font-size: 16px;
+    background-color: lightskyblue;
+    border-color: mintcream;
+}
+
+ul {
+    display: inline-block;
+    font-size: 20px;
+    margin-left: 40px;
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background-color: ghostwhite;
+    padding: 8px;
+    border-top: 2px dotted crimson;
+}
+.imagem-rodape {
+    height: 28px;
+    width: auto;
+    margin: 4px;
+}
