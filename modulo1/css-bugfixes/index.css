@@ -158,6 +158,19 @@ td button:active {
     background-color: transparent;
 }
 
+.icone:hover {
+    opacity: 0.5;
+}
+
+.icone:active {
+    opacity: 1;
+}
+
+#container-back-button {
+    text-align: center;
+    margin: 80px;
+}
+
 #back-button {
     background-color: white;
     width: 100px;
