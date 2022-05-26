@@ -127,6 +127,11 @@ td button {
     height: 100px;
 }
 
+.imagens-tabela {
+    width: 40px;
+    height: auto;
+    background-color: transparent;
+}
 
 #back-button {
     background-color: white;
