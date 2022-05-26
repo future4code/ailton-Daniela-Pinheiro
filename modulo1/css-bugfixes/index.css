@@ -133,6 +133,12 @@ td button {
     background-color: transparent;
 }
 
+.icone {
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+}
+
 #back-button {
     background-color: white;
     width: 100px;
