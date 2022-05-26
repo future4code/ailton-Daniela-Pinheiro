@@ -60,10 +60,6 @@ div img {
     height: 15px;
 }
 
-#container-para-comprar p {
-    display: block;
-}
-
 /** 
   *
   *  ESTILOS HOME 
@@ -79,6 +75,11 @@ div img {
     padding: 15px 0px;
 }
 
+#container-de-descricao>p, ol, h3 {
+    position: relative;
+    top: 100px;
+}
+
 #container-para-comprar {
     background-color: #e7eb90;
 }
@@ -87,6 +88,7 @@ div img {
     color: #c44f00;
     padding: 100px 0;
     font-size: 60px;
+    display: block;
 }
 
 
