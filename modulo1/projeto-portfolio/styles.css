@@ -1,0 +1,63 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* font-family: ; */
+    color: dimgray;
+}
+
+header>h1 {
+    margin: 8px 16px;
+    text-align: right;
+}
+
+div {
+    margin: 20px;
+    text-align: center;
+}
+
+a {
+    margin: 4px;
+    opacity: 70%;
+    text-decoration-line: none;
+}
+
+a:hover {
+    opacity: 100%;
+}
+
+/* button {
+    display: block;
+} */
+
+p {
+    margin: 4px;
+}
+
+/* IDS */
+
+#barra-lateral {
+    position: fixed;
+    margin: 0 80px;
+    padding: 8px;
+    width: 280px;
+    height: 100vh;
+    text-align: justify;
+    border: 1px solid gray;
+}
+
+#imagem-lateral {
+    position: fixed;
+    width: 60px;
+    height: 100vh;
+    margin: 0;
+    background-color: aquamarine;
+}
+
+.conteudo-principal {
+    margin-left: 400px;
+    padding: 8px;
+    width: 65vw;
+    text-align: justify;
+    border: 1px solid gray;
+}
