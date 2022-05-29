@@ -11,41 +11,46 @@
     <title>Daniela Klem - Contato</title>
 </head>
 <body>
-        <header>
-            <h1>Daniela Klem</h1>
-        </header>
+    <header>
+        <h1>Daniela Klem</h1>
+    </header>
         
-        <div id="imagem-lateral"></div>
+    <div id="imagem-lateral"></div>
     
-        <div id="barra-lateral">
-            <div><p>Imagem?</p></div>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Distinctio nulla vitae quam optio assumenda dolorem at ea et nihil perferendis maxime illo ut, sed incidunt nisi eaque non recusandae nemo inventore commodi nesciunt quibusdam hic error. Optio, blanditiis sapiente consequatur repellat sed illo adipisci autem sit non, vero dolorum assumenda?</p>
-            <div>
-                <a href="index.html"><button>Início</button></a><br>
-                <a href="sobre.html">Sobre</a><br>
-                <a href="projetos.html">Projetos</a><br>
-                <a href="contato.html">Contato</a><br>
-            </div>
-            <div><p>Redes sociais</p></div>
+    <div id="barra-lateral">
+        <div><img id="foto-perfil" src="./img/photo.png"></div>
+        <p>Futura desenvolvedora Full Stack pela Labenu. Adoro games, filmes, livros e música.
+            Atualmente encantada pelo front-end e me divertindo com diferentes layouts de páginas web.</p>
+        <div>
+            <a href="index.html">Início</a><br>
+            <a href="sobre.html">Sobre</a><br>
+            <a href="projetos.html">Projetos</a><br>
+            <a href="contato.html">Contato</a><br>
         </div>
+        <div>
+            <a href="https://www.instagram.com/daniekcp"><img class="imagem-redes-sociais" src="./img/icon_insta.png" alt="Instagram"></a>
+            <a href="https://github.com/dkklem"><img class="imagem-redes-sociais" src="./img/icon_github.png" alt="GitHub"></a>
+            <a href="mailto:danie_klem@hotmail.com"><img class="imagem-redes-sociais" src="./img/icon_email.png" alt="Email"></a>
+        </div>
+    </div>
     
-        <div class="conteudo-principal">
-            <h3>Contato</h3>
+    <div class="conteudo-principal">
+        <h3>Contato</h3>
+        <br>
+        <p>Quer falar comigo? Basta preencher o formulário abaixo:</p>
+        <br>
+        <form>
+            <label for="nome"><b>Nome</b> </label><br>
+            <input class="caixa-texto" type="text" id="nome" name="nome" size="56">
+            <br><br>
+            <label for="email"><b>Email</b> </label><br>
+            <input class="caixa-texto" type="text" id="email" name="email" size="56">
+            <br><br>
+            <label for="mensagem"><b>Mensagem</b> </label><br>
+            <textarea class="caixa-texto" id="mensagem" name="mensagem" rows="8" cols="60"></textarea>
             <br>
-            <p>Preencha o <b>formulário</b> abaixo</p>
-            <br>
-            <form>
-                <label for="nome">Nome: </label><br>
-                <input type="text" id="nome" name="nome">
-                <br>
-                <label for="email">Email: </label><br>
-                <input type="text" id="email" name="email">
-                <br>
-                <label for="mensagem">Mensagem: </label><br>
-                <textarea id="mensagem" name="mensagem" rows="8" cols="60"></textarea>
-                <br>
-                <button type="submit">Enviar</button>
-            </form>
-        </div>
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
 </body>
 </html>
