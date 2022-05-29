@@ -2,13 +2,20 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* font-family: ; */
+    font-family: 'Ubuntu', sans-serif;
     color: dimgray;
 }
+
+/* ESTILOS GERAIS */
 
 header>h1 {
     margin: 8px 16px;
     text-align: right;
+    color: #e4370c;
+}
+
+h3 {
+    color: #389ae5;
 }
 
 div {
@@ -20,10 +27,16 @@ a {
     margin: 4px;
     opacity: 70%;
     text-decoration-line: none;
+    color: #e4370c;
 }
 
 a:hover {
     opacity: 100%;
+}
+
+a:active {
+    opacity: 100%;
+    color: #389ae5;
 }
 
 /* button {
@@ -34,7 +47,7 @@ p {
     margin: 4px;
 }
 
-/* IDS */
+/* BARRA LATERAL */
 
 #barra-lateral {
     position: fixed;
@@ -54,10 +67,21 @@ p {
     background-color: aquamarine;
 }
 
+.imagem-redes-sociais {
+    height: 28px;
+    width: auto;
+}
+
+/* CONTAINER CONTEÚDO PRINCIPAL */
+
 .conteudo-principal {
     margin-left: 400px;
     padding: 8px;
-    width: 65vw;
     text-align: justify;
     border: 1px solid gray;
 }
+/* SOBRE */
+
+/* PROJETOS */
+
+/* CONTATO */
