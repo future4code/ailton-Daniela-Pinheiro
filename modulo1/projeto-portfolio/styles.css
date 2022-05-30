@@ -1,0 +1,148 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Ubuntu', sans-serif;
+    color: dimgray;
+}
+
+/* ESTILOS GERAIS */
+
+header>h1 {
+    margin: 8px 16px;
+    padding-right: 40px;
+    text-align: right;
+    color: #e4370c;
+}
+
+h3, h4 {
+    color: #389ae5;
+}
+
+div {
+    margin: 20px;
+    text-align: center;
+}
+
+a {
+    margin: 4px;
+    opacity: 70%;
+    text-decoration-line: none;
+    color: #e4370c;
+}
+
+a:hover {
+    opacity: 100%;
+}
+
+a:active {
+    opacity: 100%;
+    color: #389ae5;
+}
+
+p {
+    margin: 4px;
+}
+
+/* BARRA LATERAL */
+
+#barra-lateral {
+    position: fixed;
+    margin: 0 100px;
+    padding: 0 8px;
+    width: 260px;
+    height: 100vh;
+    text-align: justify;
+}
+
+#imagem-lateral {
+    position: fixed;
+    width: 80px;
+    height: 100vh;
+    margin: 0;
+    background-image: url(./img/pattern_1.png);
+}
+
+#foto-perfil {
+    width: 200px;
+    height: auto;
+    margin: 0;
+    border-radius: 24px;
+}
+
+.imagem-redes-sociais {
+    height: 28px;
+    width: auto;
+}
+
+/* CONTEÚDO PRINCIPAL */
+
+.conteudo-principal {
+    margin-left: 400px;
+    padding: 8px;
+    padding-right: 40px;
+    text-align: justify;
+}
+
+/* PROJETOS */
+
+#menu-projetos {
+    border: 4px double #389ae5;
+    border-radius: 24px;
+    padding: 16px;
+}
+
+table {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+th, td {
+    padding: 4px 12px;
+}
+
+.imagens-projeto {
+    width: 240px;
+    height: 200px;
+    margin: 8px 12px;
+    border-radius: 24px;
+    border: 1px solid #389ae5;
+}
+
+.imagens-projeto-menor {
+    width: 140px;
+    height: auto;
+    margin: 8px 12px;
+    border-radius: 24px;
+    border: 1px solid #e4370c;
+}
+
+/* CONTATO */
+
+.caixa-texto {
+    margin: 8px 4px;
+    border: 1px solid #389ae5;
+}
+
+form {
+    margin: 8px;
+}
+
+button {
+    margin: 16px 0;
+    padding: 4px 16px;
+    background-color: #e4370c;
+    opacity: 70%;
+    color: white;
+    border: 0;
+}
+
+button:hover {
+    opacity:100%;
+}
+
+button:active {
+    opacity: 100%;
+    background-color: #389ae5;
+}
