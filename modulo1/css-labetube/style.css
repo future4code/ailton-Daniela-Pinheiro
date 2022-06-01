@@ -88,24 +88,9 @@ section>p {
     height: auto;
 }
 
-/* REDIMENSIONAR NO DESKTOP */
+/* PARA DISPOSITIVOS MÓVEIS E REDIMENSIONAR */
 
 @media screen and (max-width: 850px) {
-    main {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .video-tamanho {
-        width: 100%;
-    }
-}
-
-
-/* PARA DISPOSITIVOS MÓVEIS */
-
-@media screen and (min-device-width: 320px) and (max-device-width: 800px) {
     main {
         display: flex;
         flex-wrap: wrap;
