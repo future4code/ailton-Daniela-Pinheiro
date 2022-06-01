@@ -4,10 +4,13 @@
     box-sizing: border-box;
 }
 
+/* PÁGINA INICIAL */
+
 #container {
     display: grid;
     height: 100vh;
     width: 100vw;
+    min-width: 320px;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 50px 1fr 50px;
     justify-items: stretch;
@@ -18,10 +21,9 @@ header {
     grid-column: 1 / 3;
     display: flex;
     background-color: mediumturquoise;
-    height: 50px;
     align-items: center;
     justify-content: space-between;
-    padding: 24px;
+    padding: 20px;
 }
 
 header>h3 {
@@ -33,33 +35,36 @@ main {
     grid-column: 1 / 3;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(4, 1fr);
-    row-gap: 8px;
-    column-gap: 8px;
+    grid-template-rows: repeat(2, 1fr);
+    column-gap: 4px;
     justify-items: center;
     padding: 20px 8px;
 }
 
 footer {
+    
     grid-row: 3 / 4;
     grid-column: 1 / 3;
     display: flex;
     background-color: dimgray;
-    height: 50px;
     align-items: center;
     justify-content: center;
-    padding: 8px;
+    padding: 16px;
     color: antiquewhite;
+    
 }
+
+/* MENU DE VIDEOS PÁGINA INICIAL */
 
 .card-video {
     display: flex;
     flex-direction: column;
     border: 1px solid gray;
     height: 240px;
-    width: 240px;
+    width: 210px;
     align-items: center;
     justify-content: space-evenly;
+    margin: 4px;
 }
 
 .icone-video {
@@ -69,4 +74,45 @@ footer {
 
 section>p {
     padding: 8px;
+}
+
+/* PÁGINA DO VIDEO */
+
+.container-video {
+    display: flex;
+    flex-direction: column;
+}
+
+.video-tamanho {
+    width: 800px;
+    height: auto;
+}
+
+/* REDIMENSIONAR NO DESKTOP */
+
+@media screen and (max-width: 850px) {
+    main {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .video-tamanho {
+        width: 100%;
+    }
+}
+
+
+/* PARA DISPOSITIVOS MÓVEIS */
+
+@media screen and (min-device-width: 320px) and (max-device-width: 800px) {
+    main {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .video-tamanho {
+        width: 100%;
+    }
 }
