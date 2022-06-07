@@ -18,8 +18,11 @@ const ImagemBotao = styled.img `
 function ImagemButton(props) {
     return (
         <ContainerImagemButton>
-            <ImagemBotao src={ props.imagem }/>
+            <a target='blank' href={ props.link }>
+                <ImagemBotao src={ props.imagem }/>
+            </a>
             <p>{ props.texto }</p>
+            
         </ContainerImagemButton>
     )
 }

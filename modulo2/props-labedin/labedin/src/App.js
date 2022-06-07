@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import CardGrande from './components/CardGrande/CardGrande';
 import ImagemButton from './components/ImagemButton/ImagemButton';
 import CardPequeno from './components/CardPequeno/CardPequeno';
@@ -33,7 +32,7 @@ function App() {
         <CardGrande 
           imagem={foto}
           nome="Daniela Klem" 
-          descricao="Oi, eu chamo Daniela. Sou aspirante a Web Developer, atualmente aluna na Labenu. Adoro estilizar páginas, testando diversos layouts e cores. Talvez por isso acabo demorando muito para terminar algumas atividades..."
+          descricao="Oi, eu me chamo Daniela! Sou aspirante a Web Developer, atualmente aluna na Labenu. Adoro estilizar páginas, testando diversos layouts e cores. Talvez por isso acabo demorando muito para terminar algumas atividades..."
         />
         
         <ImagemButton 
@@ -69,11 +68,13 @@ function App() {
       <ContainerSecao>
         <TituloMaior>Minhas redes sociais</TituloMaior>
         <ImagemButton 
+          link="https://pt-br.facebook.com/"
           imagem="https://d2v9ipibika81v.cloudfront.net/uploads/sites/261/2017/01/facebook-logo-3.png" 
           texto="Facebook" 
         />        
 
         <ImagemButton 
+          link="https://twitter.com/"
           imagem="https://logodownload.org/wp-content/uploads/2014/09/twitter-logo-1-1.png" 
           texto="Twitter" 
         />        
