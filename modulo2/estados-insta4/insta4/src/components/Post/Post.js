@@ -1,12 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
-
 import {IconeComContador} from '../IconeComContador/IconeComContador'
-
 import iconeCoracaoBranco from '../../img/favorite-white.svg'
 import iconeCoracaoPreto from '../../img/favorite.svg'
 import iconeComentario from '../../img/comment_icon.svg'
 import {SecaoComentario} from '../SecaoComentario/SecaoComentario'
+import iconeMarcacaoBranco from '../../img/bookmark.png'
+import iconeMarcacaoPreto from '../../img/bookmark_black.png'
+import iconeCompartilhar from '../../img/share.png'
+import { SecaoCompartilhar } from '../SecaoCompartilhar/SecaoCompartilhar'
+
 
 const PostContainer = styled.div`
   border: 1px solid gray;
@@ -45,7 +48,9 @@ class Post extends React.Component {
     curtido: false,
     numeroCurtidas: 0,
     comentando: false,
-    numeroComentarios: 0
+    numeroComentarios: 0,
+    marcado: false,
+    compartilhando: false
   }
 
   onClickCurtida = () => {
@@ -76,6 +81,20 @@ class Post extends React.Component {
     })
   }
 
+  onClickCompartilhar = () => {
+    this.setState({
+      compartilhando: !this.state.compartilhando
+    })
+  }
+
+  onClickMarcacao = () => {
+    this.setState({
+      marcado: !this.state.marcado
+    })
+  }
+
+  
+
   render() {
     let iconeCurtida
 
@@ -83,12 +102,26 @@ class Post extends React.Component {
       iconeCurtida = iconeCoracaoPreto
     } else {
       iconeCurtida = iconeCoracaoBranco
-    }
+    }    
 
     let componenteComentario
 
     if(this.state.comentando) {
       componenteComentario = <SecaoComentario aoEnviar={this.aoEnviarComentario}/>
+    }
+    
+    let opcaoCompartilhar
+
+    if(this.state.compartilhando) {
+      opcaoCompartilhar = <SecaoCompartilhar />
+    }
+
+    let iconeMarcacao
+
+    if(this.state.marcado) {
+      iconeMarcacao = iconeMarcacaoPreto
+    } else {
+      iconeMarcacao = iconeMarcacaoBranco
     }
 
     return <PostContainer>
@@ -105,14 +138,25 @@ class Post extends React.Component {
           onClickIcone={this.onClickCurtida}
           valorContador={this.state.numeroCurtidas}
         />
-
+        
         <IconeComContador
           icone={iconeComentario}
           onClickIcone={this.onClickComentario}
           valorContador={this.state.numeroComentarios}
         />
+        
+        <IconeComContador
+          icone={iconeCompartilhar}
+          onClickIcone={this.onClickCompartilhar}
+        />
+        
+        <IconeComContador
+          icone={iconeMarcacao}
+          onClickIcone={this.onClickMarcacao}
+        />
       </PostFooter>
       {componenteComentario}
+      {opcaoCompartilhar}
     </PostContainer>
   }
 }
