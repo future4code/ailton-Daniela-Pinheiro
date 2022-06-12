@@ -13,11 +13,9 @@ const Container = styled.div`
 `
 
 function App() {
-  return (
-    <Container>
+  return <Container>
     <EscreverMensagem />
   </Container>
-  );
 }
 
 export default App;

@@ -13,6 +13,7 @@ const MensagemExibida = styled.p`
   background-color: white;
   padding: 4px;
   border-radius: 4px;
+  word-wrap: break-word;
 `
 
 const ContainerEscrever = styled.div`
@@ -47,54 +48,75 @@ const BotaoEnviar = styled.button`
 `
 
 class EscreverMensagem extends React.Component {
+  state = {
+    listaMensagens: [], // Para ser exibida na tela
+    valorInputUsuario: "",
+    valorInputMensagem: ""
+  }
 
-    state = {
-        listaMensagens: [], // Para ser exibida na tela
-        valorInputUsuario: "",
-        valorInputMensagem: ""
+  aoDigitarUsuario = (event) => {
+    this.setState({valorInputUsuario: event.target.value})
+  }
+
+  aoDigitarMensagem = (event) => {
+    this.setState({valorInputMensagem: event.target.value})
+  }
+
+  aoClicarEnviar = () => {
+    // Guarda as informações de estado no array de mensagens para ser exibida na tela
+    const novaMensagem = {
+      usuario: this.state.valorInputUsuario,
+      mensagem: this.state.valorInputMensagem
     }
+    const novaListaMensagens = [...this.state.listaMensagens, novaMensagem]
+    this.setState({ listaMensagens: novaListaMensagens })
 
-    aoDigitarUsuario = (event) => {
-        this.setState({valorInputUsuario: event.target.value})
+    // Limpa o input
+    this.setState({valorInputUsuario: "", valorInputMensagem: ""})
+  }
+
+  aoClicarEnter = (event) => {
+    if(event.keyCode === 13) {
+      // Mesma função do botão enviar
+      const novaMensagem = {
+        usuario: this.state.valorInputUsuario,
+        mensagem: this.state.valorInputMensagem
+      }
+      const novaListaMensagens = [...this.state.listaMensagens, novaMensagem]
+      this.setState({ listaMensagens: novaListaMensagens })
+      this.setState({valorInputUsuario: "", valorInputMensagem: ""})
     }
+  }
 
-    aoDigitarMensagem = (event) => {
-        this.setState({valorInputMensagem: event.target.value})
+  aoClicarDeletarMensagem = (chave) => {
+    if(window.confirm('Tem certeza de que quer deletar esta mensagem?')) {
+      // Deleta mensagem
+      const novoMostraMensagem = this.state.listaMensagens.filter((mensagens, index) => {
+        return chave !== index
+      })
+      this.setState({listaMensagens: novoMostraMensagem})
     }
-
-    aoClicarEnviar = () => {
-        // Guarda as informações de estado no array de mensagens para ser exibida na tela
-        const novaMensagem = {
-            usuario: this.state.valorInputUsuario,
-            mensagem: this.state.valorInputMensagem
-        }
-        const novaListaMensagens = [...this.state.listaMensagens, novaMensagem]
-        this.setState({ listaMensagens: novaListaMensagens })
-
-        // Limpa o input
-        this.setState({valorInputUsuario: "", valorInputMensagem: ""})
-    }
-
-    render () {
-
-        // Tratamento do array para exibição
-        const mostraMensagens = this.state.listaMensagens.map((mensagens) => {
-            return <MensagemExibida>
-                <b>{mensagens.usuario}: </b>{mensagens.mensagem}
-            </MensagemExibida>
-        })
-
-        return <>
-            <ContainerMensagens>
-                {mostraMensagens}
-            </ContainerMensagens>
-            <ContainerEscrever>
-                <InputUsuario value={this.state.valorInputUsuario} onChange={this.aoDigitarUsuario} placeholder='Usuário' />
-                <InputMensagem value={this.state.valorInputMensagem} onChange={this.aoDigitarMensagem} placeholder='Mensagem' />
-                <BotaoEnviar onClick={this.aoClicarEnviar}>Enviar</BotaoEnviar>
-            </ContainerEscrever>
-        </>
-    }
+  }
+  
+  render () {
+    // Tratamento do array para exibição
+    const mostraMensagens = this.state.listaMensagens.map((mensagens, index) => {
+      return <MensagemExibida key={index} onDoubleClick={() => this.aoClicarDeletarMensagem(index)}>
+        <b>{mensagens.usuario}: </b>{mensagens.mensagem}
+      </MensagemExibida>
+    })
+    
+    return <>
+      <ContainerMensagens>
+        {mostraMensagens}
+      </ContainerMensagens>
+      <ContainerEscrever>
+        <InputUsuario value={this.state.valorInputUsuario} onChange={this.aoDigitarUsuario} placeholder='Usuário' />
+        <InputMensagem value={this.state.valorInputMensagem} onChange={this.aoDigitarMensagem} onKeyDown={this.aoClicarEnter} placeholder='Mensagem' />
+        <BotaoEnviar onClick={this.aoClicarEnviar}>Enviar</BotaoEnviar>
+      </ContainerEscrever>
+    </>
+  }
 }
 
 export default EscreverMensagem
