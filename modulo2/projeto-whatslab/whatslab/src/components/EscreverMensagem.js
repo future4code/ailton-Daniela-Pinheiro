@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components'
 
-// Estilização
 const ContainerMensagens = styled.div`
   flex-grow: 1;
   width: 470px;
@@ -50,7 +49,7 @@ const BotaoEnviar = styled.button`
 class EscreverMensagem extends React.Component {
 
     state = {
-        listaMensagens: [{usuario: "aaaa", mensagem:"jfehfheihe"}], // Para ser exibida na tela
+        listaMensagens: [], // Para ser exibida na tela
         valorInputUsuario: "",
         valorInputMensagem: ""
     }

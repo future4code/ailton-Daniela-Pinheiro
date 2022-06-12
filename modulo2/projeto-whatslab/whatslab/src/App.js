@@ -1,10 +1,22 @@
 import React from 'react';
-import ContainerEscreverMensagem from './components/ContainerEscreverMensagem';
+import EscreverMensagem from './components/EscreverMensagem';
+import styled from 'styled-components';
 
+const Container = styled.div`
+  width: 100vw;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px;
+  color: darkslategray;
+`
 
 function App() {
   return (
-   <ContainerEscreverMensagem />
+    <Container>
+    <EscreverMensagem />
+  </Container>
   );
 }
 
