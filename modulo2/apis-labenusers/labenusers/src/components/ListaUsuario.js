@@ -7,6 +7,13 @@ width: 70%;
 height: 90%;
 margin: 20px;
 padding: 16px;
+div {
+    display: flex;
+    align-items: center;
+}
+button {
+    margin-left: 8px;
+}
 `
 
 export default class ListaUsuario extends React.Component {
@@ -19,7 +26,8 @@ export default class ListaUsuario extends React.Component {
         const listaUsuarios = this.props.lista.map((usuario) => {
             return <div key={usuario.id}>
                 <p>{usuario.name}</p>
-            </div>
+                <button>X</button>
+                </div>
         })
         return <Lista>
             {listaUsuarios}

@@ -15,7 +15,6 @@ export default class CadastroUsuario extends React.Component {
     state ={
         inputNome: "",
         inputEmail: "",
-        usuarios: [],
       }
     
     onChangeNome = (event) => {
