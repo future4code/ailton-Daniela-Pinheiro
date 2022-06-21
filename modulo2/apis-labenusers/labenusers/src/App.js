@@ -1,6 +1,9 @@
 import './App.css';
 import React from 'react';
 import styled from 'styled-components';
+import CadastroUsuario from './components/CadastroUsuario';
+import ListaUsuario from './components/ListaUsuario';
+import axios from 'axios';
 
 const Container = styled.div`
 width: 100vw;
@@ -21,23 +24,40 @@ h3 {
   margin: 20px;
 }
 `
-const Cadastro = styled.div`
-border: 1px solid red;
-width: 70%;
-height: 90%;
-margin: 20px;
-padding: 16px;
-`
 
 class App extends React.Component {
+  state ={
+    // telaCadastro: true,
+    usuarios: [
+      {
+        nome: "a",
+        email: "@",
+      }
+    ],
+  }
+  componentDidMount() {
+    this.getUser()
+}
+
+    getUser = () => { axios.get('https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users', {
+        headers: {
+            Authorization: "daniela-pinheiro-ailton"
+          }
+    }).then((response) => {
+        console.log(response)
+        this.setState({usuarios: response.data.result})
+    }).catch((error) => {
+        console.log(error.response.data)
+    })}
+
   render() {
+
     return <Container>
       <Cabecalho>
         <h3>Labenusers</h3>
         </Cabecalho>
-      <Cadastro>
-        Formulário
-      </Cadastro>
+      {/* <CadastroUsuario /> */}
+      <ListaUsuario lista={this.state.usuarios} />
     </Container>
   }
 }
