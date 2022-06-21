@@ -16,10 +16,9 @@ export default class ListaUsuario extends React.Component {
     }
 
     render() {
-        const listaUsuarios = this.props.lista.map((usuario, index) => {
-            return <div key={index}>
-                <p>{usuario.nome}</p>
-                <p>{usuario.email}</p>
+        const listaUsuarios = this.props.lista.map((usuario) => {
+            return <div key={usuario.id}>
+                <p>{usuario.name}</p>
             </div>
         })
         return <Lista>

@@ -29,10 +29,10 @@ class App extends React.Component {
   state ={
     // telaCadastro: true,
     usuarios: [
-      {
-        nome: "a",
-        email: "@",
-      }
+      // {
+      //   nome: "exemplo",
+      //   email: "exemplo@mail.com",
+      // }
     ],
   }
   componentDidMount() {
@@ -44,8 +44,7 @@ class App extends React.Component {
             Authorization: "daniela-pinheiro-ailton"
           }
     }).then((response) => {
-        console.log(response)
-        this.setState({usuarios: response.data.result})
+        this.setState({usuarios: response.data})
     }).catch((error) => {
         console.log(error.response.data)
     })}
@@ -56,7 +55,7 @@ class App extends React.Component {
       <Cabecalho>
         <h3>Labenusers</h3>
         </Cabecalho>
-      {/* <CadastroUsuario /> */}
+      <CadastroUsuario />
       <ListaUsuario lista={this.state.usuarios} />
     </Container>
   }
