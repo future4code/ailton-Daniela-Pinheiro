@@ -3,11 +3,47 @@ import styled from 'styled-components';
 import axios from 'axios';
 
 const Cadastro = styled.div`
-border: 1px solid orange;
-width: 70%;
-height: 90%;
-margin: 20px;
-padding: 16px;
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 20px;
+`
+const Titulo = styled.h3`
+margin: 16px 32px;
+`
+const BotaoTela = styled.button`
+width: 160px;
+margin: 32px 24px;
+background-color: #ea7b00;
+color: white;
+padding: 8px;
+border: none;
+border-radius: 4px;
+:hover {
+    background-color: bisque;
+    color: #ea7b00;
+}
+`
+const Formulario = styled.div`
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 0 16px;
+margin: 4px;
+input{
+    margin: 0 4px;
+}
+`
+const BotaoCadastro = styled.button`
+border: 1px solid #ea7b00;
+background-color: white;
+color: dimgray;
+border-radius: 4px;
+margin: 0 4px;
+padding: 2px 4px;
+:hover {
+    background-color: bisque;
+}
 `
 
 export default class CadastroUsuario extends React.Component {
@@ -17,12 +53,15 @@ export default class CadastroUsuario extends React.Component {
         inputEmail: "",
       }
     
+    // Funções do input controlado
     onChangeNome = (event) => {
         this.setState({inputNome: event.target.value})
     }
     onChangeEmail = (event) => {
         this.setState({inputEmail: event.target.value})
     }
+
+    // Função cadastrar usuário
     onClickCadastrar = () => {
         // Manda a requisição
         const body = {
@@ -36,7 +75,7 @@ export default class CadastroUsuario extends React.Component {
         }).then((response) => {
             alert("Usuário cadastrado com sucesso!")
         }).catch((error) => {
-            alert("Ops, ocorreu um erro.")
+            alert("Ops, ocorreu um erro. ", error.response.data.message)
         })
         // Limpa o input
         this.setState({inputNome: ""})
@@ -45,10 +84,26 @@ export default class CadastroUsuario extends React.Component {
 
     render() {
         return <Cadastro>
-            <input placeholder='Nome' onChange={this.onChangeNome} value={this.state.inputNome} />
-            <input placeholder='Email' onChange={this.onChangeEmail} value={this.state.inputEmail} />
-            <button onClick={this.onClickCadastrar}>Cadastrar</button>
-            <button onClick={this.props.trocaTela}>Tela de Usuários</button>
+            <Titulo>Cadastrar Usuário</Titulo>
+            <Formulario>
+                <input 
+                    placeholder='Nome'
+                    onChange={this.onChangeNome}
+                    value={this.state.inputNome}
+                />
+                <input
+                    placeholder='Email'
+                    onChange={this.onChangeEmail}
+                    value={this.state.inputEmail}
+                />
+                <BotaoCadastro onClick={this.onClickCadastrar}>
+                    Cadastrar
+                </BotaoCadastro>
+            </Formulario>
+            
+            <BotaoTela onClick={this.props.trocaTela}>
+                Usuários Cadastrados
+            </BotaoTela>
         </Cadastro>
     }
 }
