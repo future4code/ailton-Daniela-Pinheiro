@@ -75,7 +75,7 @@ export default class CadastroUsuario extends React.Component {
         }).then((response) => {
             alert("Usuário cadastrado com sucesso!")
         }).catch((error) => {
-            alert("Ops, ocorreu um erro. ", error.response.data.message)
+            alert("Ops, ocorreu um erro. Verifique se os dados inseridos estão corretos.")
         })
         // Limpa o input
         this.setState({inputNome: ""})

@@ -31,9 +31,10 @@ color: dimgray;
 display: flex;
 align-items: center;
 justify-content: space-between;
-padding: 0 16px;
+padding: 8px 16px;
 margin: 8px;
 border: 1px solid darkgray;
+border-radius: 8px;
 `
 const BotaoDeleta = styled.button`
 border: 1px solid #ea7b00;
