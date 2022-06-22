@@ -47,7 +47,6 @@ padding: 2px 4px;
 `
 
 export default class CadastroUsuario extends React.Component {
-
     state ={
         inputNome: "",
         inputEmail: "",
@@ -100,7 +99,6 @@ export default class CadastroUsuario extends React.Component {
                     Cadastrar
                 </BotaoCadastro>
             </Formulario>
-            
             <BotaoTela onClick={this.props.trocaTela}>
                 Usuários Cadastrados
             </BotaoTela>

@@ -11,6 +11,16 @@ display: grid;
 grid-template-columns: 1fr 5fr;
 grid-template-rows: 60px 1fr;
 `
+const Cabecalho = styled.header`
+grid-area: 1 / 1 / 2 / 3;
+background-color: #ea7b00;
+display: flex;
+align-items: center;
+h2 {
+  color: white;
+  margin: 16px;
+}
+`
 const MenuLateral = styled.nav`
 grid-area: 2 / 1 / 3 / 2;
 background-color: bisque;
@@ -27,16 +37,6 @@ margin: 12px 20px;
 `
 const Principal = styled.main`
 grid-area: 2 / 2 / 3 / 3;
-`
-const Cabecalho = styled.header`
-grid-area: 1 / 1 / 2 / 3;
-background-color: #ea7b00;
-display: flex;
-align-items: center;
-h2 {
-  color: white;
-  margin: 16px;
-}
 `
 
 class App extends React.Component {
@@ -70,16 +70,19 @@ class App extends React.Component {
     this.setState({telaRenderizada: "cadastro"})
   }
 
-  // Requisição
-  getAllUsers = () => { axios.get('https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users', {
-    headers: {
-      Authorization: "daniela-pinheiro-ailton"
+  // Requisição para pegar a lista de usuários
+  getAllUsers = async () => { 
+    try {
+      const response = await axios.get('https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users', {
+        headers: {
+          Authorization: "daniela-pinheiro-ailton"
+        }
+      })
+      this.setState({usuarios: response.data})
+    } catch (error) {
+      console.log(error.response.data)
     }
-  }).then((response) => {
-    this.setState({usuarios: response.data})
-  }).catch((error) => {
-    console.log(error.response.data)
-  })}
+  }
 
   render() {
     return <Container>
@@ -97,7 +100,6 @@ class App extends React.Component {
       <Principal>
         {this.trocaTelas()}
       </Principal>
-      
     </Container>
   }
 }
