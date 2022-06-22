@@ -48,6 +48,7 @@ export default class CadastroUsuario extends React.Component {
             <input placeholder='Nome' onChange={this.onChangeNome} value={this.state.inputNome} />
             <input placeholder='Email' onChange={this.onChangeEmail} value={this.state.inputEmail} />
             <button onClick={this.onClickCadastrar}>Cadastrar</button>
+            <button onClick={this.props.trocaTela}>Tela de Usuários</button>
         </Cadastro>
     }
 }

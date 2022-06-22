@@ -1,4 +1,3 @@
-import './App.css';
 import React from 'react';
 import styled from 'styled-components';
 import CadastroUsuario from './components/CadastroUsuario';
@@ -27,17 +26,36 @@ h3 {
 
 class App extends React.Component {
   state ={
-    // telaCadastro: true,
+    telaRenderizada: "cadastro",
     usuarios: [],
   }
 
   componentDidMount() {
     this.getAllUsers()
   }
-
   componentDidUpdate() {
     this.getAllUsers()
   }
+  
+  trocaTelas = () => {
+    switch(this.state.telaRenderizada) {
+      case "cadastro":
+        return <CadastroUsuario trocaTela={this.onClickIrLista} />
+      case "lista":
+        return <ListaUsuario lista={this.state.usuarios} trocaTela={this.onClickIrCadastro} />
+      default:
+        return <CadastroUsuario />
+    }
+  }
+
+  onClickIrLista = () => {
+    this.setState({telaRenderizada: "lista"})
+  }
+  onClickIrCadastro = () => {
+    this.setState({telaRenderizada: "cadastro"})
+  }
+
+  
 
   getAllUsers = () => { axios.get('https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users', {
     headers: {
@@ -53,9 +71,10 @@ class App extends React.Component {
     return <Container>
       <Cabecalho>
         <h3>Labenusers</h3>
-        </Cabecalho>
-      <CadastroUsuario />
-      <ListaUsuario lista={this.state.usuarios} />
+      </Cabecalho>
+      {this.trocaTelas()}
+      {/* <CadastroUsuario />
+      <ListaUsuario lista={this.state.usuarios} voltar={this.onClickVoltar} /> */}
     </Container>
   }
 }
