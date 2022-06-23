@@ -6,20 +6,28 @@ import ListaPersonagens from './pages/ListaPersonagens/ListaPersonagens'
 class App extends React.Component {
   state = {
     telaAtual: "lista",
+    urlPersonagem: "",
+  }
+  
+  irParaDetalhes = (url) => {
+    this.setState({telaAtual: "detalhes", urlPersonagem: url})
+  }
+  irParaLista = () => {
+    this.setState({telaAtual: "lista", urlPersonagem: ""})
   }
 
   mudaTela = () => {
-    switch (this.state.mudaTela) {
+    switch (this.state.telaAtual) {
       case "lista":
-        return <ListaPersonagens />
+        return <ListaPersonagens irParaDetalhes={this.irParaDetalhes} />
       case "detalhes":
-        return <DetalhesPersonagens />
+        return <DetalhesPersonagens irParaLista={this.irParaLista} url={this.state.urlPersonagem} />
       default:
-        return <ListaPersonagens />
+        return <ListaPersonagens irParaDetalhes={this.irParaDetalhes} />
     }
   }
 
-
+ 
   render() {
     return <div>
       {this.mudaTela()}

@@ -1,7 +1,6 @@
 import React from "react"
-import axios from "axios"
-import { url_base } from "../../constants/urls"
 import { CardPersonagem } from "./ListaPersonagens-styled"
+import { pegarListaPersonagens } from "../../services/requests"
 
 export default class ListaPersonagens extends React.Component {
     state = {
@@ -9,22 +8,21 @@ export default class ListaPersonagens extends React.Component {
     }
 
     componentDidMount() {
-        this.pegarPersonagens()
+        pegarListaPersonagens(this.salvarListaPersonagens)
     }
 
-    pegarPersonagens = () => {
-        axios.get(`${url_base}/people/`)
-        .then((response) => {
-            this.setState({listaPersonagens: response.data.results})
-        })
-        .catch((error) => {
-            console.log(error.response)
-        })
+    salvarListaPersonagens = (dados) => {
+        this.setState({listaPersonagens: dados})
     }
 
     render() {
         const personagens = this.state.listaPersonagens.map((pessoa) => {
-            return <CardPersonagem key={pessoa.url}>{pessoa.name}</CardPersonagem>
+            return <CardPersonagem
+                key={pessoa.url}
+                onClick={() => this.props.irParaDetalhes(pessoa.url)}
+            >
+                {pessoa.name}
+            </CardPersonagem>
         })
 
         return <div>
