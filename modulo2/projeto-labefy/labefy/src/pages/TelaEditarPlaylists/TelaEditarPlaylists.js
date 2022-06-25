@@ -34,6 +34,8 @@ export default class TelaEditarPlaylists extends React.Component {
         }).catch(() => {
             alert("Ops, ocorreu um erro. Verifique se inseriu todos os dados corretamente.")
         })
+        // Limpa o input
+        this.setState({inputMusica: "", inputArtista: "", inputUrl: ""})
     }
 
 

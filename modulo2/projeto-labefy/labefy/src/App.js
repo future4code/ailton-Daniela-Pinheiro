@@ -1,8 +1,10 @@
 import React from 'react'
+import {ContainerPrincipal, Cabecalho, Principal, Rodape} from './App-styled'
 import TelaListaPlaylists from './pages/TelaListaPlaylists/TelaListaPlaylists'
 import TelaDetalhesPlaylists from './pages/TelaDetalhesPlaylists/TelaDetalhesPlaylists'
 import TelaCriarPlaylists from './pages/TelaCriarPlaylists/TelaCriarPlaylists'
 import TelaEditarPlaylists from './pages/TelaEditarPlaylists/TelaEditarPlaylists'
+
 import axios from 'axios'
 import { url_base } from './constants/url.js'
 
@@ -24,7 +26,7 @@ class App extends React.Component {
     }
   }
 
-  // Requisições
+  // Requisição pegar todas as playlists
   getAllPlaylists = () => {
     axios.get(url_base, {
       headers: {
@@ -81,18 +83,19 @@ class App extends React.Component {
 
   render() {
 
-    return <div>
-      <header>
+    return <ContainerPrincipal>
+      <Cabecalho>
         <h1 onClick={this.onClickMudaTelaLista}>Labefy</h1>
-        </header>
-      {this.mudaTela()}
-      <br />
-      {/* <button onClick={this.onClickMudaTelaLista}>Lista</button> */}
-      {/* <button onClick={this.onClickMudaTelaDetalhes}>Detalhes</button> */}
-      {/* <button onClick={this.onClickMudaTelaCriar}>Criar</button> */}
-      {/* <button onClick={this.onClickMudaTelaEditar}>Editar</button> */}
-      <footer><p>Labefy ©️ 2022</p></footer>
-    </div>
+      </Cabecalho>
+
+      <Principal>
+        {this.mudaTela()}
+      </Principal>
+
+      <Rodape>
+        <p>Labefy ©️ 2022</p>
+      </Rodape>
+    </ContainerPrincipal>
   }
 }
 export default App;

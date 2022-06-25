@@ -24,6 +24,8 @@ export default class TelaCriarPlaylists extends React.Component {
         }).catch(() => {
             alert("Ops, ocorreu um erro. Verifique se já existe uma playlist com o nome digitado.")
         })
+        // Limpa o input
+        this.setState({inputNomePlaylist: ""})
     }
 
     render() {
