@@ -11,7 +11,7 @@ export default class TelaCriarPlaylists extends React.Component {
     }
 
     // Requisição criar playlist
-    onClickCriarPlaylist = () => {
+    createPlaylist = () => {
         const body = {
             "name": this.state.inputNomePlaylist
         }
@@ -34,7 +34,7 @@ export default class TelaCriarPlaylists extends React.Component {
                 value={this.state.inputNomePlaylist}
                 placeholder="Nome da Playlist"
             />
-            <button onClick={this.onClickCriarPlaylist}>Enviar</button>
+            <button onClick={this.createPlaylist}>Enviar</button>
         </div>
     }
 }

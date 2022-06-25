@@ -2,6 +2,7 @@ import React from 'react'
 import TelaListaPlaylists from './pages/TelaListaPlaylists/TelaListaPlaylists'
 import TelaDetalhesPlaylists from './pages/TelaDetalhesPlaylists/TelaDetalhesPlaylists'
 import TelaCriarPlaylists from './pages/TelaCriarPlaylists/TelaCriarPlaylists'
+import TelaEditarPlaylists from './pages/TelaEditarPlaylists/TelaEditarPlaylists'
 import axios from 'axios'
 import { url_base } from './constants/url.js'
 
@@ -43,17 +44,23 @@ class App extends React.Component {
         return <TelaListaPlaylists
           listaPlaylists={this.state.playlists}
           mudaTelaDetalhes={this.onClickMudaTelaDetalhes}
+          onClickCriar={this.onClickMudaTelaCriar}
         />
       case "detalhesPlaylists":
-        return <TelaDetalhesPlaylists idPlaylist={this.state.idPlaylistEscolhida} namePlaylist={this.state.namePlaylistEscolhida} />
-      // case "editarPlaylists":
-      //   return </>
+        return <TelaDetalhesPlaylists
+          idPlaylist={this.state.idPlaylistEscolhida}
+          namePlaylist={this.state.namePlaylistEscolhida}
+          onClickEditar={this.onClickMudaTelaEditar}
+        />
+      case "editarPlaylists":
+        return <TelaEditarPlaylists idPlaylist={this.state.idPlaylistEscolhida} />
       case "criarPlaylists":
         return <TelaCriarPlaylists />
       default:
         return <TelaListaPlaylists
           listaPlaylists={this.state.playlists}
           mudaTelaDetalhes={this.onClickMudaTelaDetalhes}
+          onClickCriar={this.onClickMudaTelaCriar}
         />
     }
   } 
@@ -75,12 +82,16 @@ class App extends React.Component {
   render() {
 
     return <div>
+      <header>
+        <h1 onClick={this.onClickMudaTelaLista}>Labefy</h1>
+        </header>
       {this.mudaTela()}
       <br />
-      <button onClick={this.onClickMudaTelaLista}>Lista</button>
+      {/* <button onClick={this.onClickMudaTelaLista}>Lista</button> */}
       {/* <button onClick={this.onClickMudaTelaDetalhes}>Detalhes</button> */}
-      <button onClick={this.onClickMudaTelaCriar}>Criar</button>
-      <button onClick={this.onClickMudaTelaEditar}>Editar</button>
+      {/* <button onClick={this.onClickMudaTelaCriar}>Criar</button> */}
+      {/* <button onClick={this.onClickMudaTelaEditar}>Editar</button> */}
+      <footer><p>Labefy ©️ 2022</p></footer>
     </div>
   }
 }

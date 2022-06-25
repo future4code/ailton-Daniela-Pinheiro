@@ -11,7 +11,7 @@ export default class TelaDetalhesPlaylists extends React.Component {
         this.getPlaylistTracks()
     }
 
-     // Requisições
+    // Requisição pegar músicas da playlist
     getPlaylistTracks = () => {
         axios.get(`${url_base}/${this.props.idPlaylist}/tracks`, {
             headers: {
@@ -28,10 +28,10 @@ export default class TelaDetalhesPlaylists extends React.Component {
     render() {
         const musicasPlaylist = this.state.musicas.map((item) => {
             return <div key={item.id}>
-                <p>Música: {item.name}</p>
-                <p>Artista: {item.artist}</p>
+                <p>{item.name} / {item.artist}</p>
                 <audio src="http://spoti4.future4.com.br/1.mp3" controls/>
                 {/* trocar por {item.url} */}
+                <button onClick={this.props.onClickEditar}>Adicionar nova música</button>
             </div>
         })
 
