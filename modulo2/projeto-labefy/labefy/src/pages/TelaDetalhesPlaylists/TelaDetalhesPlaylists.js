@@ -1,9 +1,7 @@
 import React from "react"
 import { Botao } from "../../constants/button"
 import { ContainerDetalhe, CardDetalhePlaylist } from "./TelaDetalhesPlaylists-styled"
-
-import axios from 'axios'
-import { url_base } from "../../constants/url" 
+import { getPlaylistTracks } from "../../services/requisicoes"
 
 export default class TelaDetalhesPlaylists extends React.Component {
     state = {
@@ -11,22 +9,13 @@ export default class TelaDetalhesPlaylists extends React.Component {
     }
 
     componentDidMount () {
-        this.getPlaylistTracks()
+        getPlaylistTracks(this.props.idPlaylist, this.salvarMusicas)
     }
 
-    // Requisição pegar músicas da playlist
-    getPlaylistTracks = () => {
-        axios.get(`${url_base}/${this.props.idPlaylist}/tracks`, {
-            headers: {
-                Authorization: 'daniela-pinheiro-ailton'
-            }
-        }).then((response) => {
-            this.setState({musicas: response.data.result.tracks})
-        }).catch((error) => {
-            console.log(error.response)
-        })
+    // Função para salvar as músicas da requisição
+    salvarMusicas = (dados) => {
+        this.setState({musicas: dados})
     }
-
 
     render() {
         const musicasPlaylist = this.state.musicas.map((item) => {

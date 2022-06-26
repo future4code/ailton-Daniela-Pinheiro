@@ -1,27 +1,15 @@
 import React from "react"
 import { Botao } from "../../constants/button"
-
-import axios from 'axios'
-import { url_base } from "../../constants/url" 
+import { deletePlaylist } from "../../services/requisicoes"
 
 export default class DeletarPlaylist extends React.Component {
-
-    // Requisição deletar playlist
-    deletePlaylist = () => {
-        axios.delete(`${url_base}/${this.props.idPlaylist}`, {
-            headers: {
-                Authorization: 'daniela-pinheiro-ailton'
-            }
-        }).then(() => {
-            alert("Playlist deletada.")
-        }).catch((error) => {
-            console.log(error.response)
-        })
+    confirmacaoDeletar = () => {
+        if(window.confirm("Tem certeza que deseja deletar esta playlist? Não será possível recuperá-la.")) {
+            return deletePlaylist(this.props.idPlaylist)
+        }
     }
 
     render() {
-
-
-        return <Botao onClick={this.deletePlaylist}>Deletar</Botao>
+        return <Botao onClick={this.confirmacaoDeletar}>Deletar</Botao>
     }
 }

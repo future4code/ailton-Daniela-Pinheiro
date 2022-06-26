@@ -2,9 +2,8 @@ import React from "react"
 import { Botao } from "../../constants/button"
 import { Input } from "../../constants/input"
 import { ContainerCriar, CaixaTexto } from "./TelaCriarPlaylists-styled"
+import { createPlaylist } from "../../services/requisicoes"
 
-import axios from 'axios'
-import { url_base } from "../../constants/url" 
 
 export default class TelaCriarPlaylists extends React.Component {
     state = {
@@ -14,22 +13,9 @@ export default class TelaCriarPlaylists extends React.Component {
         this.setState({inputNomePlaylist: event.target.value})
     }
 
-    // Requisição criar playlist
-    createPlaylist = () => {
-        const body = {
-            "name": this.state.inputNomePlaylist
-        }
-        axios.post(url_base, body, {
-            headers: {
-              Authorization: 'daniela-pinheiro-ailton'
-            }
-        }).then(() => {
-            alert("Playlist criada! Volte à lista para vizualizar.")
-        }).catch(() => {
-            alert("Ops, ocorreu um erro. Verifique se já existe uma playlist com o nome digitado.")
-        })
-        // Limpa o input
-        this.setState({inputNomePlaylist: ""})
+    // Função para limpar o input após a requisição
+    limparInput = (dados) => {
+        this.setState({inputNomePlaylist: dados})
     }
 
     render() {
@@ -43,7 +29,7 @@ export default class TelaCriarPlaylists extends React.Component {
                     value={this.state.inputNomePlaylist}
                     placeholder="Nome da Playlist"
                 />
-                <Botao onClick={this.createPlaylist}>Enviar</Botao>
+                <Botao onClick={() => createPlaylist(this.state.inputNomePlaylist, this.limparInput)}>Enviar</Botao>
             </CaixaTexto>
 
             <p>Lembre-se que cada playlist deve ter um nome único.</p>

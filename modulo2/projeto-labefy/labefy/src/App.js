@@ -5,9 +5,7 @@ import TelaListaPlaylists from './pages/TelaListaPlaylists/TelaListaPlaylists'
 import TelaDetalhesPlaylists from './pages/TelaDetalhesPlaylists/TelaDetalhesPlaylists'
 import TelaCriarPlaylists from './pages/TelaCriarPlaylists/TelaCriarPlaylists'
 import TelaEditarPlaylists from './pages/TelaEditarPlaylists/TelaEditarPlaylists'
-
-import axios from 'axios'
-import { url_base } from './constants/url.js'
+import { getAllPlaylists } from './services/requisicoes'
 
 class App extends React.Component {
   state = {
@@ -19,25 +17,17 @@ class App extends React.Component {
 
   // Funções de ciclo de vida
   componentDidMount() {
-    this.getAllPlaylists()
+    getAllPlaylists(this.salvarPlaylists)
   }
   componentDidUpdate(prevState) {
     if(this.state.playlists !== prevState.playlists) {
-      this.getAllPlaylists()
+      getAllPlaylists(this.salvarPlaylists)
     }
   }
 
-  // Requisição pegar todas as playlists
-  getAllPlaylists = () => {
-    axios.get(url_base, {
-      headers: {
-        Authorization: 'daniela-pinheiro-ailton'
-      }
-    }).then((response) => {
-      this.setState({playlists: response.data.result.list})
-    }).catch((error) => {
-      console.log(error.response)
-    })
+  // Função para a requisição de playlists
+  salvarPlaylists = (dados) => {
+    this.setState({playlists: dados})
   }
 
   // Funções de renderização condicional de telas
@@ -84,7 +74,6 @@ class App extends React.Component {
   }
 
   render() {
-
     return <ContainerPrincipal>
       <Cabecalho>
         <Icone src={icone} />

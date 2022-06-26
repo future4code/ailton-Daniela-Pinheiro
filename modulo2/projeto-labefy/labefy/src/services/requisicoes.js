@@ -1,22 +1,22 @@
 import axios from 'axios'
-import { url_base } from './constants/url.js'
+import { url_base } from '../constants/url'
 
 // Requisição pegar todas as playlists (App)
-export const getAllPlaylists = () => {
+export const getAllPlaylists = (salvar) => {
     axios.get(url_base, {
       headers: {
         Authorization: 'daniela-pinheiro-ailton'
       }
     }).then((response) => {
-      this.setState({playlists: response.data.result.list})
+      salvar(response.data.result.list)
     }).catch((error) => {
       console.log(error.response)
     })
 }
 
 // Requisição deletar playlist (DeletarPlaylist)
-export const deletePlaylist = () => {
-    axios.delete(`${url_base}/${this.props.idPlaylist}`, {
+export const deletePlaylist = (id) => {
+    axios.delete(`${url_base}/${id}`, {
         headers: {
             Authorization: 'daniela-pinheiro-ailton'
         }
@@ -29,9 +29,9 @@ export const deletePlaylist = () => {
 
 
 // Requisição criar playlist (TelaCriarPlaylists)
-export const createPlaylist = () => {
+export const createPlaylist = (nome, salvar) => {
     const body = {
-        "name": this.state.inputNomePlaylist
+        "name": nome
     }
     axios.post(url_base, body, {
         headers: {
@@ -43,30 +43,30 @@ export const createPlaylist = () => {
         alert("Ops, ocorreu um erro. Verifique se já existe uma playlist com o nome digitado.")
     })
     // Limpa o input
-    this.setState({inputNomePlaylist: ""})
+    salvar("")
 }
 
 // Requisição pegar músicas da playlist (TelaDetalhesPlaylists)
-export const getPlaylistTracks = () => {
-    axios.get(`${url_base}/${this.props.idPlaylist}/tracks`, {
+export const getPlaylistTracks = (id, salvar) => {
+    axios.get(`${url_base}/${id}/tracks`, {
         headers: {
             Authorization: 'daniela-pinheiro-ailton'
         }
     }).then((response) => {
-        this.setState({musicas: response.data.result.tracks})
+        salvar(response.data.result.tracks)
     }).catch((error) => {
         console.log(error.response)
     })
 }
 
 // Requisição editar playlist (TelaEditarPlaylists)
-export const addTrackToPlaylist = () => {
+export const addTrackToPlaylist = (musica, artista, url, id, salvar) => {
     const body = {
-        "name": this.state.inputMusica,
-        "artist": this.state.inputArtista,
-        "url": this.state.inputUrl
+        "name": musica,
+        "artist": artista,
+        "url": url
     }
-    axios.post(`${url_base}/${this.props.idPlaylist}/tracks`, body, {
+    axios.post(`${url_base}/${id}/tracks`, body, {
         headers: {
           Authorization: 'daniela-pinheiro-ailton'
         }
@@ -76,5 +76,5 @@ export const addTrackToPlaylist = () => {
         alert("Ops, ocorreu um erro. Verifique se inseriu todos os dados corretamente.")
     })
     // Limpa o input
-    this.setState({inputMusica: "", inputArtista: "", inputUrl: ""})
+    salvar("")
 }
