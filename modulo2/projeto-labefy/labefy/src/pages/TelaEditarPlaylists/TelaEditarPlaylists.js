@@ -1,4 +1,8 @@
 import React from "react"
+import { ContainerEditar, Formulario } from "./TelaEditarPlaylists-styled"
+import { Botao } from "../../constants/button"
+import { Input } from "../../constants/input"
+
 import axios from 'axios'
 import { url_base } from "../../constants/url" 
 
@@ -41,23 +45,27 @@ export default class TelaEditarPlaylists extends React.Component {
 
     render() {
     
-        return <div>
-            <input
-                onChange={this.onChangeMusica}
-                value={this.state.inputMusica}
-                placeholder="Nome da Música"
-            />
-            <input
-                onChange={this.onChangeArtista}
-                value={this.state.inputArtista}
-                placeholder="Nome do Artista"
-            />
-            <input
-                onChange={this.onChangeUrl}
-                value={this.state.inputUrl}
-                placeholder="Url do Aqruivo da Música"
-            />
-            <button onClick={this.addTrackToPlaylist}>Enviar</button>
-        </div>
+        return <ContainerEditar>
+            <h2>Adicionar Nova Faixa a "{this.props.playlistNome}"</h2>
+            <Formulario>
+                <Input
+                    onChange={this.onChangeMusica}
+                    value={this.state.inputMusica}
+                    placeholder="Nome da Música"
+                />
+                <Input
+                    onChange={this.onChangeArtista}
+                    value={this.state.inputArtista}
+                    placeholder="Nome do Artista"
+                />
+                <Input
+                    onChange={this.onChangeUrl}
+                    value={this.state.inputUrl}
+                    placeholder="Url do Aqruivo da Música"
+                />
+                <Botao onClick={this.addTrackToPlaylist}>Enviar</Botao>
+            </Formulario>
+            <p>Certifique-se de preencher corretamente todas as informações antes de enviar.</p>
+        </ContainerEditar>
     }
 }

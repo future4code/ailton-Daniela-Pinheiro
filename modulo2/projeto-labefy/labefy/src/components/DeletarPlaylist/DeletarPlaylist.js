@@ -1,4 +1,6 @@
 import React from "react"
+import { Botao } from "../../constants/button"
+
 import axios from 'axios'
 import { url_base } from "../../constants/url" 
 
@@ -20,6 +22,6 @@ export default class DeletarPlaylist extends React.Component {
     render() {
 
 
-        return <button onClick={this.deletePlaylist}>Deletar</button>
+        return <Botao onClick={this.deletePlaylist}>Deletar</Botao>
     }
 }

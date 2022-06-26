@@ -1,5 +1,6 @@
 import React from 'react'
-import {ContainerPrincipal, Cabecalho, Principal, Rodape} from './App-styled'
+import {ContainerPrincipal, Cabecalho, Icone, MenuLateral, Principal, Rodape} from './App-styled'
+import icone from './assets/icon.png'
 import TelaListaPlaylists from './pages/TelaListaPlaylists/TelaListaPlaylists'
 import TelaDetalhesPlaylists from './pages/TelaDetalhesPlaylists/TelaDetalhesPlaylists'
 import TelaCriarPlaylists from './pages/TelaCriarPlaylists/TelaCriarPlaylists'
@@ -46,7 +47,6 @@ class App extends React.Component {
         return <TelaListaPlaylists
           listaPlaylists={this.state.playlists}
           mudaTelaDetalhes={this.onClickMudaTelaDetalhes}
-          onClickCriar={this.onClickMudaTelaCriar}
         />
       case "detalhesPlaylists":
         return <TelaDetalhesPlaylists
@@ -55,14 +55,16 @@ class App extends React.Component {
           onClickEditar={this.onClickMudaTelaEditar}
         />
       case "editarPlaylists":
-        return <TelaEditarPlaylists idPlaylist={this.state.idPlaylistEscolhida} />
+        return <TelaEditarPlaylists
+          idPlaylist={this.state.idPlaylistEscolhida}
+          playlistNome={this.state.namePlaylistEscolhida}
+        />
       case "criarPlaylists":
         return <TelaCriarPlaylists />
       default:
         return <TelaListaPlaylists
           listaPlaylists={this.state.playlists}
           mudaTelaDetalhes={this.onClickMudaTelaDetalhes}
-          onClickCriar={this.onClickMudaTelaCriar}
         />
     }
   } 
@@ -85,8 +87,14 @@ class App extends React.Component {
 
     return <ContainerPrincipal>
       <Cabecalho>
-        <h1 onClick={this.onClickMudaTelaLista}>Labefy</h1>
+        <Icone src={icone} />
+        <h1>Labefy</h1>
       </Cabecalho>
+
+      <MenuLateral>
+        <h3 onClick={this.onClickMudaTelaLista}>Todas as playlists</h3>
+        <h3 onClick={this.onClickMudaTelaCriar}>Criar playlist</h3>
+      </MenuLateral>
 
       <Principal>
         {this.mudaTela()}
