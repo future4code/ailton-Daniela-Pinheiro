@@ -1,38 +1,37 @@
 import React, { useState, useEffect } from 'react'
-// import { CardPerfil } from './TelaInicial-styled'
-import CardPerfil from '../../components/CardPerfil'
-import axios from 'axios'
-import { url_base } from '../../constants/url'
+import { CardPerfil } from './TelaInicial-styled'
+import { getProfileToChoose, choosePerson } from '../../services/requisicoes'
 
 export default function TelaInicial(props) {
     
     const [perfil, setPerfil] = useState([])
-    const[loading, setLoading] = useState("false")
+    const [clicou, setClicou] = useState(false)
 
     useEffect(() => {
-        const getProfileToChoose = async () => {
-            try {
-                setLoading("true")
-                const response = await axios.get(`${url_base}/person`)
-                setPerfil(response.data.profile)
+        getProfileToChoose(setPerfil)
+    }, [clicou])
 
-                setLoading("false")
-            } catch(error) {
-                console.log(error)
-            }
-        }
-        getProfileToChoose()
-    }, [])
+    const clicar = (id, escolha) => {
+        choosePerson(id, escolha, setClicou)
+        setClicou(false)
+    }
 
-    const renderiza = () => {
-        if(loading === "false") {
-            return <CardPerfil foto={perfil.photo} nome={perfil.name} idade={perfil.age} bio={perfil.bio} mudaTelaMatches={props.mudaTelaMatches} />
-        } else {
-            return <p>Carregando...</p>
-        }
+    const mostraPerfil = () => {
+        if(perfil) {
+            return <CardPerfil>
+                <img src={perfil.photo} />
+                <p><strong>{perfil.name}</strong>, {perfil.age}</p>
+                <p>{perfil.bio}</p>
+                <button onClick={() => clicar(perfil.id, false)} > X </button> 
+                <button onClick={() => clicar(perfil.id, true)} > S2 </button> 
+            </CardPerfil>
+        }else {
+           return <p>Carregando...</p> 
+        } 
     }
 
     return <>
-        {renderiza()}    
+        {mostraPerfil()}
+        <button onClick={props.mudaTelaMatches}>Matches</button>
     </>
 }
