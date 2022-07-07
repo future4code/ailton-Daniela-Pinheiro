@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Container } from './App-styled'
+import { Container, ContainerMenor } from './App-styled'
 import TelaInicial from './pages/TelaInicial/TelaInicial'
 import TelaMatches from './pages/TelaMatches'
 
@@ -26,8 +26,10 @@ function App() {
   }
 
   return <Container>
-    {mudaTela()}
-    </Container>
+    <ContainerMenor>
+      {mudaTela()}
+    </ContainerMenor>  
+  </Container>
 }
 
 export default App
