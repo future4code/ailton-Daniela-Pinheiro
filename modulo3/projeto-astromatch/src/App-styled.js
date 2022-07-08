@@ -16,18 +16,24 @@ display: grid;
 grid-template-rows: 40px 1fr 24px;
 grid-template-columns: 1fr;
 align-items: center;
-background-color: darkgray;
+background-color: lightcyan;
+border: 2px solid cadetblue;
 border-radius: 12px;
 `
 export const Cabecalho = styled.header`
 grid-area: 1 / 1 / 2 / 2;
 display: flex;
 align-items: center;
-justify-content: space-evenly;
+justify-content: space-between;
+padding: 0 4px;
 font-family: 'Fredoka One', cursive;
+color: cadetblue;
 img {
     height: 36px;
     width: auto;
+    :hover{
+        cursor: pointer;
+    }
 }
 `
 export const Rodape = styled.footer`

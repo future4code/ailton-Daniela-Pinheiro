@@ -44,7 +44,7 @@ export const getMatches = (funcao) => {
 export const clear = () => {
     axios.put(`${url_base}/clear`)
     .then(() => {
-        alert("Todos os seus matches foram desfeitos! Atualize a tela.")
+        alert("Todos os seus matches foram desfeitos!")
     })
     .catch((error) => {
         console.log(error)

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { ContainerPerfil, CardPerfil, FotoFundo, Foto, Texto, Botoes } from './TelaInicial-styled'
 import { getProfileToChoose, choosePerson } from '../../services/requisicoes'
+import iconeRejeitar from '../../assets/img/icone-rejeitar.png'
+import iconeGostar from '../../assets/img/icone-gostar.png'
 
 export default function TelaInicial() {
     
@@ -28,23 +30,19 @@ export default function TelaInicial() {
         // Se o estado "perfil" contém um objeto, renderiza esse objeto
         if(perfil) {
             return <CardPerfil>
-                {/* <Foto> */}
                 <FotoFundo src={perfil.photo} alt={perfil.photo_alt} />
                 <Foto src={perfil.photo} alt={perfil.photo_alt} />
-                {/* </Foto> */}
                 <Texto>
                     <h3>{perfil.name}, {perfil.age}</h3>
                     <p>{perfil.bio}</p>
                 </Texto>
                 <Botoes>
-                    <button onClick={() => clicar(perfil.id, false)} > X </button> 
-                    <button onClick={() => clicar(perfil.id, true)} > S2 </button> 
+                    <img src={iconeRejeitar} alt={"Rejeitar"} onClick={() => clicar(perfil.id, false)} /> 
+                    <img src={iconeGostar} alt={"Gostar"} onClick={() => clicar(perfil.id, true)} />
                 </Botoes>
             </CardPerfil>
         // Se não, mostra uma mensagem
         } else {
-
-            // COLOCAR IMAGEM ??
            return <p>Parece que não tem mais ninguém por perto...</p> 
         } 
     }
