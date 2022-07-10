@@ -40,7 +40,7 @@ export const getMatches = (funcao) => {
     })
 }
 
-// Clear (App)
+// Clear (Rodape)
 export const clear = () => {
     axios.put(`${url_base}/clear`)
     .then(() => {

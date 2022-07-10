@@ -13,9 +13,6 @@ grid-template-columns: 1fr;
 grid-template-rows: 300px 1fr 80px;
 justify-items: center;
 align-items: center;
-:active{
-    /* efeito */
-}
 `
 export const FotoFundo = styled.img`
 grid-area: 1 / 1 / 2 / 2;
@@ -28,7 +25,8 @@ filter: blur(4px);
 export const Foto = styled.img`
 grid-area: 1 / 1 / 2 / 2;
 max-width: 90%;
-max-height: 300px;
+height: 300px;
+object-fit: cover;
 position: relative;
 `
 
@@ -53,6 +51,11 @@ img{
         opacity: 1;
         width: 60px;
         height: 60px;
+    }
+    :active {
+        width: 48px;
+        height: 48px;
+        transition: width 1s, height 1s;
     }
 }
 `

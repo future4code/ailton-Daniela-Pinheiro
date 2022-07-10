@@ -9,7 +9,7 @@ import { clear } from './services/requisicoes'
 
 function App() {
 
-  // Estados
+  // Estado
   const [telaAtual, setTelaAtual] = useState("inicial")
 
   // Funções de mudança de telas
@@ -34,8 +34,10 @@ function App() {
 
   // Renderização condicional dos botões no Header
   const renderizaBotao = () => {
+    // Quando estiver na tela inicial, renderiza o botão para a tela de matches
     if(telaAtual === "inicial") {
       return <img src={iconeMatches} alt="Matches" onClick={mudaTelaMatches}/>
+      // Quando estiver na tela de matches, renderiza o botão para a tela inicial
     } else {
       return <img src={iconeInicial} alt="Início" onClick={mudaTelaInicial}/>
     }
@@ -43,11 +45,14 @@ function App() {
 
   return <Container>
     <ContainerMenor>
+
       <Cabecalho>
         <h1>astromatch</h1>
         {renderizaBotao()}
       </Cabecalho>
+
       {mudaTela()}
+
       <Rodape>
         <button onClick={clear}>Limpar matches</button>
       </Rodape>

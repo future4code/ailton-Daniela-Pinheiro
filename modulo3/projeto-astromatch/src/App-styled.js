@@ -25,7 +25,7 @@ grid-area: 1 / 1 / 2 / 2;
 display: flex;
 align-items: center;
 justify-content: space-between;
-padding: 0 4px;
+padding: 0 4px 8px 4px;
 font-family: 'Fredoka One', cursive;
 color: cadetblue;
 img {
@@ -41,4 +41,19 @@ grid-area: 3 / 1 / 4 / 2;
 padding-top: 4px;
 display: flex;
 justify-content: center;
+button {
+    background-color: cadetblue;
+    color: lightcyan;
+    padding: 2px 4px;
+    border: none;
+    border-radius: 2px;
+    :hover {
+        cursor: pointer;
+        background-color: #436e70;
+    }
+    :active {
+        background-color: cadetblue;
+        color: #436e70;
+    }
+}
 `
