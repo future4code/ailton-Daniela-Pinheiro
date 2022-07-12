@@ -1,1 +1,1 @@
-export const url_base = "https://us-central1-labenu-apis.cloudfunctions.net/labeX/daniela-pinheiro-ailton"
+export const base_url = "https://us-central1-labenu-apis.cloudfunctions.net/labeX/daniela-pinheiro-ailton"

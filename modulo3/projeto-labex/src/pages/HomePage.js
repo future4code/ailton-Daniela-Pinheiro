@@ -1,45 +1,44 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import { goToListTripsPage, goToAdminHomePage } from '../routes/coordinator'
+
 import styled from 'styled-components'
-import fundo from '../assets/img/imagem-fundo.jpg'
+import background from '../assets/img/background-image.png'
 
 const ContainerHome = styled.div`
 width: 100%;
 height: 100%;
-background-image: url(${fundo});
+background-image: url(${background});
 object-fit: cover;
 display: flex;
-flex-direction: column;
-align-items: center;
+align-items: flex-end;
 justify-content: center;
-div {
-    display: flex;
-    align-items: center;
-}
 `
 const BotaoGrande = styled.button`
-background-color: #CCFFFF44;
-width: 180px;
+background-color: #00006699;
+width: 240px;
 height: 64px;
-
-margin: 8px;
+margin: 80px 12px;
 border: 1px solid white;
-border-radius: 6px;
+border-radius: 8px;
 font-size: 20px;
+color: white;
 :hover {
     cursor: pointer;
-    background-color: #CCFFFF77;
+    background-color: #000066CC;
 }
 :active {
     cursor: pointer;
+    background-color: #00006655;
     mix-blend-mode: overlay;
 }
 `
 
 export default function HomePage() {
+    const navigate = useNavigate()
+
     return <ContainerHome>
-        <div>
-            <BotaoGrande><strong>Viagens cadastradas</strong></BotaoGrande>
-            <BotaoGrande><strong>Área administrativa</strong></BotaoGrande>
-        </div>
+        <BotaoGrande onClick={() => goToListTripsPage(navigate)}><strong>Lista de Viagens</strong></BotaoGrande>
+        <BotaoGrande onClick={() => goToAdminHomePage(navigate)}><strong>Área Administrativa</strong></BotaoGrande>
     </ContainerHome>
 }
