@@ -19,10 +19,10 @@ h1 {
 }
 p {
   margin-left: 16px;
-  color: #48404F;
+  /* color: #48404F; */
 }
 `
 export const Content = styled.main`
 grid-area: 2 / 1 / 3 / 2;
-color: #48404F;
+/* color: #48404F; */
 `
