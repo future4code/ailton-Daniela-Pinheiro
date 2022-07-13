@@ -10,8 +10,8 @@ background-color: white;
 display: flex;
 flex-direction: column;
 justify-content: space-evenly;
-h3 {
-    margin-bottom: 8px;
-    color: #3333AA;
-}
+`
+export const TitleTrips = styled.h3`
+margin-bottom: 8px;
+color: #3333AA;
 `

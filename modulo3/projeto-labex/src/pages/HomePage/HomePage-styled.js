@@ -10,7 +10,7 @@ display: flex;
 align-items: flex-end;
 justify-content: center;
 `
-export const BotaoGrande = styled.button`
+export const ButtonHome = styled.button`
 background-color: #00006688;
 width: 240px;
 height: 64px;
