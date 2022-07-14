@@ -7,7 +7,6 @@ import CreateTripPage from '../pages/CreateTripPage/CreateTripPage'
 import LoginPage from '../pages/LoginPage/LoginPage'
 import TripDetailsPage from '../pages/TripDetailsPage/TripDetailsPage'
 
-
 export const Router = () => {
     return <BrowserRouter>
         <Routes>

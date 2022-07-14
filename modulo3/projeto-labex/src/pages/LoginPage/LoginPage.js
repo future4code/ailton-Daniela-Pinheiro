@@ -33,7 +33,7 @@ export default function LoginPage() {
                 <input
                     type={'email'}
                     placeholder={"E-mail"}
-                    name = "email"
+                    name="email"
                     value={form.email}
                     onChange={onChangeForm}
                     required
