@@ -30,11 +30,10 @@ export default function LoginPage() {
         .then((response) => {
             localStorage.setItem('token', response.data.token)
 
-            // goToAdminHomePage(navigate)
-            goToTripDetailsPage(navigate, "2AaaNKGWQ7PMcEojWPRv")
+            goToAdminHomePage(navigate)
+            // goToTripDetailsPage(navigate, "2AaaNKGWQ7PMcEojWPRv")
 
         }).catch(() => {
-            // console.log(error)
             alert("Ocorreu um erro. Verifique se todas as informações inseridas estão corretas.")
         })
     }

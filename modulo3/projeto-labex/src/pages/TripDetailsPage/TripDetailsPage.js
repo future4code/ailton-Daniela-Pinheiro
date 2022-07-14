@@ -1,36 +1,35 @@
-import React, { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { goToLoginPage } from '../../routes/coordinator'
-
-import { useGetTripDetails } from '../../hooks/useAdminRequestData'
+import React from 'react'
+import { useProtectedPage } from '../../hooks/useProtectedPage'
+import { useRequestData } from '../../hooks/useRequestData'
 
 
 export default function TripDetailsPage() {
 
-    const navigate = useNavigate()
-    useEffect(() => {
-        const token = localStorage.getItem('token')
-        if(token === null) {
-            goToLoginPage(navigate)
-        }
-    })
+    useProtectedPage()
 
-    const [trip, isLoading, error] = useGetTripDetails()
+    // constantes??
+    const token = localStorage.getItem('token')
+    const header = {
+        headers: {
+            auth: token
+        }
+    }
+    const [data, isLoading, error] = useRequestData("trip", "2AaaNKGWQ7PMcEojWPRv", header)
 
     const tripDetails = () => {
        return <div>
-        <p>Data: {trip && trip.date}</p>
-        <p>Aprovação: {trip && trip.aproved}</p>
+        <p>Data: {data.trip && data.trip.date}</p>
+        <p>Aprovação: {data.trip && data.trip.aproved}</p>
        </div>
     } 
 
     // MAP EM CANDIDATES
-    console.log(trip)
+    // console.log(data)
 
     return <div>
         {isLoading && <p>Carregando...</p>}
         {!isLoading && error && <p>Ocorreu um erro</p>}
-        {!isLoading && !trip && <p>Não há nenhuma viagem com essa id</p>}
-        {!isLoading && trip && tripDetails()}
+        {!isLoading && !data && <p>Não há nenhuma viagem com essa id</p>}
+        {!isLoading && data && tripDetails()}
     </div>
 }
