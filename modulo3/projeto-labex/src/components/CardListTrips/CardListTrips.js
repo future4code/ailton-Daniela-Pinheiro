@@ -6,7 +6,7 @@ export default function CardListTrips() {
 
     const [data, isLoading, error] = useRequestData("trips", "")
 
-    const TripsList = data.trips && data.trips.map((trip) => {
+    const tripsList = data.trips && data.trips.map((trip) => {
         return <CardTrips key={trip.id}>
             <TitleTrips>{trip.name}</TitleTrips>
             <div>
@@ -22,6 +22,6 @@ export default function CardListTrips() {
         {isLoading && <p>Carregando...</p>}
         {!isLoading && error && <p>Ocorreu um erro</p>}
         {!isLoading && !data && <p>Não há nenhuma viagem marcada.</p>}
-        {!isLoading && data && TripsList}
+        {!isLoading && data && tripsList}
     </>
 }
