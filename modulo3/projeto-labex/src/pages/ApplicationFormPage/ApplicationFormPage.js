@@ -1,21 +1,23 @@
-import React from 'react'
-import { ApplicationForm } from './ApplicationFormPage-styled'
+import React, { useState } from 'react'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+import { base_url } from '../../constants/url'
+import { ContainerApplication, ApplicationForm, ContainerButtons } from './ApplicationFormPage-styled'
 import { useRequestData } from '../../hooks/useRequestData'
 import { useForm } from '../../hooks/useForm'
-import axios from 'axios'
-import { base_url } from '../../constants/url'
+import { listOfCountries } from '../../constants/listOfCountries'
 import { Button } from '../../constants/Button'
-import { useNavigate } from 'react-router-dom'
 import { goBack } from '../../routes/coordinator'
 
 export default function ApplicationFormPage() {
     const navigate = useNavigate()
     
     const [data, isLoading, error] = useRequestData("trips", "")
+    const [tripId, setTripId] = useState("")
 
-    const tripsOption = data.trips && data.trips.map((trip) => {
-        return <option key={trip.id} value={trip.id}>{trip.name}</option>
-    })
+    const onChangeTrip = (event) => {
+        setTripId(event.target.value)
+    }
 
     const [form, onChangeForm, cleanInputs] = useForm({
         name: "",
@@ -25,13 +27,13 @@ export default function ApplicationFormPage() {
         country: ""
     })
 
-    const onSubmitApply = (event, id) => {
+    const onSubmitApply = (event) => {
         event.preventDefault()
 
-        axios.post(`${base_url}/trips/${id}/apply`, form)
+        axios.post(`${base_url}/trips/${tripId}/apply`, form)
         .then(() => {
             alert("Inscrição feita com sucesso!")
-
+            console.log(form)
         }).catch(() => {
             alert("Ocorreu um erro. Verifique se todas as informações foram inseridas corretamente, ou tente novamente mais tarde.")
         })
@@ -39,11 +41,18 @@ export default function ApplicationFormPage() {
         cleanInputs()
     }
 
-    return <div>
-        <Button onClick={() => goBack(navigate)}>Voltar</Button>
-        <h3>Formulário de inscrição</h3>
+    const tripsOption = data.trips && data.trips.map((trip) => {
+        return <option key={trip.id} value={trip.id}>{trip.name}</option>
+    })
+    const countriesOption = listOfCountries.map((country, index) => {
+        return <option key={index} value={country}>{country}</option>
+    })
+
+    return <ContainerApplication>
+        <h2>Formulário de inscrição</h2>
+        
         <ApplicationForm onSubmit={onSubmitApply}>
-            <select required>
+            <select onChange={onChangeTrip} required>
                 <option value="">Escolha sua viagem:</option>
                 {tripsOption}
             </select>
@@ -76,16 +85,20 @@ export default function ApplicationFormPage() {
                 onChange={onChangeForm}
                 required
             />
-            <input 
+            <select
                 name="country"
-                placeholder="País"
-                // type="country"
                 value={form.country}
                 onChange={onChangeForm}
                 required
-            />
-
+            >
+                <option value="">País:</option>
+                {countriesOption}
+            </select>
             <button>Enviar</button>
         </ApplicationForm>
-    </div>
+
+        <ContainerButtons>
+            <Button onClick={() => goBack(navigate)}>Voltar</Button>
+        </ContainerButtons>
+    </ContainerApplication>
 }

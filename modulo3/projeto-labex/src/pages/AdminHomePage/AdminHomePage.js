@@ -1,4 +1,5 @@
 import React from 'react'
+import { ContainerAdminHome, ContainerButtons, ContainerLogout } from './AdminHomePage-styled'
 import { Button } from '../../constants/Button'
 import { useNavigate } from 'react-router-dom'
 import { useProtectedPage } from '../../hooks/useProtectedPage'
@@ -21,23 +22,28 @@ export default function AdminHomePage() {
         </div>
     })
 
-    // COLOCAR NO HEADER??
+    // Função logout
     const onClickLogout = () => {
         localStorage.removeItem('token')
 
         goToHomePage(navigate)
     }
 
-    return <div>
-        <h3>Área Administrativa</h3>
-        <p>Lista de viagens</p>
+    return <ContainerAdminHome>
+        <ContainerLogout>
+            <button onClick={onClickLogout}>LOGOUT</button>
+        </ContainerLogout>
+        <h2>Administrar suas viagens</h2>
+
         {isLoading && <p>Carregando...</p>}
         {!isLoading && error && <p>Ocorreu um erro.</p>}
         {!isLoading && !data && <p>Não há nenhuma viagem marcada.</p>}
         {!isLoading && data && tripsList}
-        <Button onClick={() => goToHomePage(navigate)}>Voltar</Button>
-        {/* <Button onClick={() => goToTripDetailsPage(navigate, "2AaaNKGWQ7PMcEojWPRv")}>Detalhes da viagem TESTE</Button> */}
-        <Button onClick={() => goToCreateTripPage(navigate)}>Nova Viagem</Button>
-        <Button onClick={onClickLogout}>LOGOUT</Button>
-    </div>
+        
+        <ContainerButtons>
+            <Button onClick={() => goToHomePage(navigate)}>Voltar</Button>
+            <Button onClick={() => goToCreateTripPage(navigate)}>Nova Viagem</Button>
+        </ContainerButtons>
+        
+    </ContainerAdminHome>
 }

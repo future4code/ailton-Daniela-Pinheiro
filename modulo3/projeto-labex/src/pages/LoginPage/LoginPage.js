@@ -1,13 +1,12 @@
 import React from 'react'
 import axios from 'axios'
+import { base_url } from '../../constants/url'
 import { ContainerLogin, CardLogin, ButtonLogin } from './LoginPage-styled'
 import { useNavigate } from 'react-router-dom'
-import { base_url } from '../../constants/url'
-import { useForm } from '../../hooks/useForm'
 import { goToHomePage, goToAdminHomePage } from '../../routes/coordinator'
+import { useForm } from '../../hooks/useForm'
 
 export default function LoginPage() {
-
     const navigate = useNavigate()
 
     const [form, onChangeForm, cleanInputs] = useForm({email: "", password: ""})
@@ -28,7 +27,7 @@ export default function LoginPage() {
 
     return <ContainerLogin>
         <CardLogin>
-            <h3>Faça o login para prosseguir</h3>
+            <h2>Faça o login para prosseguir</h2>
             <form onSubmit={onSubmitLogin}>
                 <input
                     type={'email'}

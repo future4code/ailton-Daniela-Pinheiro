@@ -1,10 +1,9 @@
 import styled from "styled-components"
 
-export const ContainerApplication = styled.div`
+export const ContainerCreate = styled.div`
 width: 100%;
 height: 100%;
 padding-top: 20px;
-padding-bottom: 20px;
 
 /* mudar cor */
 background-color: aliceblue;
@@ -12,16 +11,18 @@ background-color: aliceblue;
 display: flex;
 flex-direction: column;
 align-items: center;
+h2 {
+    margin-bottom: 32px;
+}
 `
 export const ContainerButtons = styled.div`
 width: 90%;
 display: flex;
 justify-content: space-between;
 `
-export const ApplicationForm = styled.form`
+export const CreateTripForm = styled.form`
 width: 30%;
 height: 100%;
-margin-top: 32px;
 display: flex;
 flex-direction: column;
 align-items: center;

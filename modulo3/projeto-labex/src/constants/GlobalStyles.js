@@ -10,4 +10,8 @@ export const GlobalStyles = createGlobalStyle`
 p {
   color: #48404F;
 }
+h2 {
+  color: #000066;
+  margin: 8px;
+}
 `

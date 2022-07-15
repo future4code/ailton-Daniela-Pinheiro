@@ -7,7 +7,7 @@ function App() {
 
     <Header>
       <h1>LabeX</h1>
-      <p>Toda a galáxia ao seu alcance!</p>
+      <p>Encontre as melhores viagens espaciais!</p>
     </Header>
 
     <Content>

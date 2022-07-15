@@ -8,7 +8,7 @@ export default function HomePage() {
     const navigate = useNavigate()
 
     return <ContainerHome>
-        <ButtonHome onClick={() => goToListTripsPage(navigate)}><strong>Lista de Viagens</strong></ButtonHome>
+        <ButtonHome onClick={() => goToListTripsPage(navigate)}><strong>Próximas Viagens</strong></ButtonHome>
         <ButtonHome onClick={() => goToAdminHomePage(navigate)}><strong>Área Administrativa</strong></ButtonHome>
     </ContainerHome>
 }
