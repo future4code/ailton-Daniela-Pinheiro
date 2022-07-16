@@ -5,6 +5,7 @@ import { useForm } from '../../hooks/useForm'
 import { goBack } from '../../routes/coordinator'
 import { useNavigate } from 'react-router-dom'
 import { headers } from '../../constants/headers'
+import {listOfPlanets} from '../../constants/listOfPLanets'
 
 import axios from 'axios'
 import { base_url } from '../../constants/url'
@@ -37,6 +38,10 @@ export default function CreateTripPage() {
         cleanInputs()
     }
 
+    const planets = listOfPlanets.map((planet, index) => {
+        return <option key={index} value={planet}>{planet}</option>
+    })
+
     return <ContainerCreate>
         
         <h2>Cadastrar nova viagem</h2>
@@ -48,14 +53,15 @@ export default function CreateTripPage() {
                 onChange={onChangeForm}
                 required
             />
-            {/* MUDAR PARA SELECT */}
-            <input 
+            <select 
                 name="planet"
-                placeholder="Planeta"
                 value={form.planet}
                 onChange={onChangeForm}
                 required
-            />
+            >
+                <option value="">Planeta:</option>
+                {planets}
+            </select>
             <input 
                 name="date"
                 type="date"
@@ -78,12 +84,11 @@ export default function CreateTripPage() {
                 onChange={onChangeForm}
                 required
             />
-            
-            <Button>Enviar</Button>
-        </CreateTripForm>
 
-        <ContainerButtons>
-            <Button onClick={() => goBack(navigate)}>Voltar</Button>
-        </ContainerButtons>
+            <ContainerButtons>
+                <Button onClick={() => goBack(navigate)}>Voltar</Button>
+                <Button>Enviar</Button>
+            </ContainerButtons>
+        </CreateTripForm>
     </ContainerCreate>
 }

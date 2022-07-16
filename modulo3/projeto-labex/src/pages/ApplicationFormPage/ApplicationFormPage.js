@@ -94,11 +94,11 @@ export default function ApplicationFormPage() {
                 <option value="">País:</option>
                 {countriesOption}
             </select>
-            <button>Enviar</button>
-        </ApplicationForm>
 
-        <ContainerButtons>
-            <Button onClick={() => goBack(navigate)}>Voltar</Button>
-        </ContainerButtons>
+            <ContainerButtons>
+                <Button onClick={() => goBack(navigate)}>Voltar</Button>
+                <Button>Enviar</Button>
+            </ContainerButtons>
+        </ApplicationForm>   
     </ContainerApplication>
 }

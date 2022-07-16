@@ -9,7 +9,12 @@ import { useRequestData } from '../../hooks/useRequestData'
 
 export default function AdminHomePage() {
     useProtectedPage()
+    
+    const onClickLogout = () => {
+        localStorage.removeItem('token')
 
+        goToHomePage(navigate)
+    }
     const navigate = useNavigate()
 
     const [data, isLoading, error] = useRequestData("trips", "")
@@ -22,28 +27,25 @@ export default function AdminHomePage() {
         </div>
     })
 
-    // Função logout
-    const onClickLogout = () => {
-        localStorage.removeItem('token')
-
-        goToHomePage(navigate)
-    }
+    
 
     return <ContainerAdminHome>
-        <ContainerLogout>
-            <button onClick={onClickLogout}>LOGOUT</button>
-        </ContainerLogout>
+        <ContainerButtons>
+            <Button onClick={() => goToHomePage(navigate)}>Voltar</Button>
+            <Button onClick={() => goToCreateTripPage(navigate)}>Nova Viagem</Button>
+        </ContainerButtons>
+
         <h2>Administrar suas viagens</h2>
 
         {isLoading && <p>Carregando...</p>}
         {!isLoading && error && <p>Ocorreu um erro.</p>}
         {!isLoading && !data && <p>Não há nenhuma viagem marcada.</p>}
         {!isLoading && data && tripsList}
+
+        <ContainerLogout>
+            <Button onClick={onClickLogout}>LOGOUT</Button>
+        </ContainerLogout>
         
-        <ContainerButtons>
-            <Button onClick={() => goToHomePage(navigate)}>Voltar</Button>
-            <Button onClick={() => goToCreateTripPage(navigate)}>Nova Viagem</Button>
-        </ContainerButtons>
         
     </ContainerAdminHome>
 }

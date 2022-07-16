@@ -10,13 +10,14 @@ export default function ListTripsPage() {
     const navigate = useNavigate()
 
     return <ContainerTrips>
-        <h2>Próximas viagens</h2>
-
-        <CardListTrips />
-        
         <ContainerButtons>            
             <Button onClick={() => goBack(navigate)}>Voltar</Button>
             <Button onClick={() => goToApplicationFormPage(navigate)}>Inscrever-se</Button>
         </ContainerButtons>
+        <h2>Próximas viagens</h2>
+
+        <CardListTrips />
+        
+        
     </ContainerTrips>
 }

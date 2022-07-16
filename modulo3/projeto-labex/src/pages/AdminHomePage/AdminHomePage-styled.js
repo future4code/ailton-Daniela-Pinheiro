@@ -22,7 +22,7 @@ display: flex;
 justify-content: flex-end;
 `
 export const ContainerButtons = styled.div`
-width: 90%;
+width: 40%;
 display: flex;
 justify-content: space-between;
 `

@@ -19,9 +19,9 @@ export default function CardListTrips() {
     })
 
     return <>
-        {isLoading && <p>Carregando...</p>}
-        {!isLoading && error && <p>Ocorreu um erro</p>}
-        {!isLoading && !data && <p>Não há nenhuma viagem marcada.</p>}
+        {isLoading && <CardListTrips>Carregando...</CardListTrips>}
+        {!isLoading && error && <CardListTrips>Ocorreu um erro</CardListTrips>}
+        {!isLoading && !data && <CardListTrips>Não há nenhuma viagem marcada.</CardListTrips>}
         {!isLoading && data && tripsList}
     </>
 }

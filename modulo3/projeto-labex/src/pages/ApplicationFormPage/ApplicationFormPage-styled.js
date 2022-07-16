@@ -19,16 +19,16 @@ display: flex;
 justify-content: space-between;
 `
 export const ApplicationForm = styled.form`
-width: 30%;
+width: 40%;
 height: 100%;
 margin-top: 32px;
 display: flex;
 flex-direction: column;
 align-items: center;
 input, select {
-    width: 100%;
+    width: 90%;
     padding: 8px;
-    margin: 4px;
+    margin: 8px;
     border: 1px solid #000066;
     border-radius: 6px;
 }
