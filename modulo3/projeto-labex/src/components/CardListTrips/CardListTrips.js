@@ -1,6 +1,6 @@
 import React from 'react'
 import { useRequestData } from '../../hooks/useRequestData'
-import { CardTrips, TitleTrips } from './CardListTrips-styled'
+import { CardTrips, TitleTrips, CardText } from './CardListTrips-styled'
 
 export default function CardListTrips() {
 
@@ -9,19 +9,17 @@ export default function CardListTrips() {
     const tripsList = data.trips && data.trips.map((trip) => {
         return <CardTrips key={trip.id}>
             <TitleTrips>{trip.name}</TitleTrips>
-            <div>
-                <p><strong>Descrição:</strong> {trip.description}</p>
-                <p><strong>Planeta:</strong> {trip.planet}</p>
-                <p><strong>Duração:</strong> {trip.durationInDays} dias</p>
-                <p><strong>Data:</strong> {trip.date}</p>  
-            </div> 
+            <p><strong>Descrição:</strong> {trip.description}</p>
+            <p><strong>Planeta:</strong> {trip.planet}</p>
+            <p><strong>Duração:</strong> {trip.durationInDays} dias</p>
+            <p><strong>Data:</strong> {trip.date}</p>  
         </CardTrips>
     })
 
     return <>
-        {isLoading && <CardListTrips>Carregando...</CardListTrips>}
-        {!isLoading && error && <CardListTrips>Ocorreu um erro</CardListTrips>}
-        {!isLoading && !data && <CardListTrips>Não há nenhuma viagem marcada.</CardListTrips>}
+        {isLoading && <CardText>Carregando...</CardText>}
+        {!isLoading && error && <CardText>Ocorreu um erro</CardText>}
+        {!isLoading && !data && <CardText>Não há nenhuma viagem marcada.</CardText>}
         {!isLoading && data && tripsList}
     </>
 }

@@ -14,10 +14,9 @@ export default function ListTripsPage() {
             <Button onClick={() => goBack(navigate)}>Voltar</Button>
             <Button onClick={() => goToApplicationFormPage(navigate)}>Inscrever-se</Button>
         </ContainerButtons>
+
         <h2>Próximas viagens</h2>
 
-        <CardListTrips />
-        
-        
+        <CardListTrips />        
     </ContainerTrips>
 }

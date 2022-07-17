@@ -1,5 +1,5 @@
 import React from 'react'
-import { ContainerDetails, ContainerButtons } from './TripDetailsPage-styled'
+import { ContainerDetails, ContainerButtons, CardText } from './TripDetailsPage-styled'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useProtectedPage } from '../../hooks/useProtectedPage'
 import { useRequestData } from '../../hooks/useRequestData'
@@ -21,9 +21,9 @@ export default function TripDetailsPage() {
             <Button onClick={() => goBack(navigate)}>Voltar</Button>
         </ContainerButtons>
 
-        {isLoading && <p>Carregando...</p>}
-        {!isLoading && error && <p>Ocorreu um erro</p>}
-        {!isLoading && !data && <p>Não há nenhuma viagem com essa id...</p>}
+        {isLoading && <CardText>Carregando...</CardText>}
+        {!isLoading && error && <CardText>Ocorreu um erro</CardText>}
+        {!isLoading && !data && <CardText>Não há nenhuma viagem com essa id...</CardText>}
         {!isLoading && data && <CardTripDetails data={data} id={pathParams.id} />}  
     </ContainerDetails>
 }

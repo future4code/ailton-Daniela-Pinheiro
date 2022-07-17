@@ -1,6 +1,6 @@
 import React from 'react'
 import { CardCandidates, CardDetails, TitleDetails } from './CardTripDetails-styled'
-import CardCandidatesToApprove from '../CardsCandidatesToApprove/CardCandidatesToApprove'
+import CardCandidatesToApprove from '../CardCandidatesToApprove/CardCandidatesToApprove'
 
 export default function CardTripDetails(props) {
     const tripDetails = () => {
@@ -29,7 +29,6 @@ export default function CardTripDetails(props) {
         <CardCandidatesToApprove data={data} id={props.id} />
        </>
     } 
-    return <>
-    {tripDetails()}
-    </>
+
+    return tripDetails()
 }

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import { base_url } from '../../constants/url'
+import { applyToTrip } from '../../services/requests'
 import { ContainerApplication, ApplicationForm, ContainerButtons } from './ApplicationFormPage-styled'
 import { useRequestData } from '../../hooks/useRequestData'
 import { useForm } from '../../hooks/useForm'
@@ -30,13 +29,7 @@ export default function ApplicationFormPage() {
     const onSubmitApply = (event) => {
         event.preventDefault()
 
-        axios.post(`${base_url}/trips/${tripId}/apply`, form)
-        .then(() => {
-            alert("Inscrição feita com sucesso!")
-            console.log(form)
-        }).catch(() => {
-            alert("Ocorreu um erro. Verifique se todas as informações foram inseridas corretamente, ou tente novamente mais tarde.")
-        })
+        applyToTrip(tripId, form)
 
         cleanInputs()
     }
@@ -54,7 +47,9 @@ export default function ApplicationFormPage() {
         <ApplicationForm onSubmit={onSubmitApply}>
             <select onChange={onChangeTrip} required>
                 <option value="">Escolha sua viagem:</option>
-                {tripsOption}
+                {isLoading && <option>Carregando opções...</option>}
+                {!isLoading && error && <option>Ocorreu um erro.</option>}
+                {!isLoading && data && tripsOption}
             </select>
             <input 
                 name="name"

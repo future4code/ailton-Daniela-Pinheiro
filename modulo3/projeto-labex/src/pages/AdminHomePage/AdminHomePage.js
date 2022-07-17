@@ -1,33 +1,39 @@
 import React from 'react'
-import { ContainerAdminHome, ContainerButtons, ContainerLogout } from './AdminHomePage-styled'
+import { ContainerAdminHome, ContainerButtons, ContainerLogout, ButtonAdminHome, CardAdminHome, CardText, ContainerCardButtons } from './AdminHomePage-styled'
 import { Button } from '../../constants/Button'
 import { useNavigate } from 'react-router-dom'
 import { useProtectedPage } from '../../hooks/useProtectedPage'
 import { goToHomePage, goToCreateTripPage, goToTripDetailsPage } from '../../routes/coordinator'
 import { useRequestData } from '../../hooks/useRequestData'
-
+import { deleteTrip } from '../../services/requests'
 
 export default function AdminHomePage() {
     useProtectedPage()
-    
+    const navigate = useNavigate()
+
     const onClickLogout = () => {
         localStorage.removeItem('token')
-
         goToHomePage(navigate)
     }
-    const navigate = useNavigate()
 
     const [data, isLoading, error] = useRequestData("trips", "")
 
     const tripsList = data.trips && data.trips.map((trip) => {
-        return <div key={trip.id}>
-            <p>{trip.name}</p>
-            <p>{trip.date}</p>
-            <button onClick={() => goToTripDetailsPage(navigate, trip.id)}>Detalhes</button>
-        </div>
-    })
+        return <CardAdminHome key={trip.id}>
+            <h3>{trip.name}</h3>
 
-    
+            <p><strong>Descrição:</strong> {trip.description}</p>
+            <p><strong>Planeta:</strong> {trip.planet}</p>
+            <p><strong>Duração:</strong> {trip.durationInDays} dias</p>
+            <p><strong>Data:</strong> {trip.date}</p> 
+
+            <ContainerCardButtons>
+                <ButtonAdminHome onClick={() => goToTripDetailsPage(navigate, trip.id)}>Detalhes da viagem</ButtonAdminHome>
+                <ButtonAdminHome onClick={() => deleteTrip(trip.id)}>Cancelar viagem</ButtonAdminHome>
+            </ContainerCardButtons>
+            
+        </CardAdminHome>
+    })
 
     return <ContainerAdminHome>
         <ContainerButtons>
@@ -37,15 +43,14 @@ export default function AdminHomePage() {
 
         <h2>Administrar suas viagens</h2>
 
-        {isLoading && <p>Carregando...</p>}
-        {!isLoading && error && <p>Ocorreu um erro.</p>}
-        {!isLoading && !data && <p>Não há nenhuma viagem marcada.</p>}
+        {isLoading && <CardText>Carregando...</CardText>}
+        {!isLoading && error && <CardText>Ocorreu um erro.</CardText>}
+        {!isLoading && !data && <CardText>Não há nenhuma viagem marcada.</CardText>}
         {!isLoading && data && tripsList}
 
         <ContainerLogout>
-            <Button onClick={onClickLogout}>LOGOUT</Button>
+            <ButtonAdminHome onClick={onClickLogout}><strong>LOGOUT</strong></ButtonAdminHome>
         </ContainerLogout>
-        
-        
+            
     </ContainerAdminHome>
 }

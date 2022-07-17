@@ -4,12 +4,8 @@ import { ContainerCreate, CreateTripForm, ContainerButtons } from './CreateTripP
 import { useForm } from '../../hooks/useForm'
 import { goBack } from '../../routes/coordinator'
 import { useNavigate } from 'react-router-dom'
-import { headers } from '../../constants/headers'
+import { createTrip } from '../../services/requests'
 import {listOfPlanets} from '../../constants/listOfPLanets'
-
-import axios from 'axios'
-import { base_url } from '../../constants/url'
-
 import { Button } from '../../constants/Button'
 
 export default function CreateTripPage() {
@@ -27,13 +23,7 @@ export default function CreateTripPage() {
     const onSubmitCreate = (event) => {
         event.preventDefault()
 
-        // Requisição com os dados
-        axios.post(`${base_url}/trips`, form, headers)
-        .then(() => {
-            alert("Viagem cadastrada com sucesso!")
-        }).catch(() => {
-            alert("Ocorreu um erro. Verifique se todas as informações foram inseridas corretamente, ou tente novamente mais tarde.")
-        })
+        createTrip(form)
 
         cleanInputs()
     }

@@ -11,6 +11,12 @@ display: flex;
 flex-direction: column;
 justify-content: space-evenly;
 `
+export const CardText = styled.div`
+width: 50%;
+background-color: white;
+padding: 12px;
+text-align: center;
+`
 export const TitleTrips = styled.h3`
 margin-bottom: 8px;
 color: #3333AA;

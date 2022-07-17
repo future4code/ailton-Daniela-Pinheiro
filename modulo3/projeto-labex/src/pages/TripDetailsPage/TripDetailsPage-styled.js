@@ -16,6 +16,12 @@ h2 {
     margin-bottom: 32px;
 }
 `
+export const CardText = styled.div`
+width: 50%;
+background-color: white;
+padding: 12px;
+text-align: center;
+`
 export const ContainerButtons = styled.div`
 width: 90%;
 display: flex;
