@@ -3,9 +3,9 @@ import { useRequestData } from '../../hooks/useRequestData'
 import { CardTrips, TitleTrips, CardText } from './CardListTrips-styled'
 
 export default function CardListTrips() {
-
+    // Requisição para pegar informações das viagens
     const [data, isLoading, error] = useRequestData("trips", "")
-
+    // Renderização das informações das viagens
     const tripsList = data.trips && data.trips.map((trip) => {
         return <CardTrips key={trip.id}>
             <TitleTrips>{trip.name}</TitleTrips>

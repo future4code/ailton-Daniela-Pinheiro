@@ -1,7 +1,22 @@
 import axios from "axios"
 import { base_url } from "../constants/url"
 import { headers } from "../constants/headers"
+import { goToAdminHomePage } from "../routes/coordinator"
 
+// Requisição de login
+export const login = (body, navigate) => {
+    axios.post(`${base_url}/login`, body)
+        .then((response) => {
+            // Guarda o token recebido no localStorage
+            localStorage.setItem('token', response.data.token)
+            // Direciona para a área administrativa
+            goToAdminHomePage(navigate)
+        }).catch(() => {
+            alert("Ocorreu um erro. Verifique se todas as informações inseridas estão corretas.")
+        })
+}
+
+// Requisição aprovar/reprovar candidato (CardCandidatesToApprove)
 export const decideCandidate = (decision, tripId, candidateId) => {
     const refreshPage = () => {
         window.location.reload(true)
@@ -18,6 +33,7 @@ export const decideCandidate = (decision, tripId, candidateId) => {
     })
 }
 
+// Requisição deletar viagem (AdminHomePage)
 export const deleteTrip = (tripId) => {
     const refreshPage = () => {
         window.location.reload(true)
@@ -34,6 +50,7 @@ export const deleteTrip = (tripId) => {
     }
 }
 
+// Requisição inscrever-se para viagem (ApplicationFormPage)
 export const applyToTrip = (tripId, body) => {
     axios.post(`${base_url}/trips/${tripId}/apply`, body)
         .then(() => {
@@ -43,6 +60,7 @@ export const applyToTrip = (tripId, body) => {
         })
 }
 
+// Requisição criar viagem (CreateTripPage)
 export const createTrip = (body) => {
     axios.post(`${base_url}/trips`, body, headers)
         .then(() => {

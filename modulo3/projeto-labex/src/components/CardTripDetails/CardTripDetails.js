@@ -4,8 +4,9 @@ import CardCandidatesToApprove from '../CardCandidatesToApprove/CardCandidatesTo
 
 export default function CardTripDetails(props) {
     const tripDetails = () => {
+        // Informações da viagem específica
         const data = props.data
-
+        // Renderização em lista dos candidatos aprovados
         const approved = data.trip && data.trip.approved.map((candidate) => {
             return <li>{candidate.name}</li>
         })
@@ -26,7 +27,7 @@ export default function CardTripDetails(props) {
         </CardCandidates>
 
         <TitleDetails>Candidatos inscritos</TitleDetails>
-        <CardCandidatesToApprove data={data} id={props.id} />
+        <CardCandidatesToApprove data={data} isLoading={props.isLoading} id={props.id} />
        </>
     } 
 

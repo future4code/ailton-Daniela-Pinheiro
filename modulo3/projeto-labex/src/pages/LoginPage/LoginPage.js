@@ -1,33 +1,30 @@
 import React from 'react'
-import axios from 'axios'
-import { base_url } from '../../constants/url'
-import { ContainerLogin, CardLogin, ButtonLogin } from './LoginPage-styled'
 import { useNavigate } from 'react-router-dom'
-import { goToHomePage, goToAdminHomePage } from '../../routes/coordinator'
+import { goToHomePage} from '../../routes/coordinator'
+import { login } from '../../services/requests'
 import { useForm } from '../../hooks/useForm'
+import { ContainerLogin, CardLogin, ButtonLogin } from './LoginPage-styled'
 
 export default function LoginPage() {
+    // Função navegação
     const navigate = useNavigate()
 
+    // Hook para o formulário
     const [form, onChangeForm, cleanInputs] = useForm({email: "", password: ""})
-
+    // Função de submissão do formulário
     const onSubmitLogin = (event) => {
+        // Não atualiza a página
         event.preventDefault()
-
-        axios.post(`${base_url}/login`, form)
-        .then((response) => {
-            localStorage.setItem('token', response.data.token)
-            goToAdminHomePage(navigate)
-        }).catch(() => {
-            alert("Ocorreu um erro. Verifique se todas as informações inseridas estão corretas.")
-        })
-
+        // Requisição de login
+        login(form, navigate)
+        // Limpa os inputs
         cleanInputs()
     }
 
     return <ContainerLogin>
         <CardLogin>
             <h2>Faça o login para prosseguir</h2>
+            
             <form onSubmit={onSubmitLogin}>
                 <input
                     type={'email'}

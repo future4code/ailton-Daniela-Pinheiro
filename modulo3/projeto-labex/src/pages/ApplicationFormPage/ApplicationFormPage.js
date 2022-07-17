@@ -1,23 +1,25 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { applyToTrip } from '../../services/requests'
-import { ContainerApplication, ApplicationForm, ContainerButtons } from './ApplicationFormPage-styled'
+import { goBack } from '../../routes/coordinator'
 import { useRequestData } from '../../hooks/useRequestData'
 import { useForm } from '../../hooks/useForm'
+import { applyToTrip } from '../../services/requests'
+import { ContainerApplication, ApplicationForm, ContainerButtons } from './ApplicationFormPage-styled'
 import { listOfCountries } from '../../constants/listOfCountries'
 import { Button } from '../../constants/Button'
-import { goBack } from '../../routes/coordinator'
 
 export default function ApplicationFormPage() {
+    // Função navegação
     const navigate = useNavigate()
-    
+    // Requisição para pegar todas as viagens
     const [data, isLoading, error] = useRequestData("trips", "")
+    // Estado e Função para guardar a id da viagem selecionada no formulário
     const [tripId, setTripId] = useState("")
-
     const onChangeTrip = (event) => {
         setTripId(event.target.value)
     }
 
+    // Hook para o formulário
     const [form, onChangeForm, cleanInputs] = useForm({
         name: "",
         age: "",
@@ -25,15 +27,17 @@ export default function ApplicationFormPage() {
         profession: "",
         country: ""
     })
-
+    // Função de submissão do formulário
     const onSubmitApply = (event) => {
+        // Não atualiza a página
         event.preventDefault()
-
+        // Requisição para inscrever-se na viagem
         applyToTrip(tripId, form)
-
+        // Limpa os inputs
         cleanInputs()
     }
 
+    // Renderização das opções para os inputs do tipo select do formulário
     const tripsOption = data.trips && data.trips.map((trip) => {
         return <option key={trip.id} value={trip.id}>{trip.name}</option>
     })

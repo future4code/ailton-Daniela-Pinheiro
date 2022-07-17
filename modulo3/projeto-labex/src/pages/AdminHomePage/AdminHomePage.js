@@ -1,23 +1,27 @@
 import React from 'react'
-import { ContainerAdminHome, ContainerButtons, ContainerLogout, ButtonAdminHome, CardAdminHome, CardText, ContainerCardButtons } from './AdminHomePage-styled'
-import { Button } from '../../constants/Button'
 import { useNavigate } from 'react-router-dom'
-import { useProtectedPage } from '../../hooks/useProtectedPage'
 import { goToHomePage, goToCreateTripPage, goToTripDetailsPage } from '../../routes/coordinator'
+import { useProtectedPage } from '../../hooks/useProtectedPage'
 import { useRequestData } from '../../hooks/useRequestData'
 import { deleteTrip } from '../../services/requests'
+import { ContainerAdminHome, ContainerButtons, ContainerLogout, ButtonAdminHome, CardAdminHome, CardText, ContainerCardButtons } from './AdminHomePage-styled'
+import { Button } from '../../constants/Button'
 
 export default function AdminHomePage() {
+    // Função de verificação de login
     useProtectedPage()
+    // Função navegação
     const navigate = useNavigate()
-
+    // Função de logout
     const onClickLogout = () => {
+        // Apaga o token do localStorage
         localStorage.removeItem('token')
         goToHomePage(navigate)
     }
 
+    // Requisição para pegar todas as viagens
     const [data, isLoading, error] = useRequestData("trips", "")
-
+    // Renderização das viagens na tela
     const tripsList = data.trips && data.trips.map((trip) => {
         return <CardAdminHome key={trip.id}>
             <h3>{trip.name}</h3>
@@ -50,7 +54,6 @@ export default function AdminHomePage() {
 
         <ContainerLogout>
             <ButtonAdminHome onClick={onClickLogout}><strong>LOGOUT</strong></ButtonAdminHome>
-        </ContainerLogout>
-            
+        </ContainerLogout>    
     </ContainerAdminHome>
 }

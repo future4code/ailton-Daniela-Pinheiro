@@ -1,17 +1,19 @@
 import React from 'react'
-import { useProtectedPage } from '../../hooks/useProtectedPage'
-import { ContainerCreate, CreateTripForm, ContainerButtons } from './CreateTripPage-styled'
-import { useForm } from '../../hooks/useForm'
-import { goBack } from '../../routes/coordinator'
 import { useNavigate } from 'react-router-dom'
+import { goBack } from '../../routes/coordinator'
+import { useProtectedPage } from '../../hooks/useProtectedPage'
+import { useForm } from '../../hooks/useForm'
 import { createTrip } from '../../services/requests'
+import { ContainerCreate, CreateTripForm, ContainerButtons } from './CreateTripPage-styled'
 import {listOfPlanets} from '../../constants/listOfPLanets'
 import { Button } from '../../constants/Button'
 
 export default function CreateTripPage() {
+    // Função de verificação de login
     useProtectedPage()
+    // Função navegação
     const navigate = useNavigate()
-
+    // Hook para o formulário
     const [form, onChangeForm, cleanInputs] = useForm({
         name: "",
         planet: "",
@@ -20,21 +22,24 @@ export default function CreateTripPage() {
         durationInDays: ""
     })
 
+    // Função de submissão do formulário
     const onSubmitCreate = (event) => {
+        // Não atualiza a página
         event.preventDefault()
-
+        // Requisição para criar nova viagem
         createTrip(form)
-
+        // Limpa os inputs
         cleanInputs()
     }
 
+    // Renderização das opções para o input do tipo select do formulário
     const planets = listOfPlanets.map((planet, index) => {
         return <option key={index} value={planet}>{planet}</option>
     })
 
     return <ContainerCreate>
-        
         <h2>Cadastrar nova viagem</h2>
+        
         <CreateTripForm onSubmit={onSubmitCreate}>
             <input 
                 name="name"

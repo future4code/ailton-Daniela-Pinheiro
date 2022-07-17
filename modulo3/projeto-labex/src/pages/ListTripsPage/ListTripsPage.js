@@ -1,12 +1,13 @@
 import React from 'react'
-import { ContainerTrips, ContainerButtons } from './ListTripsPage-styled'
-import { Button } from '../../constants/Button'
 import { useNavigate } from 'react-router-dom'
 import { goBack, goToApplicationFormPage } from '../../routes/coordinator'
+import { ContainerTrips, ContainerButtons } from './ListTripsPage-styled'
+import { Button } from '../../constants/Button'
 import CardListTrips from '../../components/CardListTrips/CardListTrips'
 
 
 export default function ListTripsPage() {
+    // Função navegação
     const navigate = useNavigate()
 
     return <ContainerTrips>
