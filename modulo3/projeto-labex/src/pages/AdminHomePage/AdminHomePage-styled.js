@@ -5,10 +5,7 @@ width: 100%;
 height: 100%;
 padding-top: 4px;
 padding-bottom: 8px;
-
-/* mudar cor */
 background-color: aliceblue;
-
 display: flex;
 flex-direction: column;
 align-items: center;
