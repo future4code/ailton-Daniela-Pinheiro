@@ -2,6 +2,8 @@ import React from "react"
 import { useNavigate } from "react-router-dom"
 import { useForm } from "../../hooks/useForm"
 import { signUp } from "../../services/users"
+import { TextField } from "@mui/material"
+import { LargeButton } from "../../constants/buttons"
 
 export function SignUpForm() {
     const navigate = useNavigate()
@@ -13,35 +15,41 @@ export function SignUpForm() {
     }
 
     return <form onSubmit={onSubmitForm}>
-        <input 
+        <TextField
+            id="outlined-basic"
+            label="Nome"
+            variant="outlined" 
             name="username"
-            placeholder="Nome"
             value={form.username}
             onChange={onChangeInput}
             required
+            margin="normal"
         />
-        <br/>
-        <input 
+        <TextField
+            id="outlined-basic"
+            label="E-mail"
+            variant="outlined"  
             name="email"
-            placeholder="E-mail"
             type="email"
             value={form.email}
             onChange={onChangeInput}
             required
+            margin="normal"
         />
-        <br/>
-        <input
+        <TextField
+            id="outlined-basic"
+            label="Senha"
+            variant="outlined" 
             name="password"
-            placeholder="Senha"
             type="password"
             value={form.password}
             onChange={onChangeInput}
             pattern="[0-9a-zA-Z]{8,30}"
             title="Senha deve possuir no mínimo 8 e no máximo 30 caracteres."
             required
+            margin="normal"
         />
-        <br/>
-        <button type="submit">Cadastrar</button>
-        <br/>
+        <p>Textinho</p>
+        <LargeButton variant="contained" disableElevation type="submit">Cadastrar</LargeButton>
     </form>
 }

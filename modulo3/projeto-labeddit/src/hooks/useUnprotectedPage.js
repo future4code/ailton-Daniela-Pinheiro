@@ -10,5 +10,5 @@ export const useUnprotectedPage = () => {
         if(token !== null) {
             goToFeedPage(navigate)
         }
-    }, [navigate])
+    }, [])
 }

@@ -2,6 +2,8 @@ import React from "react"
 import { useNavigate } from "react-router-dom"
 import { useForm } from "../../hooks/useForm"
 import { login } from "../../services/users"
+import { TextField } from "@mui/material"
+import { LargeButton } from "../../constants/buttons"
 
 export function LoginForm() {
     const navigate = useNavigate()
@@ -13,25 +15,30 @@ export function LoginForm() {
     }
 
     return <form onSubmit={onSubmitForm}>
-        <input 
+        <TextField
+            id="outlined-basic"
+            label="E-mail"
+            variant="outlined" 
             name="email"
-            placeholder="E-mail"
             type="email"
             value={form.email}
             onChange={onChangeInput}
             required
+            margin="normal"
         />
-        <br/>
-        <input
+        <TextField
+            id="outlined-basic"
+            label="Senha"
+            variant="outlined" 
             name="password"
-            placeholder="Senha"
             type="password"
             value={form.password}
             onChange={onChangeInput}
             required
+            margin="normal"
         />
-        <br/>
-        <button type="submit">Entrar</button>
-        <br/>
+
+        <LargeButton variant="contained" disableElevation type="submit">Entrar</LargeButton>
+
     </form>
 }
