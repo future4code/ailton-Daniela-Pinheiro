@@ -4,8 +4,9 @@ import { useForm } from "../../hooks/useForm"
 import { signUp } from "../../services/users"
 import { TextField } from "@mui/material"
 import { LargeButton } from "../../constants/buttons"
+import { secondaryColor } from "../../constants/colors"
 
-export function SignUpForm() {
+export default function SignUpForm() {
     const navigate = useNavigate()
     const [form, onChangeInput, cleanInput] = useForm({username: "", email: "", password: ""})
 
@@ -16,8 +17,12 @@ export function SignUpForm() {
 
     return <form onSubmit={onSubmitForm}>
         <TextField
+            sx={{"& label.Mui-focused": {
+                color: secondaryColor,
+            }}}
+            fullWidth
             id="outlined-basic"
-            label="Nome"
+            label="Nome de usuário"
             variant="outlined" 
             name="username"
             value={form.username}
@@ -26,6 +31,10 @@ export function SignUpForm() {
             margin="normal"
         />
         <TextField
+            sx={{"& label.Mui-focused": {
+                color: secondaryColor,
+            }}}
+            fullWidth
             id="outlined-basic"
             label="E-mail"
             variant="outlined"  
@@ -37,6 +46,10 @@ export function SignUpForm() {
             margin="normal"
         />
         <TextField
+            sx={{"& label.Mui-focused": {
+                color: secondaryColor,
+            }}}
+            fullWidth
             id="outlined-basic"
             label="Senha"
             variant="outlined" 
@@ -49,7 +62,10 @@ export function SignUpForm() {
             required
             margin="normal"
         />
-        <p>Textinho</p>
+        <p>Ao continuar, você concorda com o nosso <strong>Contrato de Usuário</strong> e nossa <strong>Política de Privacidade</strong></p>
+        <input type="checkbox" id="scales" name="mailList" />
+        <label for="mailList">Eu concordo em receber e-mails sobre coisas legais no Labeddit</label>
+        <br/>
         <LargeButton variant="contained" disableElevation type="submit">Cadastrar</LargeButton>
     </form>
 }

@@ -7,8 +7,8 @@ export const useProtectedPage = () => {
 
     useLayoutEffect(() => {
         const token = localStorage.getItem("token")
-        if(token === null) {
+        if(!token) {
             goToLoginPage(navigate)
         }
-    }, [])
+    }, [navigate])
 }

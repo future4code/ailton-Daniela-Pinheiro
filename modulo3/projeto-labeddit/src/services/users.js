@@ -8,8 +8,11 @@ export const login = (body, clean, navigate) => {
         localStorage.setItem("token", response.data.token)
         clean()
         goToFeedPage(navigate)
+
+        // setRightButtonText("Logout")
+
     }).catch(() => {
-        alert("Ocorreu um erro. Verifique se as informações inseridas estão corretas ou tente novamente mais tarde.")
+        alert("Ocorreu um erro. Verifique se todas as informações inseridas estão corretas ou tente novamente mais tarde.")
     })
 }
 
@@ -19,7 +22,10 @@ export const signUp = (body, clean, navigate) => {
         localStorage.setItem("token", response.data.token)
         clean()
         goToFeedPage(navigate)
+
+        // setRightButtonText("Logout")
+
     }).catch(() => {
-        alert("Ocorreu um erro. Verifique se as informações inseridas estão corretas ou tente novamente mais tarde.")
+        alert("Ocorreu um erro. Verifique se todas as informações inseridas estão corretas ou tente novamente mais tarde.")
     })
 }

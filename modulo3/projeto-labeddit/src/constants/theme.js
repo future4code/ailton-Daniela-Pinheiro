@@ -1,5 +1,5 @@
 import { createTheme } from "@mui/material/styles"
-import { primaryColor, neutralColor } from "./colors"
+import { primaryColor, secondaryColor } from "./colors"
 
 export const theme = createTheme({
     palette: {
@@ -7,8 +7,8 @@ export const theme = createTheme({
         main: primaryColor,
       },
       secondary: {
-        main: neutralColor,
+        main: secondaryColor,
       },
-    }
+    },
   })
 

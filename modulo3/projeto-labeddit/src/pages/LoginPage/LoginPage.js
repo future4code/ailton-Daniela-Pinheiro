@@ -1,6 +1,6 @@
 import React from "react"
 import { useNavigate } from "react-router-dom"
-import { LoginForm } from "../../components/LoginForm/LoginForm"
+import LoginForm from "../../components/LoginForm/LoginForm"
 import { useUnprotectedPage } from "../../hooks/useUnprotectedPage"
 import { goToSignUpPage } from "../../router/coordinator"
 import { Divider } from "@mui/material"
@@ -12,7 +12,7 @@ export default function LoginPage() {
 
     return <div>
         <p>imagem</p>
-        <h2>LabEddit</h2>
+        <h1>LabEddit</h1>
         <p>O projeto de rede social da Labenu</p>
         
         <LoginForm />
