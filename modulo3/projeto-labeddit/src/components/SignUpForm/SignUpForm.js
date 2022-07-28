@@ -1,18 +1,26 @@
 import React from "react"
 import { useNavigate } from "react-router-dom"
 import { useForm } from "../../hooks/useForm"
-import { login } from "../../services/users"
+import { signUp } from "../../services/users"
 
-export function LoginForm() {
+export function SignUpForm() {
     const navigate = useNavigate()
-    const [form, onChangeInput, cleanInput] = useForm({email: "", password: ""})
+    const [form, onChangeInput, cleanInput] = useForm({username: "", email: "", password: ""})
 
     const onSubmitForm = (event) => {
         event.preventDefault()
-        login(form, cleanInput, navigate)
+        signUp(form, cleanInput, navigate)
     }
 
     return <form onSubmit={onSubmitForm}>
+        <input 
+            name="username"
+            placeholder="Nome"
+            value={form.username}
+            onChange={onChangeInput}
+            required
+        />
+        <br/>
         <input 
             name="email"
             placeholder="E-mail"
@@ -28,10 +36,12 @@ export function LoginForm() {
             type="password"
             value={form.password}
             onChange={onChangeInput}
+            pattern="[0-9a-zA-Z]{8,30}"
+            title="Senha deve possuir no mínimo 8 e no máximo 30 caracteres."
             required
         />
         <br/>
-        <button type="submit">Entrar</button>
+        <button type="submit">Cadastrar</button>
         <br/>
     </form>
 }
