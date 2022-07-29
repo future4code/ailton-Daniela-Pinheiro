@@ -1,21 +1,21 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { StyledToolbar, Title } from './styled'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { StyledToolbar, Title, ButtonClose } from './styled'
 import { goToFeedPage, goToLoginPage } from '../../router/coordinator'
 import AppBar from '@mui/material/AppBar'
 import Button from '@mui/material/Button'
 
 export default function Header() {
     const navigate = useNavigate()
-    const token = localStorage.getItem("token")
+    const location = useLocation()
 
-    const [rightButtonText, setRightButtonText] = useState(token ? "Logout" : "Login")
+    const [rightButtonText, setRightButtonText] = useState(location.pathname === "/cadastrar" ? "Login" : "Logout")
 
     const logout = () => {
         localStorage.removeItem("token")
     }
     const onClickRightButton = () => {
-        if(token) {
+        if(rightButtonText === "Logout") {
             logout()
             setRightButtonText("Login")
             goToLoginPage(navigate)
@@ -24,9 +24,9 @@ export default function Header() {
         }
     }
 
-    return <AppBar position="static">
+    return location.pathname !== "/" && <AppBar position="static">
             <StyledToolbar>
-                <Button onClick={() => goToFeedPage(navigate)} color="inherit">X</Button>
+                {location.pathname !== "/feed" && location.pathname !== "/cadastrar" && <ButtonClose onClick={() => goToFeedPage(navigate)} color="inherit">X</ButtonClose>}
                 <Title>LabEddit</Title>
                 <Button onClick={onClickRightButton} color="inherit">{rightButtonText}</Button>
             </StyledToolbar>

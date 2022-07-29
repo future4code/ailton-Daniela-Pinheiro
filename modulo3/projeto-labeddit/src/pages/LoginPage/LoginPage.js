@@ -5,12 +5,13 @@ import { useUnprotectedPage } from "../../hooks/useUnprotectedPage"
 import { goToSignUpPage } from "../../router/coordinator"
 import { Divider } from "@mui/material"
 import { LargeSignUpButton } from "../../constants/buttons"
+import { ScreenContainer } from "../../constants/ScreenContainer"
 
 export default function LoginPage() {
     useUnprotectedPage()
     const navigate = useNavigate()
 
-    return <div>
+    return <ScreenContainer>
         <p>imagem</p>
         <h1>LabEddit</h1>
         <p>O projeto de rede social da Labenu</p>
@@ -20,5 +21,5 @@ export default function LoginPage() {
         <Divider variant="middle" />
         
         <LargeSignUpButton onClick={() => goToSignUpPage(navigate)}>Crie uma conta!</LargeSignUpButton>
-    </div>
+    </ScreenContainer>
 }

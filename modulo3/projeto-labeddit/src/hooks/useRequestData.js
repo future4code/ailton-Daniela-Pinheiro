@@ -16,8 +16,6 @@ export const useRequestData = (params) => {
             console.log(error.response.data.message)
         })
     }, [])
-    
-    // `/${id}/comments`
 
     return data
 }
