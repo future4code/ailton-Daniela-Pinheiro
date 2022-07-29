@@ -3,7 +3,7 @@ import { TextField } from "@mui/material"
 import { useForm } from "../../hooks/useForm"
 import { LargeButton } from "../../constants/buttons"
 import { neutralColor, primaryColor } from "../../constants/colors"
-import { NoEncryption } from "@mui/icons-material"
+import { Form } from "../../constants/Form"
 
 export default function CreatePost() {
   const [form, onChangeInput, cleanInput] = useForm({title: "", body: ""})
@@ -13,7 +13,7 @@ export default function CreatePost() {
     // post(form, cleanInput, navigate)
 }
 
-  return <form onSubmit={onSubmitForm}>
+  return <Form onSubmit={onSubmitForm}>
       <TextField
         id="outlined-textarea"
         placeholder="Título"
@@ -38,5 +38,5 @@ export default function CreatePost() {
         }}
       />
       <LargeButton>Postar</LargeButton>
-  </form>
+  </Form>
 }

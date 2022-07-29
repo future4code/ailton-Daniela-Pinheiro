@@ -5,6 +5,7 @@ import { login } from "../../services/users"
 import { TextField } from "@mui/material"
 import { LargeButton } from "../../constants/buttons"
 import { secondaryColor } from "../../constants/colors"
+import { Form } from "../../constants/Form"
 
 export default function LoginForm() {
     const navigate = useNavigate()
@@ -15,7 +16,7 @@ export default function LoginForm() {
         login(form, cleanInput, navigate)
     }
 
-    return <form onSubmit={onSubmitForm}>
+    return <Form onSubmit={onSubmitForm}>
         <TextField
             sx={{"& label.Mui-focused": {
                 color: secondaryColor,
@@ -48,5 +49,5 @@ export default function LoginForm() {
         />
 
         <LargeButton variant="contained" disableElevation type="submit">Entrar</LargeButton>
-    </form>
+    </Form>
 }
