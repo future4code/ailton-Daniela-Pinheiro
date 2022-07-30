@@ -64,8 +64,8 @@ export default function SignUpForm() {
             margin="normal"
         />
         <p>Ao continuar, você concorda com o nosso <strong>Contrato de Usuário</strong> e nossa <strong>Política de Privacidade</strong></p>
-        <input type="checkbox" id="scales" name="mailList" />
-        <label for="mailList">Eu concordo em receber e-mails sobre coisas legais no Labeddit</label>
+        <input type="checkbox" id="scales" name="newsletter" />
+        <label for="newsletter">Eu concordo em receber e-mails sobre coisas legais no Labeddit</label>
         <br/>
         <LargeButton variant="contained" disableElevation type="submit">Cadastrar</LargeButton>
     </Form>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { StyledToolbar, Title, ButtonClose } from './styled'
 import { goToFeedPage, goToLoginPage } from '../../router/coordinator'
@@ -8,8 +8,7 @@ import Button from '@mui/material/Button'
 export default function Header() {
     const navigate = useNavigate()
     const location = useLocation()
-
-    const [rightButtonText, setRightButtonText] = useState(location.pathname === "/cadastrar" ? "Login" : "Logout")
+    const rightButtonText = location.pathname === "/cadastrar" ? "Login" : "Logout"
 
     const logout = () => {
         localStorage.removeItem("token")
@@ -17,7 +16,6 @@ export default function Header() {
     const onClickRightButton = () => {
         if(rightButtonText === "Logout") {
             logout()
-            setRightButtonText("Login")
             goToLoginPage(navigate)
         } else {
             goToLoginPage(navigate)
