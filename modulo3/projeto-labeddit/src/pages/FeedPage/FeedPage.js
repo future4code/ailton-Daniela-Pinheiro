@@ -18,6 +18,8 @@ export default function FeedPage() {
                 key={post.id}
                 username={post.username}
                 body={post.body}
+                voteSum={post.voteSum}
+                commentCount={post.commentCount}
                 onClickPost={() => goToPostPage(navigate, post.id)}
             />
         })

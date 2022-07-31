@@ -5,8 +5,8 @@ import { useRequestData } from "../../hooks/useRequestData"
 import { Card, Typography } from "@mui/material"
 import { ScreenContainer } from "../../constants/ScreenContainer"
 import PostsCard from "../../components/PostsCard/PostsCard"
-import { Divider } from "./styled"
-import { LargePostButton } from "../../constants/buttons"
+import { Divider, UpArrow, DownArrow, SmallCard } from "./styled"
+import CreateComment from "../../components/CreateComment/CreateComment"
 
 export default function PostPage() {
     useProtectedPage()
@@ -14,13 +14,18 @@ export default function PostPage() {
     const comments = useRequestData(`/posts/${params.id}/comments`)
     
     const renderedComments = comments.length > 0 && comments.map((comment) => {
-        return <Card variant="outlined" key={comment.id} sx={{ width: '100%' }}>
+        return <Card variant="outlined" key={comment.id} sx={{ width: '97%', padding: '4px', marginBottom: '4px' }}>
         <Typography sx={{ fontSize: 12 }} color="text.secondary" gutterBottom>
             Enviado por: {comment.username}
         </Typography>
         <Typography variant="body">
             {comment.body}
         </Typography>
+        <SmallCard variant="outlined">
+                <UpArrow />
+                {comment.voteSum === null ? 0 : comment.voteSum}
+                <DownArrow />
+            </SmallCard>
     </Card>
     })
     
@@ -31,6 +36,8 @@ export default function PostPage() {
                 key={post.id}
                 username={post.username}
                 body={post.body}
+                voteSum={post.voteSum}
+                commentCount={post.commentCount}
             />
         }
     })
@@ -39,7 +46,7 @@ export default function PostPage() {
         {posts.length === 0 && <p>Carregando...</p>}
         {posts.length > 0 && choosenPost}
 
-        <LargePostButton>Responder</LargePostButton>
+        <CreateComment id={params.id}/>
 
         <Divider />
 

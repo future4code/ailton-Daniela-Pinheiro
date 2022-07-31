@@ -20,7 +20,7 @@ export const comment = (id, body, clean) => {
             Authorization: localStorage.getItem("token")
         }
     }).then(response => {
-        console.log(response.data)
+        // console.log(response.data)
         clean()
     }).catch(() => {
         alert("Ocorreu um erro. Verifique se todas as informações inseridas estão corretas ou tente novamente mais tarde.")
