@@ -1,25 +1,28 @@
 import React from "react"
 import { TextField } from "@mui/material"
 import { useForm } from "../../hooks/useForm"
-import { LargeButton } from "../../constants/buttons"
+import { LargePostButton } from "../../constants/buttons"
 import { neutralColor, primaryColor } from "../../constants/colors"
-import { Form } from "../../constants/Form"
+import { post } from "../../services/posts"
+import { FormCreatePost } from "./styled"
 
 export default function CreatePost() {
   const [form, onChangeInput, cleanInput] = useForm({title: "", body: ""})
 
   const onSubmitForm = (event) => {
     event.preventDefault()
-    // post(form, cleanInput, navigate)
+    post(form, cleanInput)
+    // atualizar a páginaaaa
 }
 
-  return <Form onSubmit={onSubmitForm}>
+  return <FormCreatePost onSubmit={onSubmitForm}>
       <TextField
         id="outlined-textarea"
         placeholder="Título"
         name="title"
         multiline
         fullWidth
+        onChange={onChangeInput}
         sx={{
           backgroundColor: primaryColor,
           color: neutralColor,
@@ -32,11 +35,12 @@ export default function CreatePost() {
         multiline
         rows={5}
         fullWidth
+        onChange={onChangeInput}
         sx={{
           backgroundColor: primaryColor,
           color: neutralColor,
         }}
       />
-      <LargeButton>Postar</LargeButton>
-  </Form>
+      <LargePostButton type="submit">Postar</LargePostButton>
+  </FormCreatePost>
 }

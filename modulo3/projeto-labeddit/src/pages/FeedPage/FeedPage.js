@@ -5,7 +5,7 @@ import { useRequestData } from "../../hooks/useRequestData"
 import { useNavigate } from "react-router-dom"
 import { goToPostPage } from "../../router/coordinator"
 import CreatePost from "../../components/CreatePost/CreatePost"
-import { Divider } from "@mui/material"
+import { Divider } from "./styled"
 import { ScreenContainer } from "../../constants/ScreenContainer"
 
 export default function FeedPage() {
@@ -25,8 +25,7 @@ export default function FeedPage() {
     return <ScreenContainer>
         <CreatePost />
 
-        <Divider variant="middle" />
-        <br />
+        <Divider />
 
         {posts.length === 0 && <p>Carregando...</p>}
         {posts.length > 0 && renderedPosts}

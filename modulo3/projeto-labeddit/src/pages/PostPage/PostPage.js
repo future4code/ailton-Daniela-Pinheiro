@@ -5,6 +5,8 @@ import { useRequestData } from "../../hooks/useRequestData"
 import { Card, Typography } from "@mui/material"
 import { ScreenContainer } from "../../constants/ScreenContainer"
 import PostsCard from "../../components/PostsCard/PostsCard"
+import { Divider } from "./styled"
+import { LargePostButton } from "../../constants/buttons"
 
 export default function PostPage() {
     useProtectedPage()
@@ -34,9 +36,13 @@ export default function PostPage() {
     })
 
     return <ScreenContainer>
-        <h1>Post</h1>
         {posts.length === 0 && <p>Carregando...</p>}
         {posts.length > 0 && choosenPost}
+
+        <LargePostButton>Responder</LargePostButton>
+
+        <Divider />
+
         {comments.length === 0 && <p>Não há comentários.</p>}
         {comments.length > 0 && renderedComments}
     </ScreenContainer>

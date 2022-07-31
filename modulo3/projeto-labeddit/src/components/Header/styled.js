@@ -8,9 +8,11 @@ justify-content: flex-end;
 padding-right: 6% !important;
 position: relative;
 `
-export const Title = styled.h3`
+export const LogoImage = styled.img`
 position: absolute;
-left: 37%;
+left: 44%;
+width: 32px;
+height: auto;
 `
 export const ButtonClose = styled(Button)`
 margin-right: 58% !important;

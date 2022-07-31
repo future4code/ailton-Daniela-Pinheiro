@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { highligthColor, secondaryColor } from "./colors"
 
 export const LargeButton = styled.button`
-width: 80%;
+width: 90%;
 height: 48px;
 margin-top: 8px;
 margin-bottom: 8px;
@@ -14,7 +14,7 @@ border: none;
 background-image: linear-gradient(to right, ${highligthColor} , ${secondaryColor});
 `
 export const LargeSignUpButton = styled.button`
-width: 80%;
+width: 90%;
 height: 48px;
 margin-top: 8px;
 margin-bottom: 8px;
@@ -26,7 +26,7 @@ border: 1px solid ${secondaryColor};
 background-color: transparent;
 `
 export const LargePostButton = styled.button`
-width: 80%;
+width: 90%;
 height: 48px;
 margin-top: 8px;
 margin-bottom: 8px;

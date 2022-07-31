@@ -2,10 +2,11 @@ import React from "react"
 import { useNavigate } from "react-router-dom"
 import { useForm } from "../../hooks/useForm"
 import { signUp } from "../../services/users"
-import { TextField } from "@mui/material"
+import { TextField, Typography } from "@mui/material"
 import { LargeButton } from "../../constants/buttons"
 import { secondaryColor } from "../../constants/colors"
 import { Form } from "../../constants/Form"
+import { Checkbox } from "./styled"
 
 export default function SignUpForm() {
     const navigate = useNavigate()
@@ -63,10 +64,13 @@ export default function SignUpForm() {
             required
             margin="normal"
         />
-        <p>Ao continuar, você concorda com o nosso <strong>Contrato de Usuário</strong> e nossa <strong>Política de Privacidade</strong></p>
-        <input type="checkbox" id="scales" name="newsletter" />
-        <label for="newsletter">Eu concordo em receber e-mails sobre coisas legais no Labeddit</label>
-        <br/>
+
+        <Typography variant="body2">Ao continuar, você concorda com o nosso <strong>Contrato de Usuário</strong> e nossa <strong>Política de Privacidade</strong>.</Typography>
+        <Checkbox>
+            <input type="checkbox" id="newsletter"/>
+            <label for="newsletter">Eu concordo em receber e-mails sobre coisas legais no Labeddit</label>      
+        </Checkbox>
+
         <LargeButton variant="contained" disableElevation type="submit">Cadastrar</LargeButton>
     </Form>
 }

@@ -1,11 +1,9 @@
 import styled from "styled-components"
 
-export const ScreenContainer = styled.div`
-width: 90%;
-height: 100%;
+export const FormCreatePost = styled.form`
+width: 100%;
 display: flex;
 flex-direction: column;
 align-items: center;
-padding: 2.5%;
-padding-top: 5%;
+row-gap: 4px;
 `
