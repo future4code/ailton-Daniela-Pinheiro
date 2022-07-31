@@ -16,6 +16,7 @@ export default function FeedPage() {
     const renderedPosts = (posts.length > 0) && posts.map((post) => {
             return <PostsCard
                 key={post.id}
+                id={post.id}
                 username={post.username}
                 body={post.body}
                 voteSum={post.voteSum}

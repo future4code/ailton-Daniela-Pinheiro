@@ -6,8 +6,7 @@ export const post = (body, clean) => {
         headers: {
             Authorization: localStorage.getItem("token")
         }
-    }).then(response => {
-        // alert(response.data)
+    }).then(() => {
         clean()
     }).catch(() => {
         alert("Ocorreu um erro. Verifique se todas as informações inseridas estão corretas ou tente novamente mais tarde.")
@@ -19,10 +18,20 @@ export const comment = (id, body, clean) => {
         headers: {
             Authorization: localStorage.getItem("token")
         }
-    }).then(response => {
-        // console.log(response.data)
+    }).then(() => {
         clean()
     }).catch(() => {
         alert("Ocorreu um erro. Verifique se todas as informações inseridas estão corretas ou tente novamente mais tarde.")
+    })
+}
+
+export const votePost = (id, body) => {
+    axios.put(`${BASE_URL}/posts/${id}/votes`, body, {
+        headers: {
+            Authorization: localStorage.getItem("token")
+        }
+    }).then(() => {
+    }).catch(() => {
+        alert("Ocorreu um erro, tente novamente mais tarde.")
     })
 }

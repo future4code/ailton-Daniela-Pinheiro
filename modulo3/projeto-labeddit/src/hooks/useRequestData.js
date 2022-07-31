@@ -15,7 +15,7 @@ export const useRequestData = (params) => {
         }).catch(error => {
             console.log(error.response.data.message)
         })
-    }, [])
+    }, [data])
 
     return data
 }

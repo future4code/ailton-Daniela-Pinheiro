@@ -12,7 +12,6 @@ export default function CreatePost() {
   const onSubmitForm = (event) => {
     event.preventDefault()
     post(form, cleanInput)
-    // atualizar a páginaaaa
 }
 
   return <FormCreatePost onSubmit={onSubmitForm}>
@@ -20,6 +19,7 @@ export default function CreatePost() {
         id="outlined-textarea"
         placeholder="Título"
         name="title"
+        value={form.title}
         multiline
         fullWidth
         onChange={onChangeInput}
@@ -27,11 +27,13 @@ export default function CreatePost() {
           backgroundColor: primaryColor,
           color: neutralColor,
         }}
+        required
       />
       <TextField
         id="outlined-textarea"
         placeholder="Escreva seu post..."
         name="body"
+        value={form.body}
         multiline
         rows={5}
         fullWidth
@@ -40,6 +42,7 @@ export default function CreatePost() {
           backgroundColor: primaryColor,
           color: neutralColor,
         }}
+        required
       />
       <LargePostButton type="submit">Postar</LargePostButton>
   </FormCreatePost>

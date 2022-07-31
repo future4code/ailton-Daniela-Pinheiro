@@ -6,13 +6,13 @@ import { neutralColor, primaryColor } from "../../constants/colors"
 import { comment } from "../../services/posts"
 import { FormCreateComment } from "./styled"
 
+
 export default function CreateComment(props) {
   const [form, onChangeInput, cleanInput] = useForm({body: ""})
 
   const onSubmitForm = (event) => {
     event.preventDefault()
     comment(props.id, form, cleanInput)
-    // atualizar a páginaaaa
 }
 
   return <FormCreateComment onSubmit={onSubmitForm}>
@@ -20,6 +20,7 @@ export default function CreateComment(props) {
         id="outlined-textarea"
         placeholder="Adicionar comentário"
         name="body"
+        value={form.body}
         multiline
         rows={4}
         fullWidth
@@ -28,6 +29,7 @@ export default function CreateComment(props) {
           backgroundColor: primaryColor,
           color: neutralColor,
         }}
+        required
       />
       <LargePostButton type="submit">Responder</LargePostButton>
   </FormCreateComment>

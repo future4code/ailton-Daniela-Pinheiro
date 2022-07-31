@@ -6,6 +6,6 @@ height: 100%;
 display: flex;
 flex-direction: column;
 align-items: center;
-padding: 2.5%;
+padding: 5%;
 padding-top: 5%;
 `

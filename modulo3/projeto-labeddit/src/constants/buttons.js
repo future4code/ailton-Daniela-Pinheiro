@@ -12,6 +12,10 @@ color: white;
 border-radius: 3em;
 border: none;
 background-image: linear-gradient(to right, ${highligthColor} , ${secondaryColor});
+&:active {
+    width: 85%;
+    font-size: large;
+}
 `
 export const LargeSignUpButton = styled.button`
 width: 90%;
@@ -24,6 +28,10 @@ color: ${secondaryColor};
 border-radius: 3em;
 border: 1px solid ${secondaryColor};
 background-color: transparent;
+&:active {
+    width: 85%;
+    font-size: large;
+}
 `
 export const LargePostButton = styled.button`
 width: 90%;
@@ -36,4 +44,8 @@ color: white;
 border-radius: 1em;
 border: none;
 background-image: linear-gradient(to right, ${highligthColor} , ${secondaryColor});
+&:active {
+    width: 85%;
+    font-size: large;
+}
 `
