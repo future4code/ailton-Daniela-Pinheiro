@@ -7,6 +7,7 @@ import PostsCard from "../../components/PostsCard/PostsCard"
 import { Divider } from "./styled"
 import CreateComment from "../../components/CreateComment/CreateComment"
 import { CommentsCard } from "../../components/CommentsCard/CommentsCard"
+import { CircularProgress } from "@mui/material"
 
 export default function PostPage() {
     useProtectedPage()
@@ -38,14 +39,16 @@ export default function PostPage() {
     })
     
     return <ScreenContainer>
-        {posts.length === 0 && <p>Carregando...</p>}
-        {posts.length > 0 && choosenPost}
+        {!posts && <CircularProgress />}
+        {posts && posts.length === 0 && <CircularProgress />}
+        {posts && posts.length > 0 && choosenPost}
 
         <CreateComment id={params.id}/>
 
         <Divider />
 
-        {comments.length === 0 && <p>Não há comentários.</p>}
-        {comments.length > 0 && renderedComments}
+        {!comments && <CircularProgress />}
+        {comments && comments.length === 0 && <p>Seja o primeio a responder!</p>}
+        {comments && comments.length > 0 && renderedComments}
     </ScreenContainer>
 }

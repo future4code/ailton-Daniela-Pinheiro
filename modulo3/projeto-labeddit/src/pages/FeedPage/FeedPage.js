@@ -7,6 +7,7 @@ import { goToPostPage } from "../../router/coordinator"
 import CreatePost from "../../components/CreatePost/CreatePost"
 import { Divider } from "./styled"
 import { ScreenContainer } from "../../constants/ScreenContainer"
+import { CircularProgress } from "@mui/material"
 
 export default function FeedPage() {
     useProtectedPage()
@@ -30,7 +31,8 @@ export default function FeedPage() {
 
         <Divider />
 
-        {posts.length === 0 && <p>Carregando...</p>}
-        {posts.length > 0 && renderedPosts}
+        {!posts && <CircularProgress />}
+        {posts && posts.length === 0 && <CircularProgress />}
+        {posts && posts.length > 0 && renderedPosts}
     </ScreenContainer>
 }

@@ -1,8 +1,8 @@
-import React from "react"
+import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useForm } from "../../hooks/useForm"
 import { login } from "../../services/users"
-import { TextField } from "@mui/material"
+import { CircularProgress, TextField } from "@mui/material"
 import { LargeButton } from "../../constants/buttons"
 import { secondaryColor } from "../../constants/colors"
 import { Form } from "../../constants/Form"
@@ -10,10 +10,11 @@ import { Form } from "../../constants/Form"
 export default function LoginForm() {
     const navigate = useNavigate()
     const [form, onChangeInput, cleanInput] = useForm({email: "", password: ""})
+    const [isLoading, setIsLoading] = useState(false)
 
     const onSubmitForm = (event) => {
         event.preventDefault()
-        login(form, cleanInput, navigate)
+        login(form, cleanInput, navigate, setIsLoading)
     }
 
     return <Form onSubmit={onSubmitForm}>
@@ -48,6 +49,8 @@ export default function LoginForm() {
             margin="normal"
         />
 
-        <LargeButton variant="contained" disableElevation type="submit">Entrar</LargeButton>
+        <LargeButton variant="contained" disableElevation type="submit">
+            {isLoading ? <CircularProgress color={'inherit'} size={24} /> : <>Entrar</>}
+        </LargeButton>
     </Form>
 }

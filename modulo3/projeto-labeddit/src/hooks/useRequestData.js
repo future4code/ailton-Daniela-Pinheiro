@@ -13,7 +13,7 @@ export const useRequestData = (params) => {
         }).then(response => {
             setData(response.data)
         }).catch(error => {
-            console.log(error.response.data.message)
+            alert(error.response.data.message)
         })
     }, [data])
 

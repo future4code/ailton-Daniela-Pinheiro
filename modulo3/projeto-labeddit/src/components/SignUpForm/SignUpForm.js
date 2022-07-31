@@ -1,8 +1,8 @@
-import React from "react"
+import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useForm } from "../../hooks/useForm"
 import { signUp } from "../../services/users"
-import { TextField, Typography } from "@mui/material"
+import { CircularProgress, TextField, Typography } from "@mui/material"
 import { LargeButton } from "../../constants/buttons"
 import { secondaryColor } from "../../constants/colors"
 import { Form } from "../../constants/Form"
@@ -12,9 +12,11 @@ export default function SignUpForm() {
     const navigate = useNavigate()
     const [form, onChangeInput, cleanInput] = useForm({username: "", email: "", password: ""})
 
+    const [isLoading, setIsLoading] = useState(false)
+
     const onSubmitForm = (event) => {
         event.preventDefault()
-        signUp(form, cleanInput, navigate)
+        signUp(form, cleanInput, navigate, setIsLoading)
     }
 
     return <Form onSubmit={onSubmitForm}>
@@ -71,6 +73,8 @@ export default function SignUpForm() {
             <label for="newsletter">Eu concordo em receber e-mails sobre coisas legais no Labeddit</label>      
         </Checkbox>
 
-        <LargeButton variant="contained" disableElevation type="submit">Cadastrar</LargeButton>
+        <LargeButton variant="contained" disableElevation type="submit">
+            {isLoading ? <CircularProgress color={'inherit'} size={24} /> : <>Cadastrar</>}
+        </LargeButton>
     </Form>
 }

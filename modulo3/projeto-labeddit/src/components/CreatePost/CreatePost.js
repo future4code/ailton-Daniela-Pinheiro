@@ -1,5 +1,5 @@
-import React from "react"
-import { TextField } from "@mui/material"
+import React, { useState } from "react"
+import { CircularProgress, TextField } from "@mui/material"
 import { useForm } from "../../hooks/useForm"
 import { LargePostButton } from "../../constants/buttons"
 import { neutralColor, primaryColor } from "../../constants/colors"
@@ -9,9 +9,11 @@ import { FormCreatePost } from "./styled"
 export default function CreatePost() {
   const [form, onChangeInput, cleanInput] = useForm({title: "", body: ""})
 
+  const [isLoading, setIsLoading] = useState(false)
+
   const onSubmitForm = (event) => {
     event.preventDefault()
-    post(form, cleanInput)
+    post(form, cleanInput, setIsLoading)
 }
 
   return <FormCreatePost onSubmit={onSubmitForm}>
@@ -44,6 +46,8 @@ export default function CreatePost() {
         }}
         required
       />
-      <LargePostButton type="submit">Postar</LargePostButton>
+      <LargePostButton type="submit">
+        {isLoading ? <CircularProgress color={'inherit'} size={24} /> : <>Postar</>}
+      </LargePostButton>
   </FormCreatePost>
 }
