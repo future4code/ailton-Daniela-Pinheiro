@@ -11,7 +11,16 @@
 if(process.argv[2] && process.argv[3]) {
     if(!isNaN(process.argv[3])) {
         const novaIdade = Number(process.argv[3]) + 7
-        console.log('\x1b[36m', `Olá, ${process.argv[2]}! Você tem ${process.argv[3]} anos. Em sete anos você terá ${novaIdade} anos.`, '\x1b[0m')
+        const mensagem = `Olá, ${process.argv[2]}! Você tem ${process.argv[3]} anos. Em sete anos você terá ${novaIdade} anos.`
+        
+        console.log('\x1b[36m', mensagem, '\x1b[0m')
+
+        // Desafio
+        const fs = require('fs')
+        // Salva a mensagem no arquivo txt, pulando linha
+        fs.writeFile("mensagem.txt", `${mensagem}\n`, { flag: 'a+' }, (err) => {
+            if (err) console.log(err)
+        })
     } else {
         console.log('\x1b[31m', "É necessário que o último parâmetro seja um número!", '\x1b[0m')
     }
