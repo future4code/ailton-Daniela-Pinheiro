@@ -8,7 +8,8 @@
     "start-2": "tsc && node ./build/exercicio-2.js",
     "start-3": "tsc && node ./build/exercicio-3.js",
     "start-4": "tsc && node ./build/exercicio-4.js",
-    "start-5": "tsc && node ./build/exercicio-5.js"
+    "start-5": "tsc && node ./build/exercicio-5.js",
+    "start-desafios": "tsc && node ./build/desafios.js"
   },
   "keywords": [],
   "author": "Daniela",
