@@ -75,13 +75,22 @@ type Filme = {
     pontuacao? : number
 }
 function retornaFilme(nome: string, ano: number, genero: GENERO, pontuacao? : number): Filme {
-    const filme: Filme = {
-        nome: nome,
-        ano: ano,
-        genero: genero,
-        pontuacao: pontuacao
+    if(pontuacao) {
+        const filme: Filme = {
+            nome: nome,
+            ano: ano,
+            genero: genero,
+            pontuacao: pontuacao
+        }
+        return filme
+    } else {
+        const filme: Filme = {
+            nome: nome,
+            ano: ano,
+            genero: genero,
+        }
+        return filme
     }
-    return filme
 }
 // console.log(retornaFilme("Ilha do Tesouro", 2002, GENERO.ACAO))
 // console.log(retornaFilme("Kiseki", 2011, GENERO.DRAMA, 73))
@@ -191,10 +200,63 @@ function retornaClientesNegativos(clientes: Cliente[]): Cliente[] {
 
 
 // EXERCICIO 7
+type Estoque = {
+    nome: string,
+    quantidade: number,
+    valorUnitario: number | string
+}[]
 
+const estoque: Estoque = [
+    { nome: "MacMugffin", quantidade: 37, valorUnitario: 51.040},
+	{ nome: "Vassoura voadora", quantidade: 56, valorUnitario: 210.0},
+	{ nome: "Laço da verdade", quantidade: 32, valorUnitario: 571.5},
+	{ nome: "O precioso", quantidade: 1, valorUnitario: 9181.923},
+	{ nome: "Caneta de 250 cores", quantidade: 123, valorUnitario: 17},
+	{ nome: "Plumbus", quantidade: 13, valorUnitario: 140.44},
+	{ nome: "Pokebola", quantidade: 200, valorUnitario: 99.9915}
+]
+
+const ajustaPreco = (preco :number): string => {
+    const valorAjustado: string = preco.toFixed(2).replace('.', ',')
+    return "R$ " + valorAjustado
+}
+const ordenaEstoque = (estoque: Estoque): Estoque => {
+    const estoqueAjustado = estoque.map(produto => {
+        const preco: string = ajustaPreco(produto.valorUnitario as number)
+        return {
+            nome: produto.nome,
+            quantidade: produto.quantidade,
+            valorUnitario: preco
+        }
+    }).sort((a, b) => { return a.quantidade - b.quantidade })
+
+    return estoqueAjustado
+}
+
+// console.table(ordenaEstoque(estoque))
 
 
 // EXERCICIO 8
+
+
+
 // EXERCICIO 9
+const retornaAnagramas = (palavra: string): number => {
+    let anagramas: number = 1
+
+    if(palavra.length > 1) {
+        for(let i = 1; i <= palavra.length; i++) {
+            anagramas = anagramas * i
+        }
+    }
+
+    return anagramas
+}
+// console.log(retornaAnagramas("mesa"))
+
+
 // EXERCICIO 10
+
+
+
 // EXERCICIO 11
