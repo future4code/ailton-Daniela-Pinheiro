@@ -256,7 +256,45 @@ const retornaAnagramas = (palavra: string): number => {
 
 
 // EXERCICIO 10
+function verificaCPF(cpf: string) {
+    const numeros: string[] = cpf.split(".").join("").split("-").join("").split("")
+    // 0 a 10
+    // passar para number
 
+
+    return numeros
+}
+console.log(verificaCPF("888.999.000-44"))
 
 
 // EXERCICIO 11
+const romanos: {letra: string, valor: number}[] =  [
+    {letra: "M", valor: 1000},
+    {letra: "CM", valor: 900},
+    {letra: "D", valor: 500},
+    {letra: "CD", valor: 400},
+    {letra: "C", valor: 100},
+    {letra: "XC", valor: 90},
+    {letra: "L", valor: 50},
+    {letra: "XL", valor: 40},
+    {letra: "X", valor: 10},
+    {letra: "IX", valor: 9},
+    {letra: "V", valor: 5},
+    {letra: "IV", valor: 4},
+    {letra: "I", valor: 1}
+]
+
+function converteNumerosRomanos(numero: number): string {
+    let numeroRomano: string = ""
+
+    romanos.map(item => {
+        if(numero >= item.valor) {
+            numeroRomano += item.letra
+            numero -= item.valor
+        }  
+    })
+
+    return numeroRomano
+}
+
+// console.log(converteNumerosRomanos(1990))
