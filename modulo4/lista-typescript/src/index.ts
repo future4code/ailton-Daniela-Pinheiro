@@ -92,14 +92,14 @@ enum SETOR {
     VENDAS = "vendas",
     FINANCEIRO = "financeiro"
 }
-type colaboradores = {
+type Colaboradores = {
     nome: string,
     salario: number,
     setor: SETOR,
     presencial: boolean
 }[]
 
-const pessoas: colaboradores = [
+const pessoas: Colaboradores = [
 	{ nome: "Marcos", salario: 2500, setor: SETOR.MARKETING, presencial: true},
 	{ nome: "Maria", salario: 1500, setor: SETOR.VENDAS, presencial: false},
 	{ nome: "Salete", salario: 2200, setor: SETOR.FINANCEIRO, presencial: true},
@@ -109,7 +109,7 @@ const pessoas: colaboradores = [
 	{ nome: "Paola", salario: 3500, setor: SETOR.MARKETING, presencial: true}
 ]
 
-function retornaMarketingPresencial(colaboradores: colaboradores): colaboradores {
+function retornaMarketingPresencial(colaboradores: Colaboradores): Colaboradores {
     const marketingPresencial = colaboradores.filter((pessoa) => {
         return pessoa.setor === "marketing" && pessoa.presencial
     })
@@ -121,11 +121,79 @@ function retornaMarketingPresencial(colaboradores: colaboradores): colaboradores
 
 
 // EXERCICIO 5
+enum ROLE {
+    USER = "user",
+    ADMIN = "admin"
+}
+type Usuario = {
+    name: string,
+    email: string,
+    role: ROLE
+}
 
+const usuarios: Usuario[] = [
+	{name: "Rogério", email: "roger@email.com", role: ROLE.USER},
+	{name: "Ademir", email: "ademir@email.com", role: ROLE.ADMIN},
+	{name: "Aline", email: "aline@email.com", role: ROLE.USER},
+	{name: "Jéssica", email: "jessica@email.com", role: ROLE.USER},  
+	{name: "Adilson", email: "adilson@email.com", role: ROLE.USER},  
+	{name: "Carina", email: "carina@email.com", role: ROLE.ADMIN}      
+]
+
+function retornaEmailAdmin(listaUsuarios: Usuario[]): string[] {
+    const emailAdmin: string[] = listaUsuarios.filter((usuario) => {
+        return usuario.role === "admin"
+    }).map((usuario) => {
+        return usuario.email
+    })
+    return emailAdmin
+}
+
+// console.log(retornaEmailAdmin(usuarios))
 
 
 // EXERCICIO 6
+type Cliente = {
+    cliente: string,
+    saldoTotal: number,
+    debitos: number[]
+}
+
+const clientes: Cliente[] = [
+	{ cliente: "João", saldoTotal: 1000, debitos: [100, 200, 300] },
+	{ cliente: "Paula", saldoTotal: 7500, debitos: [200, 1040] },
+	{ cliente: "Pedro", saldoTotal: 10000, debitos: [5140, 6100, 100, 2000] },
+	{ cliente: "Luciano", saldoTotal: 100, debitos: [100, 200, 1700] },
+	{ cliente: "Artur", saldoTotal: 1800, debitos: [200, 300] },
+	{ cliente: "Soter", saldoTotal: 1200, debitos: [] }
+]
+
+function retornaClientesNegativos(clientes: Cliente[]): Cliente[] {
+    const clientesNegativos: Cliente[] = clientes.map(cliente => {
+        const debitos: number = cliente.debitos.length > 0 && cliente.debitos.reduce((total, debito) => {
+            return total + debito
+        })
+        const saldo: number = cliente.saldoTotal - debitos
+
+        return {
+            cliente: cliente.cliente,
+            saldoTotal: saldo,
+            debitos: cliente.debitos
+        }
+    }).filter(cliente => {
+        return cliente.saldoTotal < 0
+    })
+
+    return clientesNegativos
+}
+
+// console.table(retornaClientesNegativos(clientes))
+
+
 // EXERCICIO 7
+
+
+
 // EXERCICIO 8
 // EXERCICIO 9
 // EXERCICIO 10
