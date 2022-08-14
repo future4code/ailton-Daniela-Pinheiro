@@ -237,7 +237,24 @@ const ordenaEstoque = (estoque: Estoque): Estoque => {
 
 
 // EXERCICIO 8
+function checaRenovacaoRG(dataNascimento: string, dataEmissao: string): boolean {
+    const anoNascimento: number = Number(dataNascimento.slice(6))
+    const anoEmissao: number = Number(dataEmissao.slice(6))
+    const anoAtual: number = new Date().getFullYear()
+    
+    let idade: number = anoAtual - anoNascimento
+    let tempoCarteira: number = anoAtual - anoEmissao
+   
+    if (idade <= 20) {
+        return tempoCarteira >= 5 ? true : false  
+    } else if (idade >= 20 || idade <= 50) {
+        return tempoCarteira >= 10 ? true : false
+    } else if (idade > 50) {
+        return tempoCarteira >=15 ? true : false
+    }
+}
 
+// console.log(checaRenovacaoRG('24/04/1993', '07/11/2015'))
 
 
 // EXERCICIO 9
@@ -256,15 +273,43 @@ const retornaAnagramas = (palavra: string): number => {
 
 
 // EXERCICIO 10
-function verificaCPF(cpf: string) {
-    const numeros: string[] = cpf.split(".").join("").split("-").join("").split("")
-    // 0 a 10
-    // passar para number
+function verificaCPF(cpf: string): boolean {
+    const digitos: number[] = cpf.split(".").join("").split("-").join("").split("").map(numero => {
+        return Number(numero)
+    })
 
+    // DV 1
+    const digitosMultiplicados1: number = digitos.slice(0, 9).map((digito, indice) => {
+        return digito * (10 - indice)
+    }).reduce((total, numero) => {
+        return total + numero
+    })
 
-    return numeros
+    const digito1: number = 11 - (digitosMultiplicados1 % 11)
+    let digitoVerificador1: number
+    digito1 < 10 ? digitoVerificador1 = digito1 : digitoVerificador1 = 0
+
+    // DV 2
+    const digitosMultiplicados2: number = digitos.slice(0, 10).map((digito, indice) => {
+        return digito * (11 - indice)
+    }).reduce((total, numero) => {
+        return total + numero
+    })
+
+    const digito2: number = 11 - (digitosMultiplicados2 % 11)
+    let digitoVerificador2: number
+    digito2 < 10 ? digitoVerificador2 = digito2 : digitoVerificador2 = 0
+
+    // Verificação
+    if (digitos[9] == digitoVerificador1 && digitos[10] == digitoVerificador2) {
+        return true
+    } else {
+        return false
+    }
 }
-console.log(verificaCPF("888.999.000-44"))
+
+// console.log(verificaCPF("145.382.206-20"))
+// console.log(verificaCPF("145.382.206-80"))
 
 
 // EXERCICIO 11
