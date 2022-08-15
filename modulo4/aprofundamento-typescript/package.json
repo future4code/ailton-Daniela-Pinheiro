@@ -1,0 +1,17 @@
+{
+  "name": "aprofundamento-typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start-1": "tsc && node ./build/exercicio-1.js",
+    "start-2": "tsc && node ./build/exercicio-2.js",
+    "start-3": "tsc && node ./build/exercicio-3.js",
+    "start-4": "tsc && node ./build/exercicio-4.js",
+    "start-5": "tsc && node ./build/exercicio-5.js",
+    "start-desafios": "tsc && node ./build/desafios.js"
+  },
+  "keywords": [],
+  "author": "Daniela",
+  "license": "ISC"
+}
