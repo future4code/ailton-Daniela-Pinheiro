@@ -1,4 +1,4 @@
-import express from "express"
+import express, { request, response } from "express"
 import cors from "cors"
 
 const app = express()
@@ -55,6 +55,13 @@ const usuarios: Usuario[] = [
         phone: "5483-8872",
         email: "crys@mail.com",
         website: "http://kicker-crys.co.jp"
+    },
+    {
+        id: 6,
+        name: "Deletar",
+        phone: "0000-0000",
+        email: "del@mail.com",
+        website: "http://deleteee.co.jp"
     }
 ]
 
@@ -91,6 +98,18 @@ const posts: Post[] = [
         body: "acho que aquele squirtle era bem querido pra ele..",
         userId: 3
     },
+    {
+        id: 4,
+        title: "deletar",
+        body: "deletar esse post",
+        userId: 2
+    },
+    {
+        id: 5,
+        title: "deletar 2.0",
+        body: "deletar esse post também",
+        userId: 2
+    }
 ]
 
 // Como a tipagem já pede um userId, não há necessidade de criar o array de posts dentro
@@ -99,6 +118,7 @@ const posts: Post[] = [
 // na requisição e usado para filtrar o array de posts.
 // Se os posts estiverem dentro do array de usuários, o userId passado deveria ser usado
 // para localizar o usuário para, então, acessar seus dados e seus posts
+// A propriedade 'posts' dentro de cada usuário deveria, ainda, ser optativa
 
 // Exercicio 7
 app.get("/posts", (request, response) => {
@@ -106,14 +126,37 @@ app.get("/posts", (request, response) => {
 })
 
 // Exercicio 8
-app.get(`/posts/:id`, (request, response) => {
-    const id: number = Number(request.params.id)
+app.get("/users/posts/:id", (request, response) => {
+    const idUsuario: number = Number(request.params.id)
     const postsPorId: Post[] = posts.filter(post => {
-        return post.userId === id
+        return post.userId === idUsuario
     }) 
-    
+
     response.send(postsPorId)
 })
+
+// Exercicio 9
+app.delete("/posts/:id", (request, response) => {
+    const idPost: number = Number(request.params.id)
+
+    const novosPosts: Post[] = posts.filter(post => {
+        return post.id !== idPost
+    })
+
+    response.send(novosPosts)
+})
+
+// Exercicio 10
+app.delete("/users/:id", (request, response) => {
+    const idUsuario: number = Number(request.params.id)
+
+    const novosUsuarios: Usuario[] = usuarios.filter(usuario => {
+        return usuario.id !== idUsuario
+    })
+
+    response.send(novosUsuarios)
+})
+
 
 // Iniciar o servidor
 app.listen(3003, () => {
