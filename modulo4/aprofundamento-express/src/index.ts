@@ -70,7 +70,7 @@ app.put("/task/status/:id", (req, res) => {
     const idAfazer: number = Number(req.params.id)
     const {completed} = req.body
 
-    const afazerAtualizado = afazeres.filter(afazer => {
+    const afazerAtualizado: Afazer[] = afazeres.filter(afazer => {
         return afazer.id === idAfazer
     })
 
@@ -83,7 +83,7 @@ app.put("/task/status/:id", (req, res) => {
 app.delete("/task/delete/:id", (req, res) => {
     const idAfazer: number = Number(req.params.id)
 
-    const afazeresAtualizados = afazeres.filter(afazer => {
+    const afazeresAtualizados: Afazer[] = afazeres.filter(afazer => {
         return afazer.id !== idAfazer
     })
 
@@ -91,9 +91,15 @@ app.delete("/task/delete/:id", (req, res) => {
 })
 
 // Exercicio 8
+app.get("/tasks/user/:id", (req, res) => {
+    const idUsuario: number = Number(req.params.id)
 
+    const afazeresUsuario: Afazer[] = afazeres.filter(afazer => {
+        return afazer.userId === idUsuario
+    })
 
-// Exercicio 9
+    res.send(afazeresUsuario)
+})
 
 
 // Servidor
