@@ -66,8 +66,8 @@ app.post("/task/create", (req, res) => {
 })
 
 // Exercicio 6
-app.put("/task/status/:id", (req, res) => {
-    const idAfazer: number = Number(req.params.id)
+app.put("/task/status/:taskId", (req, res) => {
+    const idAfazer: number = Number(req.params.taskId)
     const {completed} = req.body
 
     const afazerAtualizado: Afazer[] = afazeres.filter(afazer => {
@@ -80,8 +80,8 @@ app.put("/task/status/:id", (req, res) => {
 })
 
 // Exercicio 7
-app.delete("/task/delete/:id", (req, res) => {
-    const idAfazer: number = Number(req.params.id)
+app.delete("/task/delete/:taskId", (req, res) => {
+    const idAfazer: number = Number(req.params.taskId)
 
     const afazeresAtualizados: Afazer[] = afazeres.filter(afazer => {
         return afazer.id !== idAfazer
@@ -91,8 +91,8 @@ app.delete("/task/delete/:id", (req, res) => {
 })
 
 // Exercicio 8
-app.get("/tasks/user/:id", (req, res) => {
-    const idUsuario: number = Number(req.params.id)
+app.get("/tasks/user/:userId", (req, res) => {
+    const idUsuario: number = Number(req.params.userId)
 
     const afazeresUsuario: Afazer[] = afazeres.filter(afazer => {
         return afazer.userId === idUsuario
