@@ -117,7 +117,111 @@ app.get("/users/:type", (req, res) => {
 
 
 // Exercicio 4
+app.post("/user", (req, res) => {
+    try {
+        const {id, name, email, type, age} = req.body
 
+        if(!id || !name || !email || !type || !age) {
+            res.statusCode = (420)
+            throw new Error("All properties are required.")
+        }
+        const newUser: User = {
+            id,
+            name,
+            email,
+            type,
+            age
+        }
+
+        if(!newUser) {
+            res.statusCode = (420)
+            throw new Error("Incorrect properties' type or value.")
+        }
+
+        users.push(newUser)
+        res.status(201).send(users)
+    } catch (error: any) {
+        res.send({ message: error.message })
+    }
+})
+// a. Nada muda.
+// b. Neste caso, o método POST é mais apropriado, pois o endpoint cria um usuário novo.
+//    O método PUT deve ser usado quando se quer alterar algum dado já existente.
+
+
+// Exercicio 5
+app.put("/user", (req, res) => {
+    try {
+        const {id, name, email, type, age} = req.body
+
+        if(!id || !name || !email || !type || !age) {
+            res.statusCode = (420)
+            throw new Error("All properties are required.")
+        }
+        const editUser: User = {
+            id,
+            name,
+            email,
+            type,
+            age
+        }
+
+        if(!editUser) {
+            res.statusCode = (420)
+            throw new Error("Incorrect properties' type or value.")
+        }
+
+        const userIndex: number = users.length - 1
+        users[userIndex] = editUser
+
+        res.end()
+    } catch (error: any) {
+        res.send({ message: error.message })
+    }
+})
+
+
+// Exercicio 6
+app.patch("/user", (req, res) => {
+    try {
+        const {name} = req.body
+
+        if(!name) {
+            res.statusCode = (420)
+            throw new Error("Name is required.")
+        } else if(typeof name !== 'string') {
+            res.statusCode = (420)
+            throw new Error("Name must be a string.")
+        }
+
+        const userIndex: number = users.length - 1
+        users[userIndex].name = name
+
+        res.end()
+    } catch (error: any) {
+        res.send({ message: error.message })
+    }
+})
+
+
+// Exercicio 7
+app.delete("/user/:id", (req, res) => {
+    try {
+        const userId: number = Number(req.params.id)
+        
+        if(isNaN(userId)) {
+            res.statusCode = (420)
+            throw new Error("Id must be a number.")
+        }
+
+        const newUsers: User[] = users.filter(user => {
+            return user.id !== userId
+        })
+        res.send(newUsers)
+    } catch (error: any) {
+        res.send({ message: error.message })
+    }
+})
 
 
 // Servidor
