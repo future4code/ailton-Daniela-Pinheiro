@@ -35,7 +35,6 @@ app.post("/product/add", (req, res) => {
             res.statusCode = 400
             throw new Error("A propriedade price deve ser maior do que zero.")
         }
-        // - erro caso algo inesperado aconteça
         else {
             const novoProduto: Produto = {
                 id: String(produtos.length + 1),
@@ -52,7 +51,6 @@ app.post("/product/add", (req, res) => {
     }
 })
 
-
 // Exercicio 4
 app.get("/products", (req, res) => {
     res.send(produtos)
@@ -67,25 +65,48 @@ app.put("/product/editPrice/:id", (req, res) => {
         return produto.id === idProduto
     })
 
-    produtos[indiceProduto].price = Number(price)
-
-    res.send(produtos)
+    // Exercicio 8
+    try {
+        if(price === undefined || price === null) {
+            res.statusCode = 400
+            throw new Error("A propriedade price é obrigatória.")
+        } else if(isNaN(price)) {
+            res.statusCode = 400
+            throw new Error("A propriedade price deve ser um número.")
+        } else if(price <= 0) {
+            res.statusCode = 400
+            throw new Error("A propriedade price deve ser maior do que zero.")
+        } else if(indiceProduto === undefined || indiceProduto === null || indiceProduto < 0) {
+            res.statusCode = 404
+            throw new Error("Não há nenhum produto com essa id.")
+        } else {
+            produtos[indiceProduto].price = Number(price)
+            res.send(produtos)
+        } 
+    } catch (error: any) {
+        res.send({ message: error.message })
+    }
 })
 
 // Exercicio 6
 app.delete("/product/delete/:id", (req, res) => {
     const idProduto = req.params.id
-
     const novosProdutos = produtos.filter(produto => {
         return produto.id !== idProduto
     })
 
-    res.send(novosProdutos)
+    // Exercicio 9
+    try { 
+        if(novosProdutos.length === produtos.length) {
+            res.statusCode = 404
+            throw new Error("Não há nenhum produto com essa id.")
+        } else {
+            res.send(novosProdutos)
+        }
+    } catch (error: any) {
+        res.send({ message: error.message })
+    } 
 })
-
-// Exercicio 8
-
-// Exercicio 9
 
 
 // Servidor
