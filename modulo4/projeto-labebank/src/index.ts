@@ -1,7 +1,7 @@
 import express from "express"
 import cors from "cors"
 import { AddressInfo } from "net"
-import { contas, ContaUsuario } from "./data"
+import { contas, ContaUsuario, Transacao } from "./data"
 
 const app = express()
 app.use(express.json())
@@ -61,7 +61,7 @@ app.post("/users", (req, res) => {
         })
 
         if(cpfCadastrado.length > 0) {
-            res.statusCode = 401
+            res.statusCode = 409
             throw new Error("Já existe um usuário cadastrado com este CPF. Verifique se os dados inseridos estão corretos.")
         }
 
@@ -78,7 +78,7 @@ app.post("/users", (req, res) => {
 
         res.status(201).send({contas: contas})
     } catch (error: any) {
-        res.send({ message: error.message })  
+        res.send({ mensagem: error.message })  
     }
 })
 
@@ -106,9 +106,10 @@ app.get("/users/balance", (req, res) => {
         // CASO DE SUCESSO
         res.status(200).send({saldo: contas[indiceConta].saldo})   
     } catch (error: any) {
-        res.send({ message: error.message })  
+        res.send({ mensagem: error.message })  
     }
 })
+
 
 // ENDPOINT ADICIONAR SALDO
 app.put("/users/balance", (req, res) => {
@@ -146,23 +147,144 @@ app.put("/users/balance", (req, res) => {
         // CASO DE SUCESSO
         contas[indiceConta].saldo += Number(valor)
 
-        res.send({conta: contas[indiceConta]})
+        res.status(202).send({conta: contas[indiceConta]})
     } catch (error: any) {
-        res.send({ message: error.message })  
+        res.send({ mensagem: error.message })  
     }
 })
 
+
 // ENDPOINT PAGAR CONTA
-// pagar uma conta passando: um valor, uma descrição e uma data de pagamento
-// (.........)
-app.put("/users/payment", (req, res) => {
-    
+app.post("/users/payment", (req, res) => {
+    try {
+        const { nome, cpf, valor, data, descricao } = req.body
+
+        // VERIFICAÇÕES DAS INFORMAÇÕES
+        if(!nome || !cpf || !valor || !descricao){
+            res.statusCode = 422
+            throw new Error("As informações nome, CPF, valor e descrição são obrigatórias.")
+        }
+        if(typeof nome !== "string" || typeof data !== "string" || typeof descricao !== "string"){ 
+            res.statusCode = 422
+            throw new Error("As informações nome, data e descrição deve ser strings.")
+        }
+        if(isNaN(cpf) || isNaN(valor)){
+            res.statusCode = 422
+            throw new Error("O CPF e o valor devem ser números.")
+        }
+        if(valor <= 0){
+            res.statusCode = 422
+            throw new Error("O valor deve ser maior do que 0(zero).")
+        }
+
+        // VERIFICAÇÃO DE DATA DO PAGAMENTO
+        const dataAtual: Date = new Date()
+        const anoAtual: number = dataAtual.getFullYear()
+        const mesAtual: number = dataAtual.getMonth() + 1
+        const diaAtual: number = dataAtual.getDate()
+
+        let dataDoPagamento: string = String(mesAtual) + "/" + String(diaAtual) + "/" + String(anoAtual)
+
+        if(data) {
+            const dataPagamento: Date = new Date(data)
+            const anoPagamento: number = dataPagamento.getFullYear()
+            const mesPagamento: number = dataPagamento.getMonth() + 1
+            const diaPagamento: number = dataPagamento.getDate()
+            dataDoPagamento = String(mesPagamento) + "/" + String(diaPagamento) + "/" + String(anoPagamento)
+
+            if(anoAtual > anoPagamento) {
+                res.statusCode = 422
+                throw new Error("A data de um pagamento não pode ser anterior à data atual.")
+            }
+            if(anoAtual === anoPagamento) {
+                if(mesAtual > mesPagamento){
+                    res.statusCode = 422
+                    throw new Error("A data de um pagamento não pode ser anterior à data atual.")
+                }
+                if((mesAtual === mesPagamento) && (diaAtual > diaPagamento)) {
+                    res.statusCode = 422
+                    throw new Error("A data de um pagamento não pode ser anterior à data atual.")
+                }
+            }
+        }
+
+        // procurar usuário
+
+        // não pode pagar uma conta se não tiver saldo suficiente
+
+        // CASO DE SUCESSO
+        const transacao: Transacao = {
+            valor: valor,
+            data: dataDoPagamento,
+            descricao: descricao
+        }
+        // push no array de extratos
+        // resposta
+        res.status(200).send({ transacao: transacao })
+    } catch (error: any) {
+        res.send({ mensagem: error.message }) 
+    }
+
 })
 
+
 // ENDPOINT TRANSFERÊNCIA INTERNA
-// o usuário deve informar o seu nome, o seu CPF, o nome do destinatário, o CPF do destinatário e o valor em si
-// Transferências não podem ser agendadas e devem respeitar o saldo do usuário remetente
-// app.put("/users/transfer", (req, res) => {}) ?????? altera as duas contas(saldos)
+app.put("/users/transfer", (req, res) => {
+    try {
+        const { nomeUsuario, cpfUsuario, nomeDestinatario, cpfDestinatario, valor } = req.body
+
+        // VERIFICAÇÕES DAS INFORMAÇÕES
+        if(!nomeUsuario || !cpfUsuario || !nomeDestinatario || !cpfDestinatario || !valor){
+            res.statusCode = 422
+            throw new Error("Todas as informações são obrigatórias.")
+        }
+        if(typeof nomeUsuario !== "string" || typeof nomeDestinatario !== "string"){ 
+            res.statusCode = 422
+            throw new Error("As informações nome do usuário e nome do destinatário deve ser strings.")
+        }
+        if(isNaN(cpfUsuario) || isNaN(cpfDestinatario) || isNaN(valor)){
+            res.statusCode = 422
+            throw new Error("Os CPFs e o valor devem ser números.")
+        }
+        if(valor <= 0){
+            res.statusCode = 422
+            throw new Error("O valor deve ser maior do que 0(zero).")
+        }
+
+        const indiceContaUsuario = contas.findIndex(conta => {
+            return conta.nome === String(nomeUsuario) && conta.cpf === Number(cpfUsuario)
+        })
+
+        const indiceContaDestinatario = contas.findIndex(conta => {
+            return conta.nome === String(nomeDestinatario) && conta.cpf === Number(cpfDestinatario)
+        })
+
+        // VERIFICAÇÕES DE USUÁRIOS
+        if(indiceContaUsuario === null || indiceContaUsuario === undefined || indiceContaUsuario < 0) {
+            res.statusCode = 404
+            throw new Error("Usuário não encontrado. Verifique se os dados inseridos estão corretos.")
+        }
+
+        if(indiceContaDestinatario === null || indiceContaDestinatario === undefined || indiceContaDestinatario < 0) {
+            res.statusCode = 404
+            throw new Error("Destinatário não encontrado. Verifique se os dados inseridos estão corretos.")
+        }
+
+        // VERIFICAÇÂO DE SALDO
+        if(contas[indiceContaUsuario].saldo < Number(valor)) {
+            res.statusCode = 401
+            throw new Error("Este usuário não possui saldo suficiente para a transferência.")
+        }
+
+        // CASO DE SUCESSO
+        contas[indiceContaUsuario].saldo -= Number(valor)
+        contas[indiceContaDestinatario].saldo += Number(valor)
+
+        res.send({mensagem: "Transferência concluída!"})
+    } catch (error: any) {
+        res.send({ mensagem: error.message })
+    }
+})
 
 
 // SERVIDOR

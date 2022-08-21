@@ -19,6 +19,13 @@ export let contas: ContaUsuario[] = [
         cpf: 11122233344,
         dataNascimento: "06/08/1993", //mês, dia, ano
         saldo: 1000,
-        extratos: [] 
+        extratos: []
+    },
+    {
+        nome: "Fulano",
+        cpf: 11122233345,
+        dataNascimento: "28/05/2000",
+        saldo: 600,
+        extratos: []
     }
 ]
