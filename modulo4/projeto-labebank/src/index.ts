@@ -104,7 +104,28 @@ app.get("/users/balance", (req, res) => {
         }
 
         // CASO DE SUCESSO
-        res.status(200).send({saldo: contas[indiceConta].saldo})   
+        let saldoUsuario: number = contas[indiceConta].saldo
+        if(contas[indiceConta].extratos.length > 0) {
+            // VERIFICAÇÃO DE TRANSAÇÕES DE DATAS ANTERIORES
+            const dataAtual: Date = new Date()
+            const anoAtual: number = dataAtual.getFullYear()
+            const mesAtual: number = dataAtual.getMonth() + 1
+            const diaAtual: number = dataAtual.getDate()
+
+            const contasPagas: Transacao[] = contas[indiceConta].extratos.filter(transacao => {
+                return Number(transacao.data.split("/")[2]) <= anoAtual
+            }).filter(transacao => {
+                return Number(transacao.data.split("/")[0]) <= mesAtual
+            }).filter(transacao => {
+                return Number(transacao.data.split("/")[1]) <= diaAtual
+            })
+
+            saldoUsuario += contasPagas.reduce((total, transacao) => {
+                return total + transacao.valor
+            }, 0)
+        }
+
+        res.status(200).send({saldo: saldoUsuario})   
     } catch (error: any) {
         res.send({ mensagem: error.message })  
     }
@@ -208,19 +229,32 @@ app.post("/users/payment", (req, res) => {
             }
         }
 
-        // procurar usuário
+        const indiceConta = contas.findIndex(conta => {
+            return conta.nome === String(nome) && conta.cpf === Number(cpf)
+        })
 
-        // não pode pagar uma conta se não tiver saldo suficiente
+        // VERIFICAÇÃO USUÁRIO
+        if(indiceConta === null || indiceConta === undefined || indiceConta < 0) {
+            res.statusCode = 404
+            throw new Error("Usuário não encontrado. Verifique se os dados inseridos estão corretos.")
+        }
+
+        // VERIFICAÇÃO DE SALDO
+        if(contas[indiceConta].saldo < Number(valor)) {
+            res.statusCode = 401
+            throw new Error("Não há saldo suficiente para este pagamento.")
+        }
 
         // CASO DE SUCESSO
         const transacao: Transacao = {
-            valor: valor,
+            valor: - Number(valor),
             data: dataDoPagamento,
-            descricao: descricao
+            descricao: String(descricao)
         }
-        // push no array de extratos
-        // resposta
-        res.status(200).send({ transacao: transacao })
+
+        contas[indiceConta].extratos.push(transacao)
+
+        res.status(200).send({ extrato: contas[indiceConta].extratos })
     } catch (error: any) {
         res.send({ mensagem: error.message }) 
     }
