@@ -63,3 +63,27 @@ UPDATE Movie SET playing_limit_date = "2022-01-30" WHERE id = "002";
 
 DELETE FROM Movie WHERE id = "003";
 UPDATE Movie SET description = "Sinopse do filme que não existe mais." WHERE id = "003";
+
+-- 7
+SELECT COUNT(*) FROM Movie WHERE score > 7.5;
+
+SELECT AVG(score) FROM Movie;
+
+SELECT COUNT(*) FROM Movie WHERE playing_limit_date > CURDATE();
+
+SELECT COUNT(*) FROM Movie WHERE premiere_date > CURDATE();
+
+SELECT MAX(score) FROM Movie;
+
+SELECT MIN(score) FROM Movie;
+
+-- 8
+SELECT * FROM Movie ORDER BY name ASC;
+
+SELECT * FROM Movie ORDER BY name DESC LIMIT 5;
+
+SELECT * FROM Movie
+WHERE premiere_date < CURDATE() AND playing_limit_date > CURDATE()
+ORDER BY premiere_date DESC LIMIT 3;
+
+SELECT * FROM Movie ORDER BY score DESC LIMIT 3;

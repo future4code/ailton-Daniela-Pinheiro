@@ -55,3 +55,30 @@ UPDATE Movie SET playing_limit_date = "2022-01-30" WHERE id = "002";
 
 **d)** `DELETE FROM Movie WHERE id = "003";`
 `UPDATE Movie SET description = "Sinopse do filme que não existe mais." WHERE id = "003";` Retorna uma mensagem de sucesso, porém com 0 alterações à tabela: `0 row(s) affected Rows matched: 0  Changed: 0  Warnings: 0`. Como não havia problemas na sintaxe, o comando roda e tenta encontrar na tabela o item especificado, mas por não encontrá-lo, nada é alterado.
+
+### Exercício 7
+**a)** `SELECT COUNT(*) FROM Movie WHERE score > 7.5;`
+
+**b)** `SELECT AVG(score) FROM Movie;`
+
+**c)** `SELECT COUNT(*) FROM Movie WHERE playing_limit_date > CURDATE();`
+
+**d)** `SELECT COUNT(*) FROM Movie WHERE premiere_date > CURDATE();`
+
+**e)** `SELECT MAX(score) FROM Movie;`
+
+**f)** `SELECT MIN(score) FROM Movie;`
+
+### Exercício 8
+**a)** `SELECT * FROM Movie ORDER BY name ASC;`
+
+**b)** `SELECT * FROM Movie ORDER BY name DESC LIMIT 5;`
+
+**c)**
+```
+SELECT * FROM Movie
+WHERE premiere_date < CURDATE() AND playing_limit_date > CURDATE()
+ORDER BY premiere_date DESC LIMIT 3;
+```
+
+**d)** `SELECT * FROM Movie ORDER BY score DESC LIMIT 3;`
