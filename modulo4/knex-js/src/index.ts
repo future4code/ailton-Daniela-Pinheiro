@@ -96,6 +96,7 @@ const averageSalary = async (gender: string): Promise<any> => {
     return result[0].average
 }
 
+
 // Exercicio 3
 // a) 
 app.get("/actor/:id", async (req, res) => {
@@ -121,12 +122,61 @@ app.get("/actor", async (req, res) => {
     }
 })
 
+
 // Exercicio 4
 // a)
+app.put("/actor", async (req, res) => {
+    try {
+        const { id, salary } = req.body
+        await changeSalary(id, salary)
 
+        res.status(200).send({ message: "Salary updated." })
+    } catch (error: any) {
+        res.status(400).send({ message: error.message })
+    }
+})
 
 // b)
+app.delete("/actor/:id", async (req, res) => {
+    try {
+        const id: string = req.params.id
+        await deleteActor(id)
+        
+        res.status(200).send({ message: "Actor deleted." })
+    } catch (error: any) {
+        res.status(400).send({ message: error.message })
+    }
+})
 
+
+// Exercicio 5
+const addMovie = async (
+    id: string,
+    name: string,
+    description: string,
+    premiereDate: Date,
+    score: number
+    ): Promise<any> => {
+    await connection("Movie")
+        .insert({
+            id: id,
+            name: name,
+            description: description,
+            premiere_date: premiereDate,
+            score: score
+        })
+}
+
+app.post("/movie", async (req, res) => {
+    try {
+        const { id, name, description, premiereDate, score } = req.body
+        await addMovie(id, name, description, new Date(premiereDate), Number(score))
+
+        res.status(201).send()
+    } catch (error: any) {
+        res.status(400).send({ message: error.message })
+    }
+})
 
 // Servidor
 const server = app.listen(process.env.PORT || 3003, () => {
