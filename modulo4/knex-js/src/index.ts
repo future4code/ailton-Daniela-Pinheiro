@@ -178,6 +178,21 @@ app.post("/movie", async (req, res) => {
     }
 })
 
+
+// Exercicio 6
+app.get("/movie/all", async (req, res) => {
+    try {
+        const movies = await connection.select()
+            .table('Movie')
+            .limit(15)
+
+        res.status(200).send({ movies: movies })   
+    } catch (error: any) {
+        res.status(400).send({ message: error.message })
+    }
+})
+
+
 // Servidor
 const server = app.listen(process.env.PORT || 3003, () => {
     if (server) {
