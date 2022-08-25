@@ -55,3 +55,26 @@ SELECT Movie.name, Movie.id, Rating.rate
 FROM Movie INNER JOIN Rating
 ON Movie.id = Rating.movie_id;
 ```
+
+### Exercício 4
+**a)**
+```
+SELECT m.id, m.name, r.rate, r.comment
+FROM Movie m LEFT JOIN Rating r
+ON m.id = r.movie_id;
+```
+
+**b)**
+```
+SELECT m.id, m.name, c.actor_id
+FROM Movie m
+RIGHT JOIN MovieCast c ON m.id = c.movie_id;
+```
+
+**c)**
+```
+SELECT AVG(r.rate), m.id, m.name
+FROM Movie m
+LEFT JOIN Rating r ON m.id = r.movie_id
+GROUP BY (m.id);
+```
