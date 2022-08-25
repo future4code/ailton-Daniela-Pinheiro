@@ -5,10 +5,10 @@
 ```
 INSERT INTO Rating
 VALUES (
-	"r001",
-    "Bem divertido!",
-    7,
-    "001"
+	"001",
+    "Enredo fantástico e ótima atuação!",
+    8.5,
+    "005"
 );
 ```
 
@@ -31,8 +31,8 @@ Error Code: 1451. Cannot delete or update a parent row: a foreign key constraint
 ```
 INSERT INTO MovieCast (movie_id, actor_id)
 VALUES (
-	"001",
-	"001"
+	"004",
+	"005"
 );
 ```
 
@@ -47,6 +47,11 @@ Error Code: 1451. Cannot delete or update a parent row: a foreign key constraint
 ```
 
 ### Exercício 3
-**a)**
+**a)** A *query* retorna todas as informações das duas tabelas que atendem à condição em `ON`, de que o *id* do filme na tabela *Movie* é igual ao *movie_id* da tabela *Rating*. Nesse caso, `ON` tem a mesma função do `WHERE` que usamos em *queries* sem o `JOIN`.
 
-**b)**
+**b)** 
+```
+SELECT Movie.name, Movie.id, Rating.rate
+FROM Movie INNER JOIN Rating
+ON Movie.id = Rating.movie_id;
+```
