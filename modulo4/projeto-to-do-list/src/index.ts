@@ -3,19 +3,25 @@ import cors from "cors"
 import { AddressInfo } from "net"
 import { postUser } from "./endpoints/postUser"
 import { getUser } from "./endpoints/getUser"
+import { putUser } from "./endpoints/putUser"
 
 // Aplicação
 const app: Express = express()
 app.use(express.json())
 app.use(cors())
 
-// Endpoints
+// Endpoints Usuário
 app.post("/user", postUser)
+
+app.get("/user/all")
+
+app.put("/user/edit/:id", putUser)
 
 app.get("/user/:id", getUser)
 
 
-// app.put("/user/edit/:id")
+
+// Endpoints Tarefas
 // app.post("/task")
 // app.get("/task/:id")
 
