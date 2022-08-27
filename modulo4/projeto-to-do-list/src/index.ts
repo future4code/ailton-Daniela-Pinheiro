@@ -1,7 +1,7 @@
 import express, { Express } from "express"
 import cors from "cors"
 import { AddressInfo } from "net"
-import { createUser } from "./endpoints/createUser"
+import { postUser } from "./endpoints/postUser"
 
 // Aplicação
 const app: Express = express()
@@ -9,12 +9,12 @@ app.use(express.json())
 app.use(cors())
 
 // Endpoints
-app.post("/user", createUser)
+app.post("/user", postUser)
 
-app.get("/user/:id")
-app.put("/user/edit/:id")
-app.post("/task")
-app.get("/task/:id")
+// app.get("/user/:id")
+// app.put("/user/edit/:id")
+// app.post("/task")
+// app.get("/task/:id")
 
 // Servidor
 const server = app.listen(process.env.PORT || 3003, () => {
