@@ -1,6 +1,4 @@
 import { connection } from "../data/dataBase"
-// import { selectAllUsers } from "./selectAllUsers"
-// import { User } from "../types"
 
 const generateUserId = (nickname: string) => {
     const userId: string = nickname.split("").map(character => {
