@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import { selectUser } from "../data/selectUser"
+import { selectUser } from "../../data/user/selectUser"
 
 export const getUser = async (req: Request, res: Response): Promise<any> => {
     try {

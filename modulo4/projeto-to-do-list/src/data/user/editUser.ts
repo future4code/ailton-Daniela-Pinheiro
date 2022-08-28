@@ -1,4 +1,4 @@
-import { connection } from "../data/dataBase"
+import { connection } from "../dataBase"
 
 export const editUser = async(id: string, name: string, nickname: string): Promise<any> => {
     const result = await connection('ListUser')

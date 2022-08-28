@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
-import { editUser } from "../data/editUser"
-import { selectUser } from "../data/selectUser"
+import { editUser } from "../../data/user/editUser"
+import { selectUser } from "../../data/user/selectUser"
 
 export const putUser = async (req: Request, res: Response): Promise<any> => {
     try {
