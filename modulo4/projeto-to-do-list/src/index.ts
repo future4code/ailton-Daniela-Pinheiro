@@ -8,6 +8,7 @@ import { getAllUsers } from "./endpoints/get/getAllUsers"
 import { postTask } from "./endpoints/post/postTask"
 import { getTask } from "./endpoints/get/getTask"
 import { putTaskStatus } from "./endpoints/put/putTaskStatus"
+import { getTaskOfUser } from "./endpoints/get/getTaskOfUser"
 
 // Aplicação
 const app: Express = express()
@@ -26,10 +27,10 @@ app.put("/user/edit/:id", putUser)
 // Endpoints Tarefas
 app.post("/task", postTask)
 
-app.get("/task") //pegar tarefas de um usuário, id por query
+app.get("/task", getTaskOfUser)
 app.get("/task/:id", getTask)
 
-app.put("/task/status/:id", putTaskStatus) //testar
+app.put("/task/status/:id", putTaskStatus)
 
 // Servidor
 const server = app.listen(process.env.PORT || 3003, () => {
