@@ -15,7 +15,7 @@ export const getTask = async (req: Request, res: Response): Promise<any> => {
         }
 
         // Resposta
-        const date: string = `${task.limit_date.getDate()}/${`${task.limit_date.getMonth()}`.padStart(2, '0')}/${task.limit_date.getFullYear()}`
+        const date: string = `${task.limit_date.getDate()}/${`${task.limit_date.getMonth() + 1}`.padStart(2, '0')}/${task.limit_date.getFullYear()}`
         res.status(200).send({ task: {
             title: task.title,
             description: task.description,
@@ -29,8 +29,3 @@ export const getTask = async (req: Request, res: Response): Promise<any> => {
         res.send({ message: error.message || error.sqlMessage })
     }
 }
-
-
-
-
-// id: "80114111106101116111"
