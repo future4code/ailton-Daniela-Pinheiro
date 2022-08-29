@@ -2,12 +2,12 @@ import { BASE_URL } from './data/BASE_URL'
 import axios from 'axios'
 
 // Exercício 3
-
 type User = {
     id: string;
     name: string;
     email: string;
 }
+
 // a. Não acusa erro de tipagem, mas os tipos da Promise e da resposta diferem
 
 // b. Fazer o mapeamento garante que o retorno na função e a Promise não

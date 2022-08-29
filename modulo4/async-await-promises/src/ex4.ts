@@ -13,7 +13,6 @@ async function criarNoticia(title: string, content: string, date: number): Promi
         content,
         date
     })
-
 }
 
 const teste = async(): Promise<any> => {
