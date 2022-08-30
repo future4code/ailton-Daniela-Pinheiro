@@ -1,0 +1,48 @@
+import { Request, Response } from 'express'
+import selectAllUsersA, { selectAllUsersB } from '../data/selectAllUsers'
+
+
+export const getAllUsersA = async(req: Request, res: Response): Promise<void> =>{
+   try {
+      let name: string = req.query.name as string
+
+      if(!name) {
+         name = ""
+      }
+
+      const users = await selectAllUsersA(name)
+ 
+      if(!users.length){
+         res.statusCode = 404
+         throw new Error("No users found.")
+      }
+ 
+      res.status(200).send(users)
+   } catch (error: any) {
+      console.log(error)
+      res.status(res.statusCode || 500).send(error.message || error.sqlMessage)
+   }
+}
+
+export const getAllUsersB = async(req: Request, res: Response): Promise<void> =>{
+   try {
+      const type: string = req.params.type
+
+      if(type.toLowerCase() !== 'operations' && type.toLowerCase() !== 'teacher' && type.toLowerCase() !== 'cx') {
+         res.statusCode = 422
+         throw new Error("Nonexistent type.")
+      }
+
+      const users = await selectAllUsersB(type)
+ 
+      if(!users.length){
+         res.statusCode = 404
+         throw new Error("No users found.")
+      }
+ 
+      res.status(200).send(users)
+   } catch (error: any) {
+      console.log(error)
+      res.status(res.statusCode || 500).send(error.message || error.sqlMessage)
+   }
+}
