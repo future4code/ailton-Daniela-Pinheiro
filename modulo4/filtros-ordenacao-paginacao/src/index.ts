@@ -1,16 +1,20 @@
 import { app } from './data/app'
 import { AddressInfo } from 'net'
-import { getAllUsersA, getAllUsersB } from './endpoints/getAllUsers'
+import { getAllUsersA, getAllUsersB, getAllUsersC } from './endpoints/getAllUsers'
 
 // Endpoints
 // Exercício 1
 // a.
 app.get("/user", getAllUsersA)
 
+// Exercício 2
+app.get("/user/order", getAllUsersC)
+
+// Exercício 1
 // b.
 app.get("/user/:type", getAllUsersB)
 
-// Exercício 2
+
 
 
 const server = app.listen(process.env.PORT || 3003, () => {

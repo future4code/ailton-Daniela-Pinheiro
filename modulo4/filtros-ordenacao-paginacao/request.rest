@@ -9,3 +9,5 @@ GET http://localhost:3003/user?name=soter
 GET http://localhost:3003/user/teacher
 
 ###
+
+GET http://localhost:3003/user/order

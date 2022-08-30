@@ -20,3 +20,13 @@ export async function selectAllUsersB(type: string):Promise<any> {
  
     return result[0]
 }
+
+export async function selectAllUsersC(order: string):Promise<any> {
+    const result = await connection.raw(`
+       SELECT id, name, email, type
+       FROM aula48_exercicio
+       ORDER BY ${order} ASC;
+    `)
+ 
+    return result[0]
+}
