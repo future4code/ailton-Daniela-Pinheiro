@@ -1,7 +1,24 @@
 import { connection } from "./connection"
 
 
-export default async function selectAllUsersA(name: string):Promise<any> {
+export default async function selectAllUsers(
+    name: string,
+    type: string,
+    order: string,
+    offset: number
+):Promise<any> {
+    const result = await connection.raw(`
+       SELECT id, name, email, type
+       FROM aula48_exercicio
+       WHERE name LIKE "%${name}%" AND type LIKE "%${type}%"
+       ORDER BY ${order} DESC
+       LIMIT 5 OFFSET ${offset};
+    `)
+ 
+    return result[0]
+}
+
+export async function selectAllUsersA(name: string):Promise<any> {
     const result = await connection.raw(`
        SELECT id, name, email, type
        FROM aula48_exercicio
