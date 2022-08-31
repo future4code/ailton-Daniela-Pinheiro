@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import selectAllUsersA, { selectAllUsersB, selectAllUsersC } from '../data/selectAllUsers'
+import selectAllUsersA, { selectAllUsersB, selectAllUsersC, selectAllUsersD } from '../data/selectAllUsers'
 
 
 export const getAllUsersA = async(req: Request, res: Response): Promise<void> =>{
@@ -60,6 +60,34 @@ export const getAllUsersC = async(req: Request, res: Response): Promise<void> =>
       }
 
       const users = await selectAllUsersC(order)
+ 
+      if(!users.length){
+         res.statusCode = 404
+         throw new Error("No users found.")
+      }
+ 
+      res.status(200).send(users)
+   } catch (error: any) {
+      console.log(error)
+      res.status(res.statusCode || 500).send(error.message || error.sqlMessage)
+   }
+}
+
+export const getAllUsersD = async(req: Request, res: Response): Promise<void> =>{
+   try {
+      let page: number = Number(req.query.page)
+
+      if(!page) {
+         page = 1
+      }
+      if(isNaN(page)) {
+         res.statusCode = 422
+         throw new Error("Invalid page number.")
+      }
+
+      const offset: number = 5 * (page - 1)
+
+      const users = await selectAllUsersD(offset)
  
       if(!users.length){
          res.statusCode = 404
