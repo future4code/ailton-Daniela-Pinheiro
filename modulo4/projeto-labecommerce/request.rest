@@ -1,0 +1,10 @@
+POST http://localhost:3003/users
+content-type: application/json
+
+{
+    "name": "Astrodev",
+    "email": "astrodev@mail.com",
+    "password": "1234567"
+}
+
+###
