@@ -13,3 +13,13 @@ GET http://localhost:3003/users
 
 ###
 
+POST http://localhost:3003/products
+content-type: application/json
+
+{
+    "name": "Viagem de balão",
+    "price": 289.90,
+    "imageUrl": "https://i.picsum.photos/id/174/1600/589.jpg?hmac=W4bG4rAGyrN9dOGFpK_BB6yROybLRgCsKQErTl9llRQ"
+}
+
+###
