@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import { createUser } from "../data/createUser"
+import { createUser } from "../../data/users/createUser"
 
 export const postUsers = async(req: Request, res: Response): Promise<any> => {
     try {
@@ -15,7 +15,7 @@ export const postUsers = async(req: Request, res: Response): Promise<any> => {
         await createUser(name, email, password)
 
         // Resposta
-        res.send({ message: "Usuário cadastrado com sucesso!"})
+        res.status(201).send({ message: "Usuário cadastrado com sucesso!"})
     } catch (error: any) {
         res.status( res.statusCode || 500 ).send({ message: error.message || error.sqlMessage})
     }

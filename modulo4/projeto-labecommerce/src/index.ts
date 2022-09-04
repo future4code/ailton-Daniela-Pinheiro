@@ -1,14 +1,19 @@
 import { app } from "./data/app"
-import { getProducts } from "./endpoints/getProducts"
-import { getUsers } from "./endpoints/getUsers"
-import { postProducts } from "./endpoints/postProducts"
-import { postUsers } from "./endpoints/postUsers"
+import { getProducts } from "./endpoints/products/getProducts"
+import { getUsers } from "./endpoints/users/getUsers"
+import { postProducts } from "./endpoints/products/postProducts"
+import { postUsers } from "./endpoints/users/postUsers"
+import { postPurchases } from "./endpoints/purchases/postPurchases"
+import { getUsersPurchases } from "./endpoints/users/getUsersPurchases"
 
-
-app.post("/users", postUsers)
-
+// Endpoints Usuários
 app.get("/users", getUsers)
+app.post("/users", postUsers)
+app.get("/users/:user_id/purchases", getUsersPurchases)
 
+// Endpoints Produtos
+app.get("/products", getProducts)
 app.post("/products", postProducts)
 
-app.get("/products", getProducts)
+// Endpoints Compras
+app.post("/purchases", postPurchases)

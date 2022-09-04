@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import { createProduct } from "../data/createProduct"
+import { createProduct } from "../../data/products/createProduct"
 
 export const postProducts = async(req: Request, res: Response): Promise<any> => {
     try {
@@ -19,7 +19,7 @@ export const postProducts = async(req: Request, res: Response): Promise<any> => 
         await createProduct(name, price, imageUrl)
 
         // Resposta
-        res.send({ message: "Produto cadastrado com sucesso!"})
+        res.status(201).send({ message: "Produto cadastrado com sucesso!" })
     } catch (error: any) {
         res.status( res.statusCode || 500 ).send({ message: error.message || error.sqlMessage })
     }
