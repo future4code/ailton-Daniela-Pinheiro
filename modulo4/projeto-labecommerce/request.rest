@@ -32,9 +32,9 @@ POST http://localhost:3003/purchases
 content-type: application/json
 
 {
-    "userId": "16620629124920.7650680293111722",
-    "productId": "16621557810960.7699760064375643",
-    "quantity": 3
+    "userId": "16620629520210.3064270853133695",
+    "productId": "16621558616840.11300819853034172",
+    "quantity": 1
 }
 
 ###
