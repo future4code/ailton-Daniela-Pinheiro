@@ -2,9 +2,9 @@ POST http://localhost:3003/users
 content-type: application/json
 
 {
-    "name": "Astrodev",
-    "email": "astrodev@mail.com",
-    "password": "1234567"
+    "name": "Astro",
+    "email": "astrodev2@mail.com",
+    "password": "1234567a"
 }
 
 ###
@@ -40,5 +40,13 @@ content-type: application/json
 ###
 
 GET http://localhost:3003/users/16620629124920.7650680293111722/purchases
+
+###
+
+GET http://localhost:3003/users?search=dan
+
+###
+
+GET http://localhost:3003/users?order=desc
 
 ###
