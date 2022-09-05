@@ -4,7 +4,7 @@ import { Product } from "../../types"
 
 export const getProducts = async(req: Request, res: Response): Promise<any> => {
     try {
-        // Seleciona os usuários
+        // Seleciona os produtos
         const products: Product[] = await selectProducts()
 
         // Resposta
