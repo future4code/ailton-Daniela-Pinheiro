@@ -1,38 +1,81 @@
-// Exercício 1
-// a. O construtor serve para definir os parâmetros necessários para se criar um
-//    objeto pertencente a uma classe. Ele é chamado como a função dentro da classe:
-//    constructor(parâmetros)
+class Transaction {
+    private description: string;
+    private value: number;
+    private date: string;
 
-// b. A mensagem foi impressa uma vez no console (na hora de criar o objeto de UserAccount).
+    constructor(description: string, value: number, date: string) {
+        console.log("Chamando o construtor da classe Transaction")
+        this.description = description;
+        this.value = value;
+        this.date = date
+    }
+
+    getDescription() {
+        return this.description
+    }
+
+    getValue() {
+        return this.value
+    }
+
+    getDate() {
+        return this.date
+    }
+}
+
+const transacao: Transaction = new Transaction("Boleto", 10, "05/09/2022")
+
 class UserAccount {
     private cpf: string;
     private name: string;
     private age: number;
     private balance: number = 0;
-    private transactions = [];
-  
+    private transactions: Transaction[] = [transacao];
+    
     constructor(
-       cpf: string,
-       name: string,
-       age: number,
+        cpf: string,
+        name: string,
+        age: number,
     ) {
-       console.log("Chamando o construtor da classe UserAccount")
-       this.cpf = cpf;
-       this.name = name;
-       this.age = age;
+        console.log("Chamando o construtor da classe UserAccount")
+        this.cpf = cpf;
+        this.name = name;
+        this.age = age;
+    }
+
+    getDCpf() {
+        return this.cpf
+    }
+
+    getName() {
+        return this.name
+    }
+
+    getAge() {
+        return this.age
+    }
+
+    getBalance() {
+        return this.balance
+    }
+
+    getTransactions() {
+        return this.transactions
     }
 }
-
+    
 const usuario: UserAccount = new UserAccount("12345678910", "Nome", 20)
+
+// Exercício 1
+// a. O construtor serve para definir os parâmetros necessários para se criar um
+//    objeto pertencente a uma classe. Ele é chamado como a função dentro da classe:
+//    constructor(parâmetros)
+    
+// b. A mensagem foi impressa uma vez no console (na hora de criar o objeto de UserAccount).
 
 // c. As propriedades privadas de uma classe só podem ser acessadas dentro da própria classe.
 //    Desse modo, é possível criar uma função que retorne essas propriedades para ser utilizada
 //    como método nos objetos pertencentes a essa classe.
-
-// Exercício 2
-// a.
-// b.
-// c.
 
 // Exercício 3
 // a.
