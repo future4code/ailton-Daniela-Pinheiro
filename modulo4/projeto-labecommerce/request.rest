@@ -1,4 +1,4 @@
-POST http://localhost:3003/users
+POST https://labecommerce-back-end.herokuapp.com/users
 content-type: application/json
 
 {
@@ -9,11 +9,11 @@ content-type: application/json
 
 ###
 
-GET http://localhost:3003/users
+GET https://labecommerce-back-end.herokuapp.com/users
 
 ###
 
-POST http://localhost:3003/products
+POST https://labecommerce-back-end.herokuapp.com/products
 content-type: application/json
 
 {
@@ -24,11 +24,11 @@ content-type: application/json
 
 ###
 
-GET http://localhost:3003/products
+GET https://labecommerce-back-end.herokuapp.com/products
 
 ###
 
-POST http://localhost:3003/purchases
+POST https://labecommerce-back-end.herokuapp.com/purchases
 content-type: application/json
 
 {
@@ -39,14 +39,14 @@ content-type: application/json
 
 ###
 
-GET http://localhost:3003/users/16620629124920.7650680293111722/purchases
+GET https://labecommerce-back-end.herokuapp.com/users/16620629124920.7650680293111722/purchases
 
 ###
 
-GET http://localhost:3003/users?search=dan
+GET https://labecommerce-back-end.herokuapp.com/users?search=dan
 
 ###
 
-GET http://localhost:3003/users?order=desc
+GET https://labecommerce-back-end.herokuapp.com/users?order=desc
 
 ###
