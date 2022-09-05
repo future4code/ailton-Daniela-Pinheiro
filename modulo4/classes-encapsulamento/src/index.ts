@@ -4,7 +4,6 @@ class Transaction {
     private date: string;
 
     constructor(description: string, value: number, date: string) {
-        console.log("Chamando o construtor da classe Transaction")
         this.description = description;
         this.value = value;
         this.date = date
@@ -66,6 +65,34 @@ class UserAccount {
     
 const usuario: UserAccount = new UserAccount("12345678910", "Nome", 20)
 
+class Bank {
+    private accounts: UserAccount[];
+
+    constructor(accounts: UserAccount[]) {
+        this.accounts = accounts
+    }
+
+    getAccounts() {
+        return this.accounts
+    }
+
+    setAccount(account: UserAccount) {
+        this.accounts.push(account)
+    }
+}
+
+const contas: UserAccount[] = [
+    usuario
+]
+
+const usuario2: UserAccount = new UserAccount("12344455599", "Fulaninho", 30)
+
+const banco: Bank = new Bank(contas)
+
+banco.setAccount(usuario2)
+
+console.log(banco.getAccounts())
+
 // Exercício 1
 // a. O construtor serve para definir os parâmetros necessários para se criar um
 //    objeto pertencente a uma classe. Ele é chamado como a função dentro da classe:
@@ -76,8 +103,3 @@ const usuario: UserAccount = new UserAccount("12345678910", "Nome", 20)
 // c. As propriedades privadas de uma classe só podem ser acessadas dentro da própria classe.
 //    Desse modo, é possível criar uma função que retorne essas propriedades para ser utilizada
 //    como método nos objetos pertencentes a essa classe.
-
-// Exercício 3
-// a.
-// b.
-// c.
