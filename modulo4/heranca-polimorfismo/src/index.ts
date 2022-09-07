@@ -161,4 +161,67 @@ const industry: Industry = new Industry(4, "10000002")
 console.log(residence.getCep(), commerce.getCep(), industry.getCep())
 
 // Exercicio 4
+class ResidentialClient extends Residence implements Client {
+    constructor(
+        public name: string,
+        public registrationNumber: number,
+        public consumedEnergy: number,
+        residentsQuantity: number,
+        cep: string,
+        private cpf: string
+    ) {
+        super(residentsQuantity, cep)
+    }
 
+    calculateBill(): number {
+        return this.consumedEnergy * 0.75
+    }
+
+    getCpf(): string {
+        return this.cpf
+    }
+}
+
+// Exercicio 5
+class CommercialClient extends Commerce implements Client {
+    constructor(
+        public name: string,
+        public registrationNumber: number,
+        public consumedEnergy: number,
+        floorsQuantity: number,
+        cep: string,
+        private cnpj: string
+    ) {
+        super(floorsQuantity, cep)
+    }
+
+    calculateBill(): number {
+        return this.consumedEnergy * 0.53
+    }
+
+    getCnpj(): string {
+        return this.cnpj
+    }
+}
+
+// Exercicio 6
+class IndustrialClient extends Industry implements Client {
+    constructor(
+        public name: string,
+        public registrationNumber: number,
+        public consumedEnergy: number,
+        machinesQuantity: number,
+        cep: string,
+        private idustrialRegistration: number
+    ) {
+        super(machinesQuantity, cep)
+    }
+
+    calculateBill(): number {
+        return (this.consumedEnergy * 0.45) + (this.machinesQuantity * 100)
+    }
+
+    getIndustrialRegistration(): number {
+        return this.idustrialRegistration
+    }
+}

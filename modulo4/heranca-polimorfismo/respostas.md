@@ -25,11 +25,16 @@
 **b)** Seria preciso criar uma classe filha de Place.
 
 ### Exercício 4
-**a)** 
-
-**b)** 
+**a)** A classe ResidentialClient possui as propriedades e métodos herdados de Residence (número de residentes, CEP e cálculo da conta) e também as propriedades necessárias para ser um Client (nome, registro, consumo).
 
 ### Exercício 5
-**a)**
+**a)** Ambas as classes possuem as propriedades especificadas pela interface Client (nome, registro, consumo).
 
-**b)** 
+**b)** Como as classes são filhas de classes diferentes, as propriedades e métodos herdados são diferentes.
+
+### Exercício 6
+**a)** Deve ser filha de Industry, para herdar suas propriedades e métodos.
+
+**b)** Implementa Client, pois as outras propriedades (nome, registro, consumo) são especificadas nessa interface.
+
+**c)** Pois esses métodos são utilizados para acessar as informações privadas da classe, e o método de calcular a conta de energia já é herdado da classe mãe, não havendo necessidade de criar outros para o propósito dessa aplicação.
