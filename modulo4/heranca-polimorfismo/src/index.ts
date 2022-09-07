@@ -1,3 +1,4 @@
+// HERANÇA
 // Exercício 1
 class User {
     private id: string;
@@ -76,4 +77,88 @@ Compras: ${newCustomer.purchaseTotal}`)
 
 // Exercicio 4 e 5
 console.log(newCustomer.introduceYourself(),
-newUser.introduceYourself())
+    newUser.introduceYourself())
+
+// POLIMORFISMO
+// Exercicio 1
+export interface Client {
+    name: string;
+    registrationNumber: number;
+    consumedEnergy: number;
+
+    calculateBill(): number;
+}
+
+const client: Client = {
+    name: "Sicrano",
+    registrationNumber: 1,
+    consumedEnergy: 20,
+
+    calculateBill: () => {
+        return 2
+    }
+}
+
+console.log(client.name, client.registrationNumber, client.consumedEnergy, client.calculateBill())
+
+// Exercicio 2
+export abstract class Place {
+    constructor(protected cep: string) { }
+
+    public getCep(): string {
+        return this.cep;
+    }
+}
+
+// const place: Place = new Place()
+
+// Exercicio 3
+export class Residence extends Place {
+    constructor(
+        protected residentsQuantity: number,
+        cep: string
+    ) {
+        super(cep);
+    }
+
+    getResidentsQuantity(): number {
+        return this.residentsQuantity
+    }
+}
+
+export class Commerce extends Place {
+    constructor(
+        protected floorsQuantity: number,
+        cep: string
+    ) {
+        super(cep);
+    }
+
+    getFloorsQuantity(): number {
+        return this.floorsQuantity
+    }
+}
+
+export class Industry extends Place {
+    constructor(
+        protected machinesQuantity: number,
+        cep: string
+    ) {
+        super(cep);
+    }
+
+    getMachinesQuantity(): number {
+        return this.machinesQuantity
+    }
+}
+
+const residence: Residence = new Residence(2, "10000000")
+
+const commerce: Commerce = new Commerce(5, "10000001")
+
+const industry: Industry = new Industry(4, "10000002")
+
+console.log(residence.getCep(), commerce.getCep(), industry.getCep())
+
+// Exercicio 4
+

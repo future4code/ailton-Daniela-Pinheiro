@@ -17,21 +17,19 @@
 ## Polimorfismo
 
 ### Exercício 1
-**a)**
-
-**b)** 
+**a)** Todas as informações foram impressas corretamente, pois são todas públicas.
 
 ### Exercício 2
-**a)**
+**a)** O Typescript gera um erro por não ser possível criar uma instância de uma classe abstrata, como é o caso de Place.
 
-**b)** 
-
-### Exercício 3
-**a)**
-
-**b)** 
+**b)** Seria preciso criar uma classe filha de Place.
 
 ### Exercício 4
+**a)** 
+
+**b)** 
+
+### Exercício 5
 **a)**
 
 **b)** 
