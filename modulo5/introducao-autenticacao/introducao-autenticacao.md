@@ -3,11 +3,20 @@
 Assim, é possível garantir que uma grande quantidade de usuários terá ids distintos.
 
 ### Exercício 2
-**a)**
+**a)** A função *createUser* recebe em seus parâmetros uma id, um e-mail e uma senha, e as insere na tabela existente no banco de dados através da *connection*.
+
 **b)**
+```
+CREATE TABLE UserTable (
+	id VARCHAR(255) PRIMARY KEY,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
+);
+```
+
 ### Exercício 3
-**a)**
-**b)**
+**a)** A linha *as string* garante que o que será recebido está no formato de *string*, que é o formato que a função de criar o token precisa no lugar da *key*.
+
 ### Exercício 4
 **a)**
 **b)**
