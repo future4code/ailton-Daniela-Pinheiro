@@ -1,7 +1,4 @@
-import {v4} from "uuid"
+import { app } from "./data/application"
+import { userSignUp } from "./endpoints/userSignUp"
 
-// class IdGenerator {
-//     generateId(): string{
-// 	    return v4()
-//     }
-// }
+app.post("/user/signup", userSignUp)

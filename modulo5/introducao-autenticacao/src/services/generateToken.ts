@@ -10,7 +10,8 @@ export function generateToken(input: AuthData): string {
         {
             id
         },
-        process.env.JWT_KEY as string,
+        // String(process.env.JWT_KEY),
+        "bananinha",
         {
             expiresIn
         }
