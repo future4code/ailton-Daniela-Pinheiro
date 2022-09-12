@@ -17,12 +17,5 @@ CREATE TABLE UserTable (
 ### Exercício 3
 **a)** A linha *as string* garante que o que será recebido está no formato de *string*, que é o formato que a função de criar o token precisa no lugar da *key*.
 
-### Exercício 5
-**a)**
-**b)**
-### Exercício 6
-**a)**
-**b)**
 ### Exercício 7
-**a)**
-**b)**
+**a)** A linha *as any* atribui a tipagem *any* ao retorno da função `jwt.verify`. É preciso usá-la pois o retorno dessa função pode ser de vários tipos, tal como ocorre com o *error*.
