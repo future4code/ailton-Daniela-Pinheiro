@@ -1,3 +1,4 @@
 export type AuthData = {
-    id: string
+    id: string,
+    role: string
 }

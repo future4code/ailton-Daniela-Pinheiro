@@ -7,11 +7,3 @@ Ainda, se não for passado um valor, o bcrypt utiliza o 10.
 **a)** O cadastro deve ser modificado primeiro, senão não haveria um hash no banco de dados para comparar ao se fazer o login.
 
 **d)** Não é necessário modificar esse endpoint, pois ele não utiliza a senha salva para retornar as informações, apenas o id, que não muda com o uso da criptografia.
-
-### Exercício 3
-**a)**
-**b)**
-
-### Exercício 4
-**a)**
-**b)**

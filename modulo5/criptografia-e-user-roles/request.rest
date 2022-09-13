@@ -2,8 +2,9 @@ POST http://localhost:3003/user/signup
 content-type: application/json
 
 {
-    "email": "dani@email.com",
-    "password": "12345678"
+    "email": "danie@email.com",
+    "password": "12345678",
+    "role": "admin"
 }
 
 ###
@@ -17,3 +18,7 @@ content-type: application/json
 }
 
 ###
+
+GET http://localhost:3003/user/profile
+content-type: application/json
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM3MjMwNTNmLTVkMDAtNDg2ZS1iMzE4LTYyMGViYzk5YWY5OSIsInJvbGUiOiJub3JtYWwiLCJpYXQiOjE2NjMwOTE1ODUsImV4cCI6MTY2MzA5MTg4NX0.pAV9GRFBjW04gfjPvhwaiKiyFtg1xUqk4K7joCcpMdE

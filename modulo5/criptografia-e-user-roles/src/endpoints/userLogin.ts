@@ -14,11 +14,6 @@ export const userLogin = async(req: Request, res: Response): Promise<void> => {
 
         const user = await getUserByEmail(email)
 
-        if(!user.length) {
-            res.statusCode = 401
-            throw new Error("E-mail ou senha inválidos.")
-        }
-
         const correctCredentials: boolean = await compareHash(password, user.password)
 
         if(!correctCredentials) {
@@ -26,7 +21,10 @@ export const userLogin = async(req: Request, res: Response): Promise<void> => {
             throw new Error("E-mail ou senha inválidos.")
         }
 
-        const token = generateToken({ id: user.id })
+        const token = generateToken({
+            id: user.id,
+            role: user.role
+        })
 
         res.status(200).send({ token: token })
     } catch (error: any) {

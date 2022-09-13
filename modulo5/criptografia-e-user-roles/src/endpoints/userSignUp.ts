@@ -7,6 +7,7 @@ import { generateToken } from "../services/token"
 export const userSignUp = async(req: Request, res: Response): Promise<void> => {
     try {
         const { email, password } = req.body
+        let role = req.body.role
 
         if(!email || !email.includes("@")) {
             res.statusCode = 422
@@ -16,13 +17,19 @@ export const userSignUp = async(req: Request, res: Response): Promise<void> => {
             res.statusCode = 422
             throw new Error("Senha inválida.")
         }
+        if(!role) {
+            role = "normal"
+        }
 
         const id: string = generateId()
         const hashPassword: string = await generateHash(password)
 
-        await createUser(id, email, hashPassword)
+        await createUser(id, email, hashPassword, role)
 
-        const token = generateToken({ id })
+        const token = generateToken({
+            id,
+            role
+        })
 
         res.status(200).send({ token: token })
     } catch (error: any) {
