@@ -1,0 +1,52 @@
+POST https://labecommerce-back-end.herokuapp.com/users
+content-type: application/json
+
+{
+    "name": "Astro",
+    "email": "astrodev2@mail.com",
+    "password": "1234567a"
+}
+
+###
+
+GET https://labecommerce-back-end.herokuapp.com/users
+
+###
+
+POST https://labecommerce-back-end.herokuapp.com/products
+content-type: application/json
+
+{
+    "name": "Viagem de balão",
+    "price": 289.90,
+    "imageUrl": "https://i.picsum.photos/id/174/1600/589.jpg?hmac=W4bG4rAGyrN9dOGFpK_BB6yROybLRgCsKQErTl9llRQ"
+}
+
+###
+
+GET https://labecommerce-back-end.herokuapp.com/products
+
+###
+
+POST https://labecommerce-back-end.herokuapp.com/purchases
+content-type: application/json
+
+{
+    "userId": "16620629520210.3064270853133695",
+    "productId": "16621558616840.11300819853034172",
+    "quantity": 1
+}
+
+###
+
+GET https://labecommerce-back-end.herokuapp.com/users/16620629124920.7650680293111722/purchases
+
+###
+
+GET https://labecommerce-back-end.herokuapp.com/users?search=dan
+
+###
+
+GET https://labecommerce-back-end.herokuapp.com/users?order=desc
+
+###
