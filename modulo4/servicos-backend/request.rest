@@ -1,0 +1,12 @@
+GET http://localhost:3003/address/05424150
+
+###
+
+POST http://localhost:3003/address
+content-type: application/json
+
+{
+    "cep": "05424150",
+    "numero": 200,
+    "complemento": 1
+}
