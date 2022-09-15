@@ -1,6 +1,6 @@
 import * as bcrypt from "bcryptjs"
 
-class hashManager {
+export class HashManager {
     async generateHash(string: string): Promise<string> {
         const cost = Number(process.env.BCRYPT_COST)
         const salt = await bcrypt.genSalt(cost)

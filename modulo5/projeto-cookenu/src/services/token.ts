@@ -6,11 +6,11 @@ export class Authenticator {
         const token = jwt.sign(
             {
                 id: info.id,
-                role: info.role
+                // role: info.role
             },
             String(process.env.JWT_KEY),
             {
-                expiresIn: process.env.JWT_EXPIRATION_TIME
+                expiresIn: "5min"
             }
         )
         return token
