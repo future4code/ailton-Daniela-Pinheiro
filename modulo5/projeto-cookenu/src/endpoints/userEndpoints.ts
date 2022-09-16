@@ -75,4 +75,27 @@ export default class UserEndpoints{
             res.status(res.statusCode || 500).send({ message: error.message || error.sqlMessage })
         }
     }
+
+    async getProfile(req: Request, res: Response) {
+        try {
+            const token: string = req.headers.authorization as string
+
+            const { id } = new Authenticator().getTokenData(token)
+
+            const user = await new UserData().getUserById(id)
+
+            if(!user){
+                res.statusCode = 404
+                throw new Error("Usuário não encontrado.")
+            }
+
+            res.status(200).send({
+                id: user.getId(),
+                name: user.getName(),
+                email: user.getEmail()
+            })
+        } catch (error: any) {
+            res.status(res.statusCode || 500).send({ message: error.message || error.sqlMessage })
+        }
+    }
 }
