@@ -6,7 +6,7 @@ export class User {
         private password: string
     ) {}
 
-    protected getId(): string {
+    getId(): string {
         return this.id
     }
     getName(): string {
@@ -15,7 +15,7 @@ export class User {
     getEmail(): string {
         return this.email
     }
-    protected getPassword(): string {
+    getPassword(): string {
         return this.password
     }
 }

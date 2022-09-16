@@ -5,6 +5,7 @@ import { HashManager } from "../services/hashManager"
 import { IdGenerator } from "../services/idGenerator"
 import { Authenticator } from "../services/authenticator"
 import { UserData } from "../data/userData"
+import { IncorrectCredentials } from "../error/incorrectCredentials"
 
 
 export default class UserEndpoints{
@@ -27,7 +28,7 @@ export default class UserEndpoints{
 
             const emailAlreadyExists = await userData.getUserByEmail(email)
 
-            if(emailAlreadyExists.length) {
+            if(emailAlreadyExists) {
                 res.statusCode = 422
                 throw new Error("E-mail já cadastrado.")
             }
@@ -49,7 +50,27 @@ export default class UserEndpoints{
     async login(req: Request, res: Response) {
         try {
             const { email, password } = req.body
-            
+            const userData = new UserData()
+
+            if(!email || !password) {
+                throw new MissingFields()
+            }
+
+            const user = await userData.getUserByEmail(email)
+
+            if(!user) {
+                throw new IncorrectCredentials()
+            }
+
+            const correctPassword = await new HashManager().compareHash(password, user.getPassword())
+
+            if(!correctPassword) {
+                throw new IncorrectCredentials()
+            }
+
+            const token = new Authenticator().generateToken({ id: user.getId() })
+
+            res.status(200).send({ access_token: token })
         } catch (error: any) {
             res.status(res.statusCode || 500).send({ message: error.message || error.sqlMessage })
         }
