@@ -8,3 +8,13 @@ content-type: application/json
 }
 
 ###
+
+POST http://localhost:3003/login
+content-type: application/json
+
+{
+    "email": "dan@email.com",
+    "password": "1234567"
+}
+
+###

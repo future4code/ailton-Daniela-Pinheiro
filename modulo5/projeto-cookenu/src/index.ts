@@ -1,7 +1,7 @@
 import { app } from "./data/application"
-import UserController from "./endpoints/userController"
+import UserEndpoints from "./endpoints/userEndpoints"
 
-const userController = new UserController()
+const userEndpoints = new UserEndpoints()
 
-app.post("/signup", userController.userSignUp)
-app.get("/")
+app.post("/signup", userEndpoints.signUp)
+app.get("/login", userEndpoints.login)
