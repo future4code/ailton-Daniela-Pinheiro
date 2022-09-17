@@ -1,7 +1,9 @@
 import { Request, Response } from "express"
+import { RecipeData } from "../data/recipeData"
 import { UserData } from "../data/userData"
 import { MissingFields } from "../error/missingFields"
 import { Unauthorized } from "../error/unauthorized"
+import { Recipe } from "../model/recipe"
 import { Authenticator } from "../services/authenticator"
 import { IdGenerator } from "../services/idGenerator"
 
@@ -15,25 +17,21 @@ export default class RecipeEndpoints {
                 throw new MissingFields()
             }
 
-            // verificar token
             const { id } = new Authenticator().getTokenData(token)
 
             const authorizedUser = await new UserData().getUserById(id)
-
             if(!authorizedUser) {
                 throw new Unauthorized()
             }
 
-            // criar id e data
             const recipeId: string = new IdGenerator().generateId()
 
-            const createDate: Date = new Date()
-            console.log(createDate)
+            const createdAt: Date = new Date()
 
-            // criar a receita no banco
-            // await createRecipe(recipeId, title, description, createDate)
+            const recipe = new Recipe(recipeId, title, description, createdAt, id)
 
-            // resposta
+            await new RecipeData().createRecipe(recipe)
+
             res.status(201).send({ message: "Receita criada com sucesso." })
         } catch (error: any) {
             res.status(res.statusCode || 500).send({ message: error.message || error.sqlMessage })
