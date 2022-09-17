@@ -21,4 +21,12 @@ content-type: application/json
 
 GET http://localhost:3003/user/profile
 content-type: application/json
-authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImIwM2I0NmNkLTFkNWMtNDJhNi1hZTI4LWE4NWE5NTAwOTg2NSIsImlhdCI6MTY2MzM1OTAyNywiZXhwIjoxNjYzMzU5NjI3fQ.6CKp2mPgkYka9l3qgEKwK-TuGJPGl79sBtD-dd-R61s
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImIwM2I0NmNkLTFkNWMtNDJhNi1hZTI4LWE4NWE5NTAwOTg2NSIsImlhdCI6MTY2MzQzNzMzNywiZXhwIjoxNjYzNDM3OTM3fQ.t3PoLo6r9nFATmZFAJkVfGWaxCfWkX6KeP890gWsn74
+
+###
+
+GET http://localhost:3003/user/2666c2c0-ac9d-4b15-934a-7c2e7fd275e9
+content-type: application/json
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImIwM2I0NmNkLTFkNWMtNDJhNi1hZTI4LWE4NWE5NTAwOTg2NSIsImlhdCI6MTY2MzQzNzMzNywiZXhwIjoxNjYzNDM3OTM3fQ.t3PoLo6r9nFATmZFAJkVfGWaxCfWkX6KeP890gWsn74
+
+###

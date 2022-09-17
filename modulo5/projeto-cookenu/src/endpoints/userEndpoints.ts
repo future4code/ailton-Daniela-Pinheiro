@@ -1,11 +1,12 @@
 import { Request, Response } from "express"
 import { MissingFields } from "../error/missingFields"
+import { IncorrectCredentials } from "../error/incorrectCredentials"
 import { User } from "../model/user"
 import { HashManager } from "../services/hashManager"
 import { IdGenerator } from "../services/idGenerator"
 import { Authenticator } from "../services/authenticator"
 import { UserData } from "../data/userData"
-import { IncorrectCredentials } from "../error/incorrectCredentials"
+import { Unauthorized } from "../error/unauthorized"
 
 
 export default class UserEndpoints{
@@ -29,7 +30,7 @@ export default class UserEndpoints{
             const emailAlreadyExists = await userData.getUserByEmail(email)
 
             if(emailAlreadyExists) {
-                res.statusCode = 422
+                res.statusCode = 409
                 throw new Error("E-mail já cadastrado.")
             }
     
@@ -82,7 +83,36 @@ export default class UserEndpoints{
 
             const { id } = new Authenticator().getTokenData(token)
 
-            const user = await new UserData().getUserById(id)
+            const authorizedUser = await new UserData().getUserById(id)
+
+            if(!authorizedUser){
+                throw new Unauthorized()
+            }
+
+            res.status(200).send({
+                id: authorizedUser.getId(),
+                name: authorizedUser.getName(),
+                email: authorizedUser.getEmail()
+            })
+        } catch (error: any) {
+            res.status(res.statusCode || 500).send({ message: error.message || error.sqlMessage })
+        }
+    }
+
+    async getOthersProfile(req: Request, res: Response) {
+        try {
+            const token: string = req.headers.authorization as string
+            const userId: string = req.params.id
+            const userData = new UserData()
+
+            const { id } = new Authenticator().getTokenData(token)
+
+            const authorizedUser = await userData.getUserById(id)
+            if(!authorizedUser){
+                throw new Unauthorized()
+            }
+
+            const user = await userData.getUserById(userId)
 
             if(!user){
                 res.statusCode = 404
