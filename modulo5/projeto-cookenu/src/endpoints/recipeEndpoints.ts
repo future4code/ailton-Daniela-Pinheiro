@@ -6,9 +6,6 @@ import { Recipe } from "../model/recipe"
 import { Authenticator } from "../services/authenticator"
 import { IdGenerator } from "../services/idGenerator"
 
-import { UserData } from "../data/userData"
-import { Unauthorized } from "../error/unauthorized"
-
 
 export default class RecipeEndpoints {
     async postRecipe(req: Request, res: Response) {
