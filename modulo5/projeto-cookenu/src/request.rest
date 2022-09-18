@@ -27,7 +27,7 @@ authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImIwM2I0NmNkLTFkNWMt
 
 GET http://localhost:3003/user/2666c2c0-ac9d-4b15-934a-7c2e7fd275e9
 content-type: application/json
-authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImIwM2I0NmNkLTFkNWMtNDJhNi1hZTI4LWE4NWE5NTAwOTg2NSIsImlhdCI6MTY2MzQzNzMzNywiZXhwIjoxNjYzNDM3OTM3fQ.t3PoLo6r9nFATmZFAJkVfGWaxCfWkX6KeP890gWsn74
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImIwM2I0NmNkLTFkNWMtNDJhNi1hZTI4LWE4NWE5NTAwOTg2NSIsImlhdCI6MTY2MzUyMzg5NywiZXhwIjoxNjYzNTI0NDk3fQ.52SdBjIP8AmZHwJ20uzw3rfXMh0bEPDiwVWVv8FAAac
 
 ###
 
@@ -39,5 +39,11 @@ authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImIwM2I0NmNkLTFkNWMt
     "title": "Arroz Frito",
     "description": "Arroz frito com verduras, legumes, ovos, bacon e molho especial."
 }
+
+###
+
+GET http://localhost:3003/recipe/b3ca2506-6a2d-4978-807e-06d575c438bd
+content-type: application/json
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImIwM2I0NmNkLTFkNWMtNDJhNi1hZTI4LWE4NWE5NTAwOTg2NSIsImlhdCI6MTY2MzUyMzY3NywiZXhwIjoxNjYzNTI0Mjc3fQ.HrUz9cyDF49CZggZoPvnY9uXGpFGJGhRAyKcgXdDAfE
 
 ###

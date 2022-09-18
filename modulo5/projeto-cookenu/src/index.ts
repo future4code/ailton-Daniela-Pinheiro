@@ -11,4 +11,6 @@ app.post("/login", userEndpoints.login)
 app.get("/user/profile", userEndpoints.getProfile)
 app.get("/user/:id", userEndpoints.getOthersProfile)
 
-app.post("/recipe", recipeEndpoints.postRecipe) //testar
+app.post("/recipe", recipeEndpoints.postRecipe)
+app.get("/recipe/:id", recipeEndpoints.getRecipe) //TESTAR
+// b3ca2506-6a2d-4978-807e-06d575c438bd

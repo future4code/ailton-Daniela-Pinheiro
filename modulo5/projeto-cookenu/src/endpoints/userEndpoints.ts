@@ -7,6 +7,7 @@ import { IdGenerator } from "../services/idGenerator"
 import { Authenticator } from "../services/authenticator"
 import { UserData } from "../data/userData"
 import { Unauthorized } from "../error/unauthorized"
+import { MissingAuthorization } from "../error/missingAuthorization"
 
 
 export default class UserEndpoints{
@@ -81,6 +82,10 @@ export default class UserEndpoints{
         try {
             const token: string = req.headers.authorization as string
 
+            if(!token) {
+                throw new MissingAuthorization()
+            }
+
             const { id } = new Authenticator().getTokenData(token)
 
             const authorizedUser = await new UserData().getUserById(id)
@@ -105,12 +110,11 @@ export default class UserEndpoints{
             const userId: string = req.params.id
             const userData = new UserData()
 
-            const { id } = new Authenticator().getTokenData(token)
-
-            const authorizedUser = await userData.getUserById(id)
-            if(!authorizedUser){
-                throw new Unauthorized()
+            if(!token) {
+                throw new MissingAuthorization()
             }
+
+            const tokenData = new Authenticator().getTokenData(token)
 
             const user = await userData.getUserById(userId)
 

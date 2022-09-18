@@ -21,7 +21,7 @@ export class Recipe {
     }
     getCreatedAtString(): string {
         const day: string = String(this.createdAt.getDate())
-        const month: string = String(this.createdAt.getMonth() + 1)
+        const month: string = String(this.createdAt.getMonth() + 1).padStart(2, '0')
         const year: string = String(this.createdAt.getFullYear())
 
         const date: string = day + "/" + month + "/" + year

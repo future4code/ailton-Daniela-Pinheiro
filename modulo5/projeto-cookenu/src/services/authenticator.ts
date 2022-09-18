@@ -1,8 +1,12 @@
 import * as jwt from "jsonwebtoken"
-import { AuthenticationData } from "../types"
 import dotenv from "dotenv"
 
 dotenv.config()
+
+export interface AuthenticationData {
+    id: string,
+    // role: string
+}
 
 export class Authenticator {
     generateToken(info: AuthenticationData): string {
