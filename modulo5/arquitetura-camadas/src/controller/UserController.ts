@@ -30,4 +30,18 @@ export class UserController {
             res.status(errorCode).send({ message: error.message })
         }
     }
+
+    public getUsers = async (req: Request, res: Response) => {
+        let errorCode = 400
+        try {
+            const token: string = req.headers.authorization as string
+            const name: string | undefined = req.query.name as string
+
+            const users = await new UserBusiness().getUsers(token, name)
+            
+            res.status(200).send({ users: users })
+        } catch (error) {
+            res.status(errorCode).send({ message: error.message })
+        }
+    }
 }

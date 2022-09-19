@@ -34,4 +34,32 @@ export class UserDatabase extends BaseDatabase {
             return user
         }
     }
+
+    public searchUserById = async(id: string): Promise<User | undefined> => {
+        const result = await BaseDatabase.connection(UserDatabase.TABLE_USERS)
+            .select('*')
+            .where({ id })
+
+        if(!result) {
+            return undefined
+        } else {
+            const user: User = new User(
+                result[0].id,
+                result[0].name,
+                result[0].email,
+                result[0].password,
+                result[0].role
+            )
+            
+            return user
+        }
+    }
+
+    public getUsers = async(name: string): Promise<any[]> => {
+        const result = await BaseDatabase.connection(UserDatabase.TABLE_USERS)
+            .select('*')
+            .whereILike('name', `%${name}%`)
+
+        return result
+    }
 }

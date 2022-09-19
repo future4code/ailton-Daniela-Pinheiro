@@ -69,4 +69,36 @@ export class UserBusiness {
 
         return token
     }
+
+    public getUsers = async(token: string, name?: string): Promise<any[]> => {
+        const queryName: string = name? name : ""
+
+        if(!token) {
+            throw new Error("Usuário não autorizado.")
+        }
+
+        const tokenData = new Authenticator().getTokenPayload(token)
+
+        if(!tokenData) {
+            throw new Error("Usuário não autorizado.")
+        }
+
+        const user: User = await new UserDatabase().searchUserById(tokenData.id)
+
+        if(!user) {
+            throw new Error("Usuário não autorizado.")
+        }
+
+        const result = await new UserDatabase().getUsers(queryName)
+
+        const users = result.map(user => {
+            return {
+                id: user.id,
+                name: user.name,
+                email: user.email
+            }
+        })
+
+        return users
+    }
 }
