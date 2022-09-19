@@ -9,7 +9,7 @@ export class UserBusiness {
         name: string,
         email: string,
         password: string,
-        role?: USER_ROLES
+        role?: string
     ): Promise<string> => {
         if(!name || !email || !password) {
             throw new Error("Todas as informações são obrigatórias.")
@@ -27,14 +27,20 @@ export class UserBusiness {
             throw new Error("Senha inválida.")
         }
 
-        let userRole: USER_ROLES = role? role : USER_ROLES.NORMAL
+        let userRole: USER_ROLES
+        if(!role || role !== "ADMIN") {
+            userRole = USER_ROLES.NORMAL
+        }
+        if(role && role === "ADMIN") {
+            userRole = USER_ROLES.ADMIN
+        }
 
         const id: string = new IdGenerator().generate()
         const hashPassword: string = await new HashManager().hash(password)
 
         await new UserDatabase().createUser(id, name, email, hashPassword, userRole)
 
-        const token: string = await new Authenticator().generateToken({ id: id, role: role || userRole })
+        const token: string = await new Authenticator().generateToken({ id: id, role: userRole })
 
         return token
     }
@@ -100,5 +106,29 @@ export class UserBusiness {
         })
 
         return users
+    }
+
+    public deleteUser = async(token: string, id: string): Promise<string> => {
+        if(!token) {
+            throw new Error("Usuário não autorizado.")
+        }
+
+        const tokenData = new Authenticator().getTokenPayload(token)
+console.log(tokenData)
+        if(!tokenData) {
+            throw new Error("Usuário não autorizado.")
+        }
+        if(tokenData.role !== USER_ROLES.ADMIN) {
+            throw new Error("Usuário não autorizado.")
+        }
+        if(tokenData.id === id) {
+            throw new Error("Não é permitido deletar este usuário.")
+        }
+
+        await new UserDatabase().deleteUser(id)
+
+        const response = "Usuário deletado com sucesso."
+
+        return response
     }
 }
