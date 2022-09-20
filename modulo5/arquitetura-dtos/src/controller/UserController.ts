@@ -57,7 +57,8 @@ export class UserController {
             const token: string = req.headers.authorization as string
             const id: string = req.params.id as string
 
-            const response: string = await new UserBusiness().deleteUser(token, id)
+            const input: IGetUsersDTO = { token, id }
+            const response: string = await new UserBusiness().deleteUser(input)
             
             res.status(200).send({ message: response })
         } catch (error) {

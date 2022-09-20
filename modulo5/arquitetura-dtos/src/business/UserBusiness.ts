@@ -116,13 +116,15 @@ export class UserBusiness {
         return users
     }
 
-    public deleteUser = async(token: string, id: string): Promise<string> => {
+    public deleteUser = async(input: IGetUsersDTO): Promise<string> => {
+        const { token, id } = input
+
         if(!token) {
             throw new Error("Usuário não autorizado.")
         }
 
         const tokenData = new Authenticator().getTokenPayload(token)
-console.log(tokenData)
+
         if(!tokenData) {
             throw new Error("Usuário não autorizado.")
         }

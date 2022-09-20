@@ -21,7 +21,7 @@ export interface ISignUpDTO {
     name: string,
     email: string,
     password: string,
-    role: string | undefined
+    role?: string | undefined
 }
 
 export interface ILoginDTO {
@@ -31,7 +31,8 @@ export interface ILoginDTO {
 
 export interface IGetUsersDTO {
     token: string,
-    name: string | undefined
+    name?: string,
+    id?: string
 }
 
 export class User {
