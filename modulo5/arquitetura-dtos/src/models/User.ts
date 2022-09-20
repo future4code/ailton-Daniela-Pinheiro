@@ -8,7 +8,30 @@ export interface IUserDB {
     name: string,
     email: string,
     password: string,
-    role?: USER_ROLES
+    role: USER_ROLES
+}
+
+export interface IUserOutputDB {
+    id: string,
+    name: string,
+    email: string
+}
+
+export interface ISignUpDTO {
+    name: string,
+    email: string,
+    password: string,
+    role: string | undefined
+}
+
+export interface ILoginDTO {
+    email: string,
+    password: string
+}
+
+export interface IGetUsersDTO {
+    token: string,
+    name: string | undefined
 }
 
 export class User {

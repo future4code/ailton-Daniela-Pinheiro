@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 import { UserBusiness } from "../business/UserBusiness"
-import { IUserDB } from "../models/User"
+import { IGetUsersDTO, ILoginDTO, ISignUpDTO } from "../models/User"
 
 export class UserController {
     public signUp = async (req: Request, res: Response) => {
@@ -8,8 +8,9 @@ export class UserController {
         try {
             const { name, email, password, role } = req.body
 
-            const newUser: IUserDB = { name, email, password, role }
-            const token: string = await new UserBusiness().signUp(newUser)
+            const input: ISignUpDTO = { name, email, password, role }
+
+            const token: string = await new UserBusiness().signUp(input)
             
             res.status(201).send({
                 message: "Usuário criado com sucesso!",
@@ -25,7 +26,9 @@ export class UserController {
         try {
             const { email, password } = req.body
 
-            const token: string = await new UserBusiness().login(email, password)
+            const input: ILoginDTO = { email, password }
+
+            const token: string = await new UserBusiness().login(input)
             
             res.status(200).send({ access_token: token })
         } catch (error) {
@@ -39,7 +42,8 @@ export class UserController {
             const token: string = req.headers.authorization as string
             const name: string | undefined = req.query.name as string
 
-            const users = await new UserBusiness().getUsers(token, name)
+            const input: IGetUsersDTO = { token, name }
+            const users = await new UserBusiness().getUsers(input)
             
             res.status(200).send({ users: users })
         } catch (error) {

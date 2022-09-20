@@ -1,4 +1,4 @@
-import { IUserDB, User } from "../models/User"
+import { IUserDB, IUserOutputDB, User } from "../models/User"
 import { BaseDatabase } from "./BaseDatabase"
 
 
@@ -56,12 +56,12 @@ export class UserDatabase extends BaseDatabase {
         }
     }
 
-    public getUsers = async(name: string): Promise<any[]> => {
-        const result = await BaseDatabase.connection(UserDatabase.TABLE_USERS)
-            .select('*')
+    public getUsers = async(name: string): Promise<IUserOutputDB[]> => {
+        const users = await BaseDatabase.connection(UserDatabase.TABLE_USERS)
+            .select('id', 'name', 'email')
             .whereILike('name', `%${name}%`)
 
-        return result
+        return users
     }
 
     public deleteUser = async(id: string) => {

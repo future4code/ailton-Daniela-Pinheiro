@@ -1,11 +1,11 @@
 import { UserDatabase } from "../database/UserDatabase"
-import { IUserDB, User, USER_ROLES } from "../models/User"
-import { Authenticator } from "../services/Authenticator"
-import { HashManager } from "../services/HashManager"
+import { IGetUsersDTO, ILoginDTO, ISignUpDTO, IUserDB, IUserOutputDB, User, USER_ROLES } from "../models/User"
+import { Authenticator, ITokenPayload } from "../services/Authenticator"
+import { HashManager, IHashCompare } from "../services/HashManager"
 import { IdGenerator } from "../services/IdGenerator"
 
 export class UserBusiness {
-    public signUp = async(input: IUserDB): Promise<string> => {
+    public signUp = async(input: ISignUpDTO): Promise<string> => {
         if(!input.name || !input.email || !input.password) {
             throw new Error("Todas as informações são obrigatórias.")
         }
@@ -40,12 +40,18 @@ export class UserBusiness {
         }
         await new UserDatabase().createUser(newUser)
 
-        const token: string = await new Authenticator().generateToken({ id: id, role: userRole })
+        const payload: ITokenPayload = {
+            id: id,
+            role: userRole
+        }
+        const token: string = await new Authenticator().generateToken(payload)
 
         return token
     }
 
-    public login = async(email: string, password: string): Promise<string> => {
+    public login = async(input: ILoginDTO): Promise<string> => {
+        const {email, password} = input
+
         if(!email || !password) {
             throw new Error("Todas as informações são obrigatórias.")
         }
@@ -65,18 +71,28 @@ export class UserBusiness {
             throw new Error("E-mail ou senha incorretos.")
         }
 
-        const correctCredentials: boolean = await new HashManager().compare(password, user.getPassword())
+        const hashCompare: IHashCompare = {
+            plaintext: password,
+            hash: user.getPassword()
+        }
+        const correctCredentials: boolean = await new HashManager().compare(hashCompare)
 
         if(!correctCredentials) {
             throw new Error("E-mail ou senha incorretos.")
         }
 
-        const token: string = new Authenticator().generateToken({ id: user.getId(), role: user.getRole() })
+        const payload: ITokenPayload = {
+            id: user.getId(),
+            role: user.getRole()
+        }
+        const token: string = new Authenticator().generateToken(payload)
 
         return token
     }
 
-    public getUsers = async(token: string, name?: string): Promise<any[]> => {
+    public getUsers = async(input: IGetUsersDTO): Promise<IUserOutputDB[]> => {
+        const { token, name } = input
+
         const queryName: string = name? name : ""
 
         if(!token) {
@@ -95,15 +111,7 @@ export class UserBusiness {
             throw new Error("Usuário não autorizado.")
         }
 
-        const result = await new UserDatabase().getUsers(queryName)
-
-        const users = result.map(user => {
-            return {
-                id: user.id,
-                name: user.name,
-                email: user.email
-            }
-        })
+        const users: IUserOutputDB[] = await new UserDatabase().getUsers(queryName)
 
         return users
     }

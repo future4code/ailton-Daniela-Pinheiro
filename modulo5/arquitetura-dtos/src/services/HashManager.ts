@@ -1,5 +1,10 @@
 import bcrypt from 'bcryptjs'
 
+export interface IHashCompare {
+    plaintext: string,
+    hash: string
+}
+
 export class HashManager {
     public hash = async (plaintext: string) => {
         const rounds = Number(process.env.BCRYPT_SALT_ROUNDS)
@@ -9,7 +14,9 @@ export class HashManager {
         return hash
     }
 
-    public compare = async (plaintext: string, hash: string) => {
+    public compare = async (input: IHashCompare) => {
+        const {plaintext, hash} = input
+        
         return bcrypt.compare(plaintext, hash)
     }
 }
