@@ -36,11 +36,11 @@ export class UserController {
                 password: req.body.password
             }
             
-            // const token: string = await this.userBusiness.signUp(input)
+            const token: string = await this.userBusiness.login(input)
 
             res.status(200).send({
                 message: "Usuário logado com sucesso.",
-                access_token: ""
+                access_token: token
             })
         } catch (error: any) {
             res.status(statusCode).send({ message: error.message })  

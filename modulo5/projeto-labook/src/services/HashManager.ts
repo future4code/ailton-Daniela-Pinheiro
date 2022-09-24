@@ -1,5 +1,10 @@
 import * as bcrypt from "bcryptjs"
 
+export interface IHashCompare {
+    plaintext: string,
+    hash: string
+}
+
 export class HashManager {
     public async generateHash(plaintext: string): Promise<string> {
         const cost: number = Number(process.env.BCRYPT_COST)
@@ -9,7 +14,9 @@ export class HashManager {
         return hash
     }
 
-    public async compareHash(plaintext: string, hash: string): Promise<boolean> {
+    public async compareHash(input: IHashCompare): Promise<boolean> {
+        const { plaintext, hash } = input
+
         const hashCompare: boolean = await bcrypt.compare(plaintext, hash)
 
         return hashCompare

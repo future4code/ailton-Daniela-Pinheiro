@@ -1,7 +1,7 @@
 import { UserDatabase } from "../data/UserDatabase"
 import { ILoginInput, ISignupInput, IUserDB, User, USER_ROLES } from "../models/User"
 import { Authenticator, ITokenPayload } from "../services/Authenticator"
-import { HashManager } from "../services/HashManager"
+import { HashManager, IHashCompare } from "../services/HashManager"
 import { IdGenerator } from "../services/IdGenerator"
 
 export class UserBusiness {
@@ -86,9 +86,32 @@ export class UserBusiness {
             throw new Error("Usuário não encontrado.")
         }
 
+        const user = new User(
+            registeredUser.id,
+            registeredUser.name,
+            registeredUser.email,
+            registeredUser.password,
+            registeredUser.role as USER_ROLES
+        )
 
+        const hashCompare: IHashCompare = {
+            plaintext: password,
+            hash: user.getPassword()
+        }
 
+        const correctCredentials: boolean = await this.hashManager.compareHash(hashCompare)
+    
+        if(!correctCredentials) {
+            throw new Error("Credenciais incorretas.")
+        }
 
-        return "token"
+        const payload: ITokenPayload = {
+            id: user.getId(),
+            role: user.getRole()
+        }
+
+        const token: string = this.authenticator.generateToken(payload)
+
+        return token
     }
 }
