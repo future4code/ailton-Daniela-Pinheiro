@@ -1,3 +1,5 @@
 import { app } from "./app"
+import { userRouter } from "./router/userRouter"
 
-app.get("/")
+app.use("/users", userRouter)
+// app.use("/posts")

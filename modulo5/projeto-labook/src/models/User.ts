@@ -3,6 +3,21 @@ export enum USER_ROLES {
     ADMIN = "ADMIN"
 }
 
+export interface IUserDB {
+    id: string,
+    name: string,
+    email: string,
+    password: string,
+    role: USER_ROLES | string
+}
+
+export interface ISignupInput {
+    name: string,
+    email: string,
+    password: string,
+    role?: string
+}
+
 export class User {
     constructor(
         private id: string,
