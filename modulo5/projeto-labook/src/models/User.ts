@@ -18,6 +18,11 @@ export interface ISignupInput {
     role?: string
 }
 
+export interface ILoginInput {
+    email: string,
+    password: string
+}
+
 export class User {
     constructor(
         private id: string,

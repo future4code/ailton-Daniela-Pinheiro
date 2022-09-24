@@ -1,21 +1,26 @@
 import { BaseDatabase } from "./BaseDatabase"
-import { IUserDB } from "../models/User"
+import { IUserDB, User } from "../models/User"
 
 export class UserDatabase extends BaseDatabase {
     public static TABLE_USERS = "Labook_Users"
 
-    public createUser = async(input: IUserDB) => {
+    public createUser = async(input: User) => {
         await BaseDatabase.connection(UserDatabase.TABLE_USERS)
-            .insert(input)
+            .insert({
+                id: input.getId(),
+                name: input.getName(),
+                email: input.getEmail(),
+                password: input.getPassword(),
+                role: input.getRole()
+            })
     }
 
     public searchUserByEmail = async(email: string): Promise<IUserDB | undefined> => {
-        const result = await BaseDatabase.connection()
+        const result = await BaseDatabase.connection(UserDatabase.TABLE_USERS)
             .select('*')
-            .from(UserDatabase.TABLE_USERS)
             .where({ email })
 
-        if(!result) {
+        if(!result.length) {
             return undefined
         } else {
             const user: IUserDB = {
@@ -25,15 +30,6 @@ export class UserDatabase extends BaseDatabase {
                 password: result[0].password,
                 role: result[0].role
             }
-
-            // ver qual é a melhor saída
-            // const user: User = new User(
-            //     result[0].id,
-            //     result[0].name,
-            //     result[0].email,
-            //     result[0].password,
-            //     result[0].role
-            // )
 
             return user
         }
