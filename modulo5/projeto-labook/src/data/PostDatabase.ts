@@ -18,7 +18,7 @@ export class PostDatabase extends BaseDatabase {
         const result = await BaseDatabase.connection(PostDatabase.TABLE_POSTS)
             .select('*')
 
-        const posts: IPostDB[] = result.map(post => {
+        const posts: IPostDB[] = result && result.map(post => {
             return {
                 id: post.id,
                 content: post.content,
@@ -36,5 +36,29 @@ export class PostDatabase extends BaseDatabase {
             .where({ post_id: postId })
 
         return result[0].likes
+    }
+
+    public searchPostById = async(postId: string): Promise<IPostDB | undefined> => {
+        const result = await BaseDatabase.connection(PostDatabase.TABLE_POSTS)
+            .select('*')
+            .where({ id: postId })
+
+        if(!result.length) {
+            return undefined
+        } else {
+            const post: IPostDB = {
+                id: result[0].id,
+                content: result[0].content,
+                userId: result[0].user_id
+            }
+      
+            return post
+        }
+    }
+
+    public deletePost = async(postId: string) => {
+        await BaseDatabase.connection(PostDatabase.TABLE_POSTS)
+            .delete('*')
+            .where({ id: postId })
     }
 }

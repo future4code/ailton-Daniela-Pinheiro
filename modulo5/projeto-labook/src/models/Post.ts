@@ -3,6 +3,11 @@ export interface ICreatePostInput {
     content: string
 }
 
+export interface IDeletePostInput {
+    token: string,
+    postId: string
+}
+
 export interface IPostDB {
     id: string,
     content: string,
