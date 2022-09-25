@@ -3,12 +3,18 @@ export interface ICreatePostInput {
     content: string
 }
 
+export interface IPostDB {
+    id: string,
+    content: string,
+    userId: string,
+}
+
 export class Post {
     constructor(
         private id: string,
         private content: string,
         private userId: string,
-        private likes: number
+        private likes: number = 0
     ) {}
 
     public getId = (): string => {
@@ -27,7 +33,7 @@ export class Post {
         return this.likes
     }
 
-    // public setLikes = () => {
-    //     this.id += 1
-    // }
+    public setLikes = (likes: number) => {
+        this.likes = likes
+    }
 }

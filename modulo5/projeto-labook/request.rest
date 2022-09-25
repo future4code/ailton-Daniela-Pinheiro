@@ -13,16 +13,21 @@ POST http://localhost:3003/users/login
 Content-Type: application/json
 
 {
-    "email": "dan@mail.com",
-    "password": "123456a"
+    "email": "juju@mail.com",
+    "password": "1234567"
 }
 
 ###
 
 POST http://localhost:3003/posts/create
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdmYWZkYTJmLWE1MjItNDUzNy1hZTM3LTlmMmQ5NzU5OTg2YSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjQwNjQzNzQsImV4cCI6MTY2NDE1MDc3NH0.3v3RoNuroxLsbDfltYCptykh_hyGd9FLM4a5YNUsmlg
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImIxYTJhNDUyLTI4OGItNDc0Yy05MzIxLTdkY2FmYzZjYTUxZCIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjQxMzQ5MTcsImV4cCI6MTY2NDIyMTMxN30.xO98MyoFJYYMssmQfaV3L2vqlOWXI9nPTAtLm7PView
 
 {
-    "content": "First!!!!"
+    "content": "Nem sei o que escrever mais"
 }
+
+###
+
+GET http://localhost:3003/posts
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdmYWZkYTJmLWE1MjItNDUzNy1hZTM3LTlmMmQ5NzU5OTg2YSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjQxMzQxNTAsImV4cCI6MTY2NDIyMDU1MH0.YsAhytZQMTMqBxeYlY-03E_U4MuS-_EbEgynIPxqCgE

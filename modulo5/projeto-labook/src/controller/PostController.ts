@@ -22,4 +22,17 @@ export class PostController {
             res.status(statusCode).send({ message: error.message })  
         }
     }
+
+    public getPosts = async(req: Request, res: Response) => {
+        let statusCode = 400
+        try {
+            const token: string = req.headers.authorization as string
+
+            const posts = await this.postBusiness.getPosts(token)
+
+            res.status(200).send({ posts: posts })
+        } catch (error: any) {
+            res.status(statusCode).send({ message: error.message })  
+        }
+    }
 }

@@ -1,9 +1,7 @@
 import { PostDatabase } from "../data/PostDatabase"
-import { ICreatePostInput } from "../models/Post"
+import { ICreatePostInput, Post } from "../models/Post"
 import { Authenticator } from "../services/Authenticator"
-import { HashManager } from "../services/HashManager"
 import { IdGenerator } from "../services/IdGenerator"
-import { Post } from "../models/Post"
 
 export class PostBusiness {
     constructor(
@@ -37,5 +35,32 @@ export class PostBusiness {
         )
 
         await this.postDatabase.createPost(newPost)
+    }
+
+    public getPosts = async(token: string): Promise<Post[]> => {
+        if(!token) {
+            throw new Error("É necessário passar um token de autorização.")
+        }
+
+        const payload = this.authenticator.getTokenPayload(token)
+
+        if(!payload) {
+            throw new Error("Usuário não autorizado.")
+        }
+
+        const posts = await this.postDatabase.getPosts()
+
+        const allPosts = posts.map(post => {
+            return new Post(post.id, post.content, post.userId)
+        })
+
+        for(let post of allPosts) {
+            const postId: string = post.getId()
+            const likes: number = await this.postDatabase.getLikes(postId) as number
+
+            post.setLikes(likes)
+        }
+
+        return allPosts
     }
 }
