@@ -1,4 +1,4 @@
-import { IPostDB, Post } from "../models/Post"
+import { ILikesInput, IPostDB, Post } from "../models/Post"
 import { BaseDatabase } from "./BaseDatabase"
 
 export class PostDatabase extends BaseDatabase {
@@ -60,5 +60,31 @@ export class PostDatabase extends BaseDatabase {
         await BaseDatabase.connection(PostDatabase.TABLE_POSTS)
             .delete('*')
             .where({ id: postId })
+    }
+
+    public getLikesByUser = async(input: ILikesInput): Promise<boolean> => {
+        const{ userId, postId } = input
+
+        const result = await BaseDatabase.connection(PostDatabase.TABLE_LIKES)
+            .select()
+            .count('id as likes')
+            .where({ post_id: postId, user_id: userId })
+
+        const alreadyLiked: boolean = result[0].likes == 0?
+            false
+            : true
+
+        return alreadyLiked
+    }
+
+    public createLike = async(input: ILikesInput) => {
+        const{ id, userId, postId } = input
+
+        await BaseDatabase.connection(PostDatabase.TABLE_LIKES)
+            .insert({
+                id: id,
+                post_id: postId,
+                user_id: userId
+            })
     }
 }

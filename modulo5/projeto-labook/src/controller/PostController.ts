@@ -50,4 +50,19 @@ export class PostController {
             res.status(statusCode).send({ message: error.message })  
         }
     }
+
+    public likePost = async(req: Request, res: Response) => {
+        let statusCode = 400
+        try {
+            const token: string = req.headers.authorization as string
+            const postId: string = req.params.id
+            
+            const input: IDeletePostInput = { token, postId }
+            await this.postBusiness.likePost(input)
+
+            res.status(200).send({ message: "Post curtido!" })
+        } catch (error: any) {
+            res.status(statusCode).send({ message: error.message })  
+        }
+    }
 }

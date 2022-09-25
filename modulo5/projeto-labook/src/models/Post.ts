@@ -8,6 +8,12 @@ export interface IDeletePostInput {
     postId: string
 }
 
+export interface ILikesInput {
+    id?: string,
+    postId: string,
+    userId: string
+}
+
 export interface IPostDB {
     id: string,
     content: string,
