@@ -1,3 +1,8 @@
+export interface ICreatePostInput {
+    token: string,
+    content: string
+}
+
 export class Post {
     constructor(
         private id: string,
