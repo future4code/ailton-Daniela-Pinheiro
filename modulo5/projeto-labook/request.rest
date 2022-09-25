@@ -38,7 +38,10 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMzNmQyODYyLTdlODYt
 
 ###
 
-POST http://localhost:3003/posts/like/1e198f0b-3ddd-4ccd-9dd7-bff7d2a9866a
+PUT http://localhost:3003/posts/like/1e198f0b-3ddd-4ccd-9dd7-bff7d2a9866a
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMzNmQyODYyLTdlODYtNGMwYS05Y2M5LWJhYTc5YWI3ZWFmYSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2NDEzOTUwMSwiZXhwIjoxNjY0MjI1OTAxfQ.co_yDgs7JlhX4ywFib8ddGVge0O2XwiRmLq08w99U-w
 
+###
 
+PUT http://localhost:3003/posts/dislike/1e198f0b-3ddd-4ccd-9dd7-bff7d2a9866a
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMzNmQyODYyLTdlODYtNGMwYS05Y2M5LWJhYTc5YWI3ZWFmYSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2NDEzOTUwMSwiZXhwIjoxNjY0MjI1OTAxfQ.co_yDgs7JlhX4ywFib8ddGVge0O2XwiRmLq08w99U-w

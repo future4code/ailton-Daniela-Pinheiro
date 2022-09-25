@@ -3,13 +3,18 @@ export interface ICreatePostInput {
     content: string
 }
 
-export interface IDeletePostInput {
+export interface IModifyPostInput {
     token: string,
     postId: string
 }
 
 export interface ILikesInput {
-    id?: string,
+    postId: string,
+    userId: string
+}
+
+export interface IPutLikeInput {
+    id: string,
     postId: string,
     userId: string
 }

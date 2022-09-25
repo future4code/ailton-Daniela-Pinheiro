@@ -1,4 +1,4 @@
-import { ILikesInput, IPostDB, Post } from "../models/Post"
+import { ILikesInput, IPostDB, IPutLikeInput, Post } from "../models/Post"
 import { BaseDatabase } from "./BaseDatabase"
 
 export class PostDatabase extends BaseDatabase {
@@ -31,7 +31,6 @@ export class PostDatabase extends BaseDatabase {
 
     public getLikes = async(postId: string): Promise<number | string> => {
         const result = await BaseDatabase.connection(PostDatabase.TABLE_LIKES)
-            .select()
             .count('id as likes')
             .where({ post_id: postId })
 
@@ -62,22 +61,17 @@ export class PostDatabase extends BaseDatabase {
             .where({ id: postId })
     }
 
-    public getLikesByUser = async(input: ILikesInput): Promise<boolean> => {
+    public getLikesByUser = async(input: ILikesInput): Promise<number | string> => {
         const{ userId, postId } = input
 
         const result = await BaseDatabase.connection(PostDatabase.TABLE_LIKES)
-            .select()
             .count('id as likes')
             .where({ post_id: postId, user_id: userId })
 
-        const alreadyLiked: boolean = result[0].likes == 0?
-            false
-            : true
-
-        return alreadyLiked
+        return result[0].likes
     }
 
-    public createLike = async(input: ILikesInput) => {
+    public createLike = async(input: IPutLikeInput) => {
         const{ id, userId, postId } = input
 
         await BaseDatabase.connection(PostDatabase.TABLE_LIKES)
@@ -86,5 +80,21 @@ export class PostDatabase extends BaseDatabase {
                 post_id: postId,
                 user_id: userId
             })
+    }
+
+    public getLikeId = async(input: ILikesInput): Promise<string> => {
+        const{ userId, postId } = input
+
+        const result = await BaseDatabase.connection(PostDatabase.TABLE_LIKES)
+            .select('id')
+            .where({ post_id: postId, user_id: userId })
+
+        return result[0].id
+    }
+
+    public deleteLike = async(id: string) => {
+        await BaseDatabase.connection(PostDatabase.TABLE_LIKES)
+            .delete('*')
+            .where({ id })
     }
 }

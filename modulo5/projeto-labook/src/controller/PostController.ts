@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 import { PostBusiness } from "../business/PostBusiness"
-import { ICreatePostInput, IDeletePostInput } from "../models/Post"
+import { ICreatePostInput, IModifyPostInput } from "../models/Post"
 
 export class PostController {
     constructor(
@@ -42,7 +42,7 @@ export class PostController {
             const token: string = req.headers.authorization as string
             const postId: string = req.params.id
             
-            const input: IDeletePostInput = { token, postId }
+            const input: IModifyPostInput = { token, postId }
             await this.postBusiness.deletePost(input)
 
             res.status(200).send({ message: "Post deletado." })
@@ -57,10 +57,25 @@ export class PostController {
             const token: string = req.headers.authorization as string
             const postId: string = req.params.id
             
-            const input: IDeletePostInput = { token, postId }
+            const input: IModifyPostInput = { token, postId }
             await this.postBusiness.likePost(input)
 
             res.status(200).send({ message: "Post curtido!" })
+        } catch (error: any) {
+            res.status(statusCode).send({ message: error.message })  
+        }
+    }
+
+    public dislikePost = async(req: Request, res: Response) => {
+        let statusCode = 400
+        try {
+            const token: string = req.headers.authorization as string
+            const postId: string = req.params.id
+            
+            const input: IModifyPostInput = { token, postId }
+            await this.postBusiness.dislikePost(input)
+
+            res.status(200).send({ message: "Post descurtido!" })
         } catch (error: any) {
             res.status(statusCode).send({ message: error.message })  
         }
