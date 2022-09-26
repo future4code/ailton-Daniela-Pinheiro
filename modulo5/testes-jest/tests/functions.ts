@@ -5,3 +5,11 @@ export const isEven = (n: number): boolean => {
         return false
     }
 }
+
+export const toUpperCase = (text: string): string => {
+    return text.toUpperCase()
+}
+
+export const returnArrayOfLetters = (text: string): string[] => {
+    return text.split("")
+}
