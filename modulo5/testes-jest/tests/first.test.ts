@@ -1,5 +1,6 @@
 import {describe, expect, test} from '@jest/globals'
 import { isEven, returnArrayOfLetters, returnRandomNumber, returnStringLength, toNumber, toUpperCase } from './functions'
+import { userList } from './userList'
 
 describe("Testes dos exercícios 0 a 9", () => {
     test("0: Testando a função que verifica se um número é par.", () => {
@@ -20,9 +21,15 @@ describe("Testes dos exercícios 0 a 9", () => {
     test("5: Testando a função que gera um número aleatório entre 1 e 10.", () => {
         expect(returnRandomNumber()).toBeGreaterThanOrEqual(1)
         expect(returnRandomNumber()).toBeLessThanOrEqual(10)
+    }),
+    test("6: Testando se o Astrodev está na lista de usuários", () => {
+        expect(userList).toEqual(
+            expect.arrayContaining([
+                expect.objectContaining({name: "Astrodev"})
+            ]))
     })
-    // test("6: Testando", () => {}),
     // test("7: Testando", () => {}),
     // test("8: Testando", () => {}),
+    // test("9: Testando", () => {}),
 })
 
