@@ -3,7 +3,7 @@ import { PostBusiness } from "../src/business/PostBusiness"
 import { PostDatabaseMock } from "./mocks/PostDatabaseMock"
 import { AuthenticatorMock } from './mocks/AuthenticatorMock'
 import { IdGeneratorMock } from "./mocks/IdGeneratorMock"
-import { ICreatePostInputDTO } from '../src/models/Post'
+import { ICreatePostInputDTO, IGetPostsInputDTO, Post } from '../src/models/Post'
 
 describe("Testando a PostBusiness", () => {
     const postBusiness = new PostBusiness(
@@ -24,6 +24,12 @@ describe("Testando a PostBusiness", () => {
     })
 
     test("Testando get posts: recebe um array de posts", async () => {
+        const input: IGetPostsInputDTO = {
+            token: "token-mock-normal"
+        }
+
+        const response = await postBusiness.getPosts(input)
         
+        expect(response.posts[0]).toBeInstanceOf(Post)
     })
 })
