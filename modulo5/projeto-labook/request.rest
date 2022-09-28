@@ -1,0 +1,47 @@
+POST https://projeto-labook-22.herokuapp.com/users/signup
+Content-Type: application/json
+
+{
+    "name": "Juninho",
+    "email": "juju@mail.com",
+    "password": "1234567"
+}
+
+###
+
+POST https://projeto-labook-22.herokuapp.com/users/login
+Content-Type: application/json
+
+{
+    "email": "danie@mail.com",
+    "password": "1234567"
+}
+
+###
+
+POST https://projeto-labook-22.herokuapp.com/posts/create
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMzNmQyODYyLTdlODYtNGMwYS05Y2M5LWJhYTc5YWI3ZWFmYSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2NDEzOTUwMSwiZXhwIjoxNjY0MjI1OTAxfQ.co_yDgs7JlhX4ywFib8ddGVge0O2XwiRmLq08w99U-w
+
+{
+    "content": "Deletaaaaaaaaa"
+}
+
+###
+
+GET https://projeto-labook-22.herokuapp.com/posts
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdmYWZkYTJmLWE1MjItNDUzNy1hZTM3LTlmMmQ5NzU5OTg2YSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjQxMzQxNTAsImV4cCI6MTY2NDIyMDU1MH0.YsAhytZQMTMqBxeYlY-03E_U4MuS-_EbEgynIPxqCgE
+
+###
+DELETE https://projeto-labook-22.herokuapp.com/posts/5404d571-f91a-470e-8039-7a9f2185b3d2
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMzNmQyODYyLTdlODYtNGMwYS05Y2M5LWJhYTc5YWI3ZWFmYSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2NDEzOTUwMSwiZXhwIjoxNjY0MjI1OTAxfQ.co_yDgs7JlhX4ywFib8ddGVge0O2XwiRmLq08w99U-w
+
+###
+
+PUT https://projeto-labook-22.herokuapp.com/posts/like/1e198f0b-3ddd-4ccd-9dd7-bff7d2a9866a
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMzNmQyODYyLTdlODYtNGMwYS05Y2M5LWJhYTc5YWI3ZWFmYSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2NDEzOTUwMSwiZXhwIjoxNjY0MjI1OTAxfQ.co_yDgs7JlhX4ywFib8ddGVge0O2XwiRmLq08w99U-w
+
+###
+
+PUT https://projeto-labook-22.herokuapp.com/posts/dislike/1e198f0b-3ddd-4ccd-9dd7-bff7d2a9866a
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMzNmQyODYyLTdlODYtNGMwYS05Y2M5LWJhYTc5YWI3ZWFmYSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2NDEzOTUwMSwiZXhwIjoxNjY0MjI1OTAxfQ.co_yDgs7JlhX4ywFib8ddGVge0O2XwiRmLq08w99U-w
