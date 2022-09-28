@@ -85,4 +85,40 @@ describe("Testando os erros da UserBusiness", () => {
         }
     })
 
+    test("Testando erro do método login: 'email' não cadastrado.", async() => {
+        expect.assertions(2)
+
+        try {
+            const input: ILoginInputDTO= {
+                email: "astro@gmail.com",
+                password: "bananinha"
+            }
+            
+            const response = await userBusiness.login(input)
+        } catch (error) {
+            if(error instanceof BaseError) {
+                expect(error.statusCode).toBe(404)
+                expect(error.message).toBe("Email não cadastrado")
+            }
+        }
+    })
+
+    test("Testando erro do método login: senha incorreta.", async() => {
+        expect.assertions(2)
+
+        try {
+            const input: ILoginInputDTO= {
+                email: "astrodev@gmail.com",
+                password: "bananinha123"
+            }
+            
+            const response = await userBusiness.login(input)
+        } catch (error) {
+            if(error instanceof BaseError) {
+                expect(error.statusCode).toBe(401)
+                expect(error.message).toBe("Password incorreto")
+            }
+        }
+    })
+
 })
