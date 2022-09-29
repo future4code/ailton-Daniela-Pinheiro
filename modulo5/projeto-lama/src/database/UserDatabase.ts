@@ -16,6 +16,26 @@ export class UserDatabase extends BaseDatabase {
         return userDB
     }
 
+    public searchUserByEmail = async(email: string): Promise<IUserDB | undefined> => {
+        const result = await BaseDatabase.connection(UserDatabase.TABLE_USERS)
+            .select('*')
+            .where({ email })
+
+        if(!result.length) {
+            return undefined
+        } else {
+            const user: IUserDB = {
+                id: result[0].id,
+                name: result[0].name,
+                email: result[0].email,
+                password: result[0].password,
+                role: result[0].role
+            }
+
+            return user
+        }
+    }
+
     public createUser = async(user: User): Promise<void> => {
         const newUser: IUserDB = this.toUserDBModel(user)
 
