@@ -3,7 +3,7 @@ import { AuthenticationError } from "../errors/AuthenticationError"
 import { AuthorizationError } from "../errors/AuthorizationError"
 import { ConflictError } from "../errors/ConflictError"
 import { ParamsError } from "../errors/ParamsError"
-import { ICreateShowInput, Show } from "../models/Show"
+import { ICreateShowInput, IGetTicketsInput, Show } from "../models/Show"
 import { Authenticator } from "../services/Authenticator"
 import { IdGenerator } from "../services/IdGenerator"
 
@@ -14,19 +14,19 @@ export class ShowBusiness {
         private authenticator: Authenticator
     ) {}
 
-    public stringToDate = (date: string): Date => {
+    // public stringToDate = (date: string): Date => {
 
-        return new Date()
-    }
+    //     return new Date()
+    // }
 
-    public dateToString = (date: Date): string => {
-        const day: string = String(date.getDate()).padStart(2, "0")
-        const month: string = String(Number(date.getMonth()) + 1).padStart(2, "0")
-        const year: string = String(date.getFullYear())
+    // public dateToString = (date: Date): string => {
+    //     const day: string = String(date.getDate()).padStart(2, "0")
+    //     const month: string = String(Number(date.getMonth()) + 1).padStart(2, "0")
+    //     const year: string = String(date.getFullYear())
 
-        const dateString: string = year + "-" + month + "-" + day
-        return dateString
-    }
+    //     const dateString: string = year + "-" + month + "-" + day
+    //     return dateString
+    // }
 
     public createShow = async(input: ICreateShowInput): Promise<string> => {
         const { token, band, startsAt } = input
@@ -83,5 +83,26 @@ export class ShowBusiness {
 
         const message: string = "Show cadastrado com sucesso!"
         return message
+    }
+
+    public getShows = async(): Promise<Show[]> => {
+        const shows = await this.showDatabase.getShows()
+
+        const showsWithTickets: Show[] = shows.map(show => {
+            return new Show(
+                show.id,
+                show.band,
+                show.startsAt
+            )
+        })
+
+        for(let show of showsWithTickets) {
+            const totalTickets: number = 5000
+            const ticketsSold: number = await this.showDatabase.getTickets(show.getId())
+
+            show.setTickets(totalTickets - ticketsSold)
+        }
+
+        return showsWithTickets
     }
 }

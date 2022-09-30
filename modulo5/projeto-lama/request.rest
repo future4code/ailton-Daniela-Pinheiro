@@ -31,3 +31,9 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjllYWY5MDliLTUyNGUt
     "band": "Paramore",
     "startsAt": "12/10/2022"
 }
+
+###
+
+GET http://localhost:3003/shows
+
+###

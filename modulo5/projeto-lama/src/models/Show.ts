@@ -22,7 +22,9 @@ export class Show {
         return this.tickets
     }
 
-    // setters
+    public setTickets = (tickets: number) => {
+        this.tickets = tickets
+    }
 }
 
 export interface IShowDB {
@@ -35,4 +37,9 @@ export interface ICreateShowInput {
     token: string,
     band: string,
     startsAt: string
+}
+
+export interface IGetTicketsInput {
+    showId: string,
+    userId: string
 }
