@@ -6,8 +6,8 @@ POST http://localhost:3003/users/signup
 Content-Type: application/json
 
 {
-    "name": "Dan",
-    "email": "dan@gmail.com",
+    "name": "Fulano",
+    "email": "fulano@gmail.com",
     "password": "1234567"
 }
 
@@ -17,6 +17,17 @@ POST http://localhost:3003/users/login
 Content-Type: application/json
 
 {
-    "email": "dan@gmail.com",
+    "email": "astrodev@gmail.com",
     "password": "1234567"
+}
+
+###
+
+POST http://localhost:3003/shows/create
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjllYWY5MDliLTUyNGUtNGJhYS1hODcyLTVjZGI1MDk0MTcxYSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2NDU1MzkzOCwiZXhwIjoxNjY0NjQwMzM4fQ.cYuAmG-5R_DFBRFugcnM-vqu3iKvSmkH59l0xmcFpJA
+
+{
+    "band": "Paramore",
+    "startsAt": "12/10/2022"
 }
