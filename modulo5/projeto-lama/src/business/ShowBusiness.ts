@@ -4,7 +4,13 @@ import { AuthorizationError } from "../errors/AuthorizationError"
 import { ConflictError } from "../errors/ConflictError"
 import { NotFoundError } from "../errors/NotFoundError"
 import { ParamsError } from "../errors/ParamsError"
-import { IManageTicketInput, ICreateShowInput, ICreateTicketInput, ISearchTicketInput, Show } from "../models/Show"
+import {
+    IManageTicketInput,
+    ICreateShowInput,
+    ICreateTicketInput,
+    ISearchTicketInput,
+    Show
+} from "../models/Show"
 import { Authenticator } from "../services/Authenticator"
 import { IdGenerator } from "../services/IdGenerator"
 
@@ -14,20 +20,6 @@ export class ShowBusiness {
         private idGenerator: IdGenerator,
         private authenticator: Authenticator
     ) {}
-
-    // public stringToDate = (date: string): Date => {
-
-    //     return new Date()
-    // }
-
-    // public dateToString = (date: Date): string => {
-    //     const day: string = String(date.getDate()).padStart(2, "0")
-    //     const month: string = String(Number(date.getMonth()) + 1).padStart(2, "0")
-    //     const year: string = String(date.getFullYear())
-
-    //     const dateString: string = year + "-" + month + "-" + day
-    //     return dateString
-    // }
 
     public createShow = async(input: ICreateShowInput): Promise<string> => {
         const { token, band, startsAt } = input
