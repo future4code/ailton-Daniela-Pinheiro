@@ -1,4 +1,4 @@
-import { ICreateTicketInput, ISearchTicketInput, IShowDB, Show } from "../models/Show"
+import { ICreateTicketInput, ISearchTicketInput, IShowDB, ITicketDB, Show } from "../models/Show"
 import { BaseDatabase } from "./BaseDatabase"
 
 export class ShowDatabase extends BaseDatabase {
@@ -73,20 +73,26 @@ export class ShowDatabase extends BaseDatabase {
         return result[0].tickets as number
     }
 
-    public searchTicketsByUser = async(input: ISearchTicketInput): Promise<boolean> => {
+    public searchTicketsByUser = async(input: ISearchTicketInput): Promise<ITicketDB | undefined> => {
         const { userId, showId } = input
 
         const result = await BaseDatabase.connection(ShowDatabase.TABLE_TICKETS)
-            .count('id as tickets')
+            .select('*')
             .where({
                 user_id: userId,
                 show_id: showId
             })
 
-        if(result[0].tickets > 0) {
-            return true
+        if(!result.length) {
+            return undefined
         } else {
-            return false
+            const ticket: ITicketDB = {
+                id: result[0].id,
+                userId: result[0].user_id,
+                showId: result[0].show_id
+            }
+
+            return ticket
         }
     }
 
@@ -97,5 +103,11 @@ export class ShowDatabase extends BaseDatabase {
                 user_id: ticket.userId,
                 show_id: ticket.showId
             })
+    }
+
+    public deleteTicket = async(id: string): Promise<void> => {
+        await BaseDatabase.connection(ShowDatabase.TABLE_TICKETS)
+            .delete('*')
+            .where({ id })
     }
 }

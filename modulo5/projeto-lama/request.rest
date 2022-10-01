@@ -44,3 +44,9 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA3ZjlhZTc3LTg0NTkt
 
 
 ###
+
+DELETE http://localhost:3003/shows/ace62c00-30c0-480a-9859-d18ed41fe45b/ticket
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA3ZjlhZTc3LTg0NTktNGYyMi1hYzkwLWQxNmViZmVjY2M1MCIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjQ2MzE2NTUsImV4cCI6MTY2NDcxODA1NX0.KwpJBcIif4rZJLjuYOZe_0TxBGQabkeRKSzp1gREV4s
+
+
+###

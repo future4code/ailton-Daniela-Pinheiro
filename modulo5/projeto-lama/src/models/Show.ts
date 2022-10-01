@@ -39,6 +39,12 @@ export interface ICreateShowInput {
     startsAt: string
 }
 
+export interface ITicketDB {
+    id: string,
+    userId: string,
+    showId: string
+}
+
 export interface IManageTicketInput {
     token: string,
     showId: string

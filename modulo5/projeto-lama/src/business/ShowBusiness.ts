@@ -150,7 +150,38 @@ export class ShowBusiness {
         return message
     }
 
-    public deleteTicket = async() => {
+    public deleteTicket = async(input: IManageTicketInput): Promise<string> => {
+        const { token, showId } = input
 
+        if(!token) {
+            throw new AuthenticationError("É necessário passar um token de autorização")
+        }
+
+        const showExists = await this.showDatabase.searchShowById(showId)
+
+        if(!showExists) {
+            throw new NotFoundError("Show não encontrado")
+        }
+
+        const payload = this.authenticator.getTokenPayload(token)
+
+        if(!payload) {
+            throw new AuthenticationError("Token inválido")
+        }
+
+        const userId: string = payload.id
+
+        const inputTicket: ISearchTicketInput = { userId, showId }
+        const userHasTicket = await this.showDatabase.searchTicketsByUser(inputTicket)
+
+        if(!userHasTicket) {
+            throw new NotFoundError("Ingresso não encontrado")
+        }
+
+        const id: string = userHasTicket.id
+        await this.showDatabase.deleteTicket(id)
+
+        const message: string = "Ingresso cancelado com sucesso!"
+        return message
     }
 }

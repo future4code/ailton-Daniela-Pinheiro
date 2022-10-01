@@ -61,9 +61,11 @@ export class ShowController {
             const token: string = req.headers.authorization as string
             const showId: string = req.params.id
 
+            const input: IManageTicketInput = { token, showId }
 
+            const message = await this.showBusiness.deleteTicket(input)
 
-            res.status(200).send("")
+            res.status(200).send({ message })
         } catch (error) {
             if (error instanceof BaseError) {
                 return res.status(error.statusCode).send({ message: error.message })
