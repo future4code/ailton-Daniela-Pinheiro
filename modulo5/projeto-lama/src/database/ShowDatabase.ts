@@ -1,4 +1,4 @@
-import { IShowDB, Show } from "../models/Show"
+import { ICreateTicketInput, ISearchTicketInput, IShowDB, Show } from "../models/Show"
 import { BaseDatabase } from "./BaseDatabase"
 
 export class ShowDatabase extends BaseDatabase {
@@ -9,6 +9,24 @@ export class ShowDatabase extends BaseDatabase {
         const result = await BaseDatabase.connection(ShowDatabase.TABLE_SHOWS)
             .select('*')
             .where({ starts_at: date })
+
+        if(!result.length) {
+            return undefined
+        } else {
+            const show: IShowDB = {
+                id: result[0].id,
+                band: result[0].band,
+                startsAt: result[0].starts_at
+            }
+
+            return show
+        }
+    }
+
+    public searchShowById = async(id: string): Promise<IShowDB | undefined> => {
+        const result = await BaseDatabase.connection(ShowDatabase.TABLE_SHOWS)
+            .select('*')
+            .where({ id })
 
         if(!result.length) {
             return undefined
@@ -53,5 +71,31 @@ export class ShowDatabase extends BaseDatabase {
             .where({ show_id: showId })
 
         return result[0].tickets as number
+    }
+
+    public searchTicketsByUser = async(input: ISearchTicketInput): Promise<boolean> => {
+        const { userId, showId } = input
+
+        const result = await BaseDatabase.connection(ShowDatabase.TABLE_TICKETS)
+            .count('id as tickets')
+            .where({
+                user_id: userId,
+                show_id: showId
+            })
+
+        if(result[0].tickets > 0) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    public createTicket = async(ticket: ICreateTicketInput): Promise<void> => {
+        await BaseDatabase.connection(ShowDatabase.TABLE_TICKETS)
+            .insert({
+                id: ticket.id,
+                user_id: ticket.userId,
+                show_id: ticket.showId
+            })
     }
 }

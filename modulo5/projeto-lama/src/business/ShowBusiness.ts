@@ -2,8 +2,9 @@ import { ShowDatabase } from "../database/ShowDatabase"
 import { AuthenticationError } from "../errors/AuthenticationError"
 import { AuthorizationError } from "../errors/AuthorizationError"
 import { ConflictError } from "../errors/ConflictError"
+import { NotFoundError } from "../errors/NotFoundError"
 import { ParamsError } from "../errors/ParamsError"
-import { ICreateShowInput, IGetTicketsInput, Show } from "../models/Show"
+import { IManageTicketInput, ICreateShowInput, ICreateTicketInput, ISearchTicketInput, Show } from "../models/Show"
 import { Authenticator } from "../services/Authenticator"
 import { IdGenerator } from "../services/IdGenerator"
 
@@ -104,5 +105,52 @@ export class ShowBusiness {
         }
 
         return showsWithTickets
+    }
+
+    public bookTicket = async(input: IManageTicketInput): Promise<string> => {
+        const { token, showId } = input
+
+        if(!token) {
+            throw new AuthenticationError("É necessário passar um token de autorização")
+        }
+
+        const showExists = await this.showDatabase.searchShowById(showId)
+
+        if(!showExists) {
+            throw new NotFoundError("Show não encontrado")
+        }
+
+        const payload = this.authenticator.getTokenPayload(token)
+
+        if(!payload) {
+            throw new AuthenticationError("Token inválido")
+        }
+
+        const ticketsSold: number = await this.showDatabase.getTickets(showId)
+
+        if(ticketsSold >= 5000) {
+            throw new ConflictError("Os ingressos para este show já estão esgotados")
+        }
+
+        const userId: string = payload.id
+
+        const inputTicket: ISearchTicketInput = { userId, showId }
+        const userHasTicket = await this.showDatabase.searchTicketsByUser(inputTicket)
+
+        if(userHasTicket) {
+            throw new ConflictError("Este usuário já possui um ingresso")
+        }
+
+        const id: string = this.idGenerator.generateId()
+
+        const ticket: ICreateTicketInput = { id, userId, showId }
+        await this.showDatabase.createTicket(ticket)
+
+        const message: string = "Ingresso reservado com sucesso!"
+        return message
+    }
+
+    public deleteTicket = async() => {
+
     }
 }

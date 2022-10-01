@@ -1,7 +1,7 @@
 import { Request, Response } from "express"
 import { ShowBusiness } from "../business/ShowBusiness"
 import { BaseError } from "../errors/BaseError"
-import { ICreateShowInput } from "../models/Show"
+import { IManageTicketInput, ICreateShowInput } from "../models/Show"
 
 export class ShowController {
     constructor(
@@ -36,6 +36,39 @@ export class ShowController {
                 return res.status(error.statusCode).send({ message: error.message })
             }
             res.status(500).send({ message: "Erro inesperado ao buscar shows" })
+        }
+    }
+
+    public bookTicket = async(req: Request, res: Response) => {
+        try {
+            const token: string = req.headers.authorization as string
+            const showId: string = req.params.id
+
+            const input: IManageTicketInput = { token, showId }
+            const message = await this.showBusiness.bookTicket(input)
+
+            res.status(200).send({ message })
+        } catch (error) {
+            if (error instanceof BaseError) {
+                return res.status(error.statusCode).send({ message: error.message })
+            }
+            res.status(500).send({ message: "Erro inesperado ao reservar ingresso" })
+        }
+    }
+
+    public deleteTicket = async(req: Request, res: Response) => {
+        try {
+            const token: string = req.headers.authorization as string
+            const showId: string = req.params.id
+
+
+
+            res.status(200).send("")
+        } catch (error) {
+            if (error instanceof BaseError) {
+                return res.status(error.statusCode).send({ message: error.message })
+            }
+            res.status(500).send({ message: "Erro inesperado ao cancelar ingresso" })
         }
     }
 }
