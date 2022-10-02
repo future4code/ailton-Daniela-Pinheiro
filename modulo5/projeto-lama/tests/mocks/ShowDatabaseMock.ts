@@ -1,91 +1,93 @@
 import { ICreateTicketInput, ISearchTicketInput, IShowDB, ITicketDB, Show } from "../../src/models/Show"
 import { BaseDatabase } from "../../src/database/BaseDatabase"
 
-export class ShowDatabase extends BaseDatabase {
+export class ShowDatabaseMock extends BaseDatabase {
     public static TABLE_SHOWS = "Lama_Shows"
     public static TABLE_TICKETS = "Lama_Tickets"
 
     public searchShowByDate = async(date: Date): Promise<IShowDB | undefined> => {
-        const result = await BaseDatabase.connection(ShowDatabase.TABLE_SHOWS)
-            .select('*')
-            .where({ starts_at: date })
+        const mockDate = new Date("12/05/2022")
 
-        if(!result.length) {
-            return undefined
-        } else {
+        if(date.toDateString() == mockDate.toDateString()) {
             const show: IShowDB = {
-                id: result[0].id,
-                band: result[0].band,
-                startsAt: result[0].starts_at
+                id: "001",
+                band: "Mock Band",
+                startsAt: mockDate
             }
 
             return show
+        } else {
+            return undefined
         }
     }
 
     public searchShowById = async(id: string): Promise<IShowDB | undefined> => {
-        const result = await BaseDatabase.connection(ShowDatabase.TABLE_SHOWS)
-            .select('*')
-            .where({ id })
+        const mockDate = new Date("12/05/2022")
+        const mockDate2 = new Date("12/10/2022")
 
-        if(!result.length) {
-            return undefined
-        } else {
-            const show: IShowDB = {
-                id: result[0].id,
-                band: result[0].band,
-                startsAt: result[0].starts_at
-            }
-
-            return show
+        switch(id) {
+            case "001":
+                const show1: IShowDB = {
+                    id: "001",
+                    band: "Mock Band",
+                    startsAt: mockDate
+                }
+                return show1
+            case "002":
+                const show2: IShowDB = {
+                    id: "002",
+                    band: "Mock Band Again",
+                    startsAt: mockDate2
+                }
+                return show2
+            default:
+                return undefined
         }
     }
 
     public createShow = async(show: Show): Promise<void> => {}
 
     public getShows = async(): Promise<IShowDB[]> => {
-        const result = await BaseDatabase.connection(ShowDatabase.TABLE_SHOWS)
-            .select('*')
+        const mockDate = new Date("12/05/2022")
+        const mockDate2 = new Date("12/10/2022")
 
-        const shows: IShowDB[] = result.map(show => {
-            return {
-                id: show.id,
-                band: show.band,
-                startsAt: show.starts_at
+        const shows: IShowDB[] = [
+            {
+                id: "001",
+                band: "Mock Band",
+                startsAt: mockDate
+            },
+            {
+                id: "002",
+                band: "Mock Band Again",
+                startsAt: mockDate2
             }
-        })
+        ]
 
         return shows
     }
 
     public getTickets = async(showId: string): Promise<number> => {
-        const result = await BaseDatabase.connection(ShowDatabase.TABLE_TICKETS)
-            .count('id as tickets')
-            .where({ show_id: showId })
-
-        return result[0].tickets as number
+        if(showId === "001") {
+            return 5000
+        } else {
+            return 0
+        }
     }
 
     public searchTicketsByUser = async(input: ISearchTicketInput): Promise<ITicketDB | undefined> => {
-        const { userId, showId } = input
+        const { showId } = input
 
-        const result = await BaseDatabase.connection(ShowDatabase.TABLE_TICKETS)
-            .select('*')
-            .where({
-                user_id: userId,
-                show_id: showId
-            })
-
-        if(!result.length) {
-            return undefined
-        } else {
+        if (showId === "001") {
             const ticket: ITicketDB = {
-                id: result[0].id,
-                userId: result[0].user_id,
-                showId: result[0].show_id
+                id: "001",
+                showId: "001",
+                userId: "id-mock"
             }
 
             return ticket
+        } else {
+            return undefined
         }
     }
 

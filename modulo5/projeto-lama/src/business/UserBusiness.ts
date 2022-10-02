@@ -83,7 +83,7 @@ export class UserBusiness {
         const { email, password } = input
 
         if(!email || !password) {
-            throw new ParamsError("Os parâmetros 'name', 'email' e 'password' são obrigatórios")
+            throw new ParamsError("Os parâmetros 'email' e 'password' são obrigatórios")
         }
 
         if (typeof email !== "string") {
