@@ -1,3 +1,10 @@
+export interface IPetDB {
+    id: string,
+    name: string,
+    breed: string,
+    age: number
+}
+
 export class Pet {
     constructor(
         private id: string,
