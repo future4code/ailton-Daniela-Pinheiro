@@ -11,6 +11,42 @@ export class DogWalkingBusiness {
         public idGenerator: IdGenerator
     ) {}
 
+    public index = async(): Promise<DogWalking[]> => {
+        const result = await this.dogWalkingDatabase.getAllWalks()
+
+        const walks: DogWalking[] = []
+
+        for(let walk of result) {
+            const petsDB = await this.dogWalkingDatabase.getPetsForWalk(walk.id)
+
+            const pets = petsDB.map(pet => {
+                return new Pet(
+                    pet.id,
+                    pet.name,
+                    pet.breed,
+                    pet.age
+                )
+            })
+            
+            const dogWalking = new DogWalking(
+                walk.id,
+                walk.status,
+                walk.date,
+                walk.price,
+                walk.duration,
+                walk.latitude,
+                walk.longitude,
+                pets,
+                walk.startTime,
+                walk.finishTime
+            )
+
+            walks.push(dogWalking)
+        }
+
+        return walks
+    }
+
     public calculatePrice = (duration: number, pets: string[]): number => {
         switch(duration) {
             case 30:
@@ -113,7 +149,7 @@ export class DogWalkingBusiness {
 
         for(let petId of pets) {
             const id = this.idGenerator.generate()
-            
+
             const relation: IPetWalkRelationInput = {
                 id,
                 petId,
@@ -124,6 +160,13 @@ export class DogWalkingBusiness {
         }
 
         const message: string = "Passeio agendado com sucesso"
+        return message
+    }
+
+    public startWalk = async(id: string): Promise<string> => {
+
+
+        const message: string = "Passeio iniciado"
         return message
     }
 }

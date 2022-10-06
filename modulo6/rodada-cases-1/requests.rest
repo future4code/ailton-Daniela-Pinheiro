@@ -2,6 +2,10 @@ GET http://localhost:3003/pets
 
 ###
 
+GET http://localhost:3003/dog_walking
+
+###
+
 POST http://localhost:3003/dog_walking/create
 Content-Type: application/json
 
@@ -16,5 +20,9 @@ Content-Type: application/json
         "18b5ab95-6194-46ec-ba6d-5f263a340f29"
     ]
 }
+
+###
+
+PUT http://localhost:3003/dog_walking/start_walk/id
 
 ###

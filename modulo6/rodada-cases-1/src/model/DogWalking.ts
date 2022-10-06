@@ -10,7 +10,7 @@ export class DogWalking {
     constructor(
         private id: string,
         private status: STATUS = STATUS.NOT_STARTED,
-        private date: Date,
+        private date: Date | string,
         private price: number,
         private duration: number,
         private latitude: number,
@@ -28,7 +28,7 @@ export class DogWalking {
         return this.status
     }
 
-    public getDate = (): Date => {
+    public getDate = (): Date | string => {
         return this.date
     }
 
@@ -63,7 +63,7 @@ export class DogWalking {
 
 export interface IDogWalkingDB {
     id: string,
-    status: STATUS | string,
+    status: STATUS,
     date: Date,
     price: number,
     duration: number,

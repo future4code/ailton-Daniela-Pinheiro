@@ -4,7 +4,7 @@ import { DogWalkingController } from "../controller/DogWalkingController"
 import { DogWalkingDatabase } from "../database/DogWalkingDatabase"
 import { IdGenerator } from "../services/IdGenerator"
 
-export const DogWalkingRouter = Router()
+export const dogWalkingRouter = Router()
 
 const dogWalkingController = new DogWalkingController(
     new DogWalkingBusiness(
@@ -13,5 +13,8 @@ const dogWalkingController = new DogWalkingController(
     )
 )
 
-DogWalkingRouter.get("/", dogWalkingController.index)
-DogWalkingRouter.post("/create", dogWalkingController.create)
+dogWalkingRouter.get("/", dogWalkingController.index)
+// dogWalkingRouter.get("/show/:id", dogWalkingController.index)
+dogWalkingRouter.post("/create", dogWalkingController.create)
+dogWalkingRouter.put("/start_walk/:id", dogWalkingController.startWalk)
+// dogWalkingRouter.put("/finish_walk/:id", dogWalkingController.startWalk)

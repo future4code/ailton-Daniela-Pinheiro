@@ -12,6 +12,9 @@ export class DogWalkingController {
         try {
             // filtragem e paginação
             
+            const walks = await this.dogWalkingBusiness.index()
+            
+            res.status(200).send({ walks })
         } catch (error) {
             if (error instanceof BaseError) {
                 return res.status(error.statusCode).send({ message: error.message })
@@ -39,6 +42,21 @@ export class DogWalkingController {
                 return res.status(error.statusCode).send({ message: error.message })
             }
             res.status(500).send({ message: "Erro inesperado ao criar passeio" })
+        }
+    }
+
+    public startWalk = async(req: Request, res: Response) => {
+        try {
+            const walkId: string = req.params.id
+
+            const message = await this.dogWalkingBusiness.startWalk(walkId)
+            
+            res.status(200).send({ message })
+        } catch (error) {
+            if (error instanceof BaseError) {
+                return res.status(error.statusCode).send({ message: error.message })
+            }
+            res.status(500).send({ message: "Erro inesperado ao mudar status" })
         }
     }
 }

@@ -1,6 +1,6 @@
 import { app } from "./app"
-import { DogWalkingRouter } from "./router/dogWalkingRouter"
+import { dogWalkingRouter } from "./router/dogWalkingRouter"
 import { petRouter } from "./router/petRouter"
 
-app.use("/dog_walking", DogWalkingRouter)
+app.use("/dog_walking", dogWalkingRouter)
 app.use("/pets", petRouter)
