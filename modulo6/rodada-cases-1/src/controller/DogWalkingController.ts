@@ -47,9 +47,9 @@ export class DogWalkingController {
 
     public startWalk = async(req: Request, res: Response) => {
         try {
-            const walkId: string = req.params.id
+            const id: string = req.params.id
 
-            const message = await this.dogWalkingBusiness.startWalk(walkId)
+            const message = await this.dogWalkingBusiness.startWalk(id)
             
             res.status(200).send({ message })
         } catch (error) {

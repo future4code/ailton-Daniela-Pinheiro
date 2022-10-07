@@ -87,3 +87,8 @@ export interface IPetWalkRelationInput {
     petId: string,
     walkId: string
 }
+
+export interface IChangeStatusInput {
+    status: STATUS,
+    id: string
+}

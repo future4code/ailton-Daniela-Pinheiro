@@ -1,4 +1,4 @@
-import { DogWalking, IDogWalkingDB, IPetWalkRelationInput, STATUS } from "../model/DogWalking"
+import { DogWalking, IChangeStatusInput, IDogWalkingDB, IPetWalkRelationInput, STATUS } from "../model/DogWalking"
 import { IPetDB } from "../model/Pet"
 import { BaseDatabase } from "./BaseDatabase"
 
@@ -14,6 +14,15 @@ export class DogWalkingDatabase extends BaseDatabase {
         return result
     }
     
+    public getPetsForWalk = async(walkId: string): Promise<IPetDB[]> => {
+        const result = await BaseDatabase.connection(`${DogWalkingDatabase.TABLE_PETS} as p`)
+        .join(`${DogWalkingDatabase.TABLE_WALKS} as w`, 'w.pet_id', 'p.id')
+        .select('p.id', 'p.name', 'p.breed', 'p.age')
+        .where({ 'w.walk_id': `${walkId}` })
+        
+        return result
+    }
+    
     public getPetById = async(id: string): Promise<IPetDB> => {
         const result = await BaseDatabase.connection(DogWalkingDatabase.TABLE_PETS)
         .select('*')
@@ -21,16 +30,7 @@ export class DogWalkingDatabase extends BaseDatabase {
         
         return result[0]
     }
-
-    public getPetsForWalk = async(walkId: string): Promise<IPetDB[]> => {
-        const result = await BaseDatabase.connection(`${DogWalkingDatabase.TABLE_PETS} as p`)
-            .join(`${DogWalkingDatabase.TABLE_WALKS} as w`, 'w.pet_id', 'p.id')
-            .select('p.id', 'p.name', 'p.breed', 'p.age')
-            .where({ 'w.walk_id': `${walkId}` })
-
-        return result
-    }
-
+    
     public getDuration = async(startTime: string, finishTime: string): Promise<number | undefined> => {
         const result = await BaseDatabase.connection.raw(
             `SELECT TIMEDIFF('${startTime}', '${finishTime}') AS duration`
@@ -78,11 +78,11 @@ export class DogWalkingDatabase extends BaseDatabase {
         return result[0]
     }
 
-    public changeStatus = async(newStatus: STATUS, id: string) => {
-        console.log(newStatus)
-        // await BaseDatabase.connection(DogWalkingDatabase.TABLE_DOG_WALKING)
-        //     .select('*')
-        //     .where({ id })
-            // update status: newStatus
+    public changeStatus = async(input: IChangeStatusInput) => {
+        const { status, id } = input
+
+        await BaseDatabase.connection(DogWalkingDatabase.TABLE_DOG_WALKING)
+            .update({ status })
+            .where({ id })
     }
 }

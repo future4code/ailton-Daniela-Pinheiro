@@ -23,6 +23,6 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:3003/dog_walking/start_walk/id
+PUT http://localhost:3003/dog_walking/start_walk/878e8c66-2876-4502-89eb-54e562b8e99b
 
 ###

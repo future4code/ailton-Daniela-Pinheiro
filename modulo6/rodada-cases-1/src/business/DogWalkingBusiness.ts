@@ -1,7 +1,7 @@
 import { DogWalkingDatabase } from "../database/DogWalkingDatabase"
 import { NotFoundError } from "../errors/NotFoundError"
 import { ParamsError } from "../errors/ParamsError"
-import { DogWalking, IDogWalkingInput, IPetWalkRelationInput, STATUS } from "../model/DogWalking"
+import { DogWalking, IChangeStatusInput, IDogWalkingInput, IPetWalkRelationInput, STATUS } from "../model/DogWalking"
 import { Pet } from "../model/Pet"
 import { IdGenerator } from "../services/IdGenerator"
 
@@ -164,7 +164,18 @@ export class DogWalkingBusiness {
     }
 
     public startWalk = async(id: string): Promise<string> => {
+        const walkExists = await this.dogWalkingDatabase.getWalkById(id)
 
+        if(!walkExists) {
+            throw new NotFoundError("Passeio não encontrado")
+        }
+
+        const input: IChangeStatusInput = {
+            status: STATUS.STARTED,
+            id: id
+        }
+
+        await this.dogWalkingDatabase.changeStatus(input)
 
         const message: string = "Passeio iniciado"
         return message
