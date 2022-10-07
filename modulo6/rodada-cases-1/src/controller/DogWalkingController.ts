@@ -56,7 +56,22 @@ export class DogWalkingController {
             if (error instanceof BaseError) {
                 return res.status(error.statusCode).send({ message: error.message })
             }
-            res.status(500).send({ message: "Erro inesperado ao mudar status" })
+            res.status(500).send({ message: "Erro inesperado ao iniciar passeio" })
+        }
+    }
+
+    public finishWalk = async(req: Request, res: Response) => {
+        try {
+            const id: string = req.params.id
+
+            const message = await this.dogWalkingBusiness.finishWalk(id)
+            
+            res.status(200).send({ message })
+        } catch (error) {
+            if (error instanceof BaseError) {
+                return res.status(error.statusCode).send({ message: error.message })
+            }
+            res.status(500).send({ message: "Erro inesperado ao encerrar passeio" })
         }
     }
 }

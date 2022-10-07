@@ -180,4 +180,22 @@ export class DogWalkingBusiness {
         const message: string = "Passeio iniciado"
         return message
     }
+
+    public finishWalk = async(id: string): Promise<string> => {
+        const walkExists = await this.dogWalkingDatabase.getWalkById(id)
+
+        if(!walkExists) {
+            throw new NotFoundError("Passeio não encontrado")
+        }
+
+        const input: IChangeStatusInput = {
+            status: STATUS.FINISHED,
+            id: id
+        }
+
+        await this.dogWalkingDatabase.changeStatus(input)
+
+        const message: string = "Passeio encerrado"
+        return message
+    }
 }
