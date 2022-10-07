@@ -13,6 +13,10 @@ export class DogWalkingBusiness {
     ) {}
 
     public index = async(): Promise<DogWalking[]> => {
+
+        // filtragem e paginação
+        // Apenas os próximos passeios a partir de hoje ou todos
+
         const result = await this.dogWalkingDatabase.getAllWalks()
 
         const walks: DogWalking[] = []
@@ -29,6 +33,7 @@ export class DogWalkingBusiness {
                 )
             })
             
+            // arrumar o display de data > string
             const dogWalking = new DogWalking(
                 walk.id,
                 walk.status,
@@ -103,8 +108,17 @@ export class DogWalkingBusiness {
             throw new ParamsError("Parâmetro 'longitude' inválido: deve ser um número")
         }
 
-        // verifica o formato de data mm/dd/aaaa
-        // verifica o formato das horas hh:mm
+        if(!date.match(/(0\d{1}|1[0-2])\/([0-2]\d{1}|3[0-1])\/(19|20)\d{2}/)) {
+            throw new ParamsError("Parâmetro 'date' inválido: deve estar no formato mm/dd/aaaa")   
+        }
+
+        if(!startTime.match(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/)) {
+            throw new ParamsError("Parâmetro 'startTime' inválido: deve estar no formato hh:mm")
+        }
+        
+        if(!finishTime.match(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/)) {
+            throw new ParamsError("Parâmetro 'finishTime' inválido: deve estar no formato hh:mm")
+        }
 
         const duration = await this.dogWalkingDatabase.getDuration(startTime, finishTime)
         if(!duration) {

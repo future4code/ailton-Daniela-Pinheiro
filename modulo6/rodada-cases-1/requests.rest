@@ -10,23 +10,24 @@ POST http://localhost:3003/dog_walking/create
 Content-Type: application/json
 
 {
-    "date": "12/10/2022",
-    "latitude": 90,
-    "longitude": -22,
-    "startTime": "12:00",
-    "finishTime": "13:00",
+    "date": "12/07/2022",
+    "latitude": 40,
+    "longitude": 120,
+    "startTime": "11:30",
+    "finishTime": "12:00",
     "pets": [
-        "91950e5f-f4e0-434f-b113-3c3fcc29ca8b",
+        "3e2fb2b5-4871-4ec3-ad6d-1e801f2c380a",
+        "91b96e5e-88df-4333-8139-69c0f627989e",
         "18b5ab95-6194-46ec-ba6d-5f263a340f29"
     ]
 }
 
 ###
 
-PUT http://localhost:3003/dog_walking/start_walk/878e8c66-2876-4502-89eb-54e562b8e99b
+PUT http://localhost:3003/dog_walking/start_walk/2aa2ef83-bd3e-43dc-bf0e-cd88da2ed306
 
 ###
 
-PUT http://localhost:3003/dog_walking/finish_walk/878e8c66-2876-4502-89eb-54e562b8e99b
+PUT http://localhost:3003/dog_walking/finish_walk/2aa2ef83-bd3e-43dc-bf0e-cd88da2ed306
 
 ###

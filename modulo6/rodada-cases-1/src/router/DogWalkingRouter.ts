@@ -14,7 +14,7 @@ const dogWalkingController = new DogWalkingController(
 )
 
 dogWalkingRouter.get("/", dogWalkingController.index)
-// dogWalkingRouter.get("/show/:id", dogWalkingController.index)
+dogWalkingRouter.get("/show/:id", dogWalkingController.show)
 dogWalkingRouter.post("/create", dogWalkingController.create)
 dogWalkingRouter.put("/start_walk/:id", dogWalkingController.startWalk)
 dogWalkingRouter.put("/finish_walk/:id", dogWalkingController.finishWalk)

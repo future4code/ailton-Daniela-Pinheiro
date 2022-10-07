@@ -12,10 +12,26 @@ export class DogWalkingController {
         try {
             // filtragem e paginação
             // Apenas os próximos passeios a partir de hoje ou todos
+            // const date = req.query
             
             const walks = await this.dogWalkingBusiness.index()
             
             res.status(200).send({ walks })
+        } catch (error) {
+            if (error instanceof BaseError) {
+                return res.status(error.statusCode).send({ message: error.message })
+            }
+            res.status(500).send({ message: "Erro inesperado" })
+        }
+    }
+
+    public show = async(req: Request, res: Response) => {
+        try {
+            const id: string = req.params.id
+
+
+            
+            res.status(200).send({ walk: {} })
         } catch (error) {
             if (error instanceof BaseError) {
                 return res.status(error.statusCode).send({ message: error.message })
