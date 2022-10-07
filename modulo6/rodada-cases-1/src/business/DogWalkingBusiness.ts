@@ -1,4 +1,5 @@
 import { DogWalkingDatabase } from "../database/DogWalkingDatabase"
+import { ConflictError } from "../errors/ConflictError"
 import { NotFoundError } from "../errors/NotFoundError"
 import { ParamsError } from "../errors/ParamsError"
 import { DogWalking, IChangeStatusInput, IDogWalkingInput, IPetWalkRelationInput, STATUS } from "../model/DogWalking"
@@ -170,6 +171,14 @@ export class DogWalkingBusiness {
             throw new NotFoundError("Passeio não encontrado")
         }
 
+        if(walkExists.status === STATUS.STARTED) {
+            throw new ConflictError("Este passeio ja foi iniciado")
+        }
+
+        if(walkExists.status === STATUS.FINISHED) {
+            throw new ConflictError("Este passeio já foi encerrado")
+        }
+
         const input: IChangeStatusInput = {
             status: STATUS.STARTED,
             id: id
@@ -186,6 +195,14 @@ export class DogWalkingBusiness {
 
         if(!walkExists) {
             throw new NotFoundError("Passeio não encontrado")
+        }
+
+        if(walkExists.status === STATUS.NOT_STARTED) {
+            throw new ConflictError("Só é possível encerrar um passeio que já foi iniciado")
+        }
+
+        if(walkExists.status === STATUS.FINISHED) {
+            throw new ConflictError("Este passeio já foi encerrado")
         }
 
         const input: IChangeStatusInput = {

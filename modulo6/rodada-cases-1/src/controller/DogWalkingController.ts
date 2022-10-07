@@ -11,6 +11,7 @@ export class DogWalkingController {
     public index = async(req: Request, res: Response) => {
         try {
             // filtragem e paginação
+            // Apenas os próximos passeios a partir de hoje ou todos
             
             const walks = await this.dogWalkingBusiness.index()
             
