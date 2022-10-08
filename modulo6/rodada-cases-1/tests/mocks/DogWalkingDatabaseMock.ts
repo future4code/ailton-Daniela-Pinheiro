@@ -18,7 +18,7 @@ export class DogWalkingDatabaseMock extends BaseDatabase {
             const result: IDogWalkingDB[] = [
                 {
                     id: "02",
-                    status: STATUS.NOT_STARTED,
+                    status: STATUS.STARTED,
                     date: new Date("10/20/2022"),
                     price: 35,
                     duration: 60,
@@ -56,7 +56,7 @@ export class DogWalkingDatabaseMock extends BaseDatabase {
                 },
                 {
                     id: "02",
-                    status: STATUS.NOT_STARTED,
+                    status: STATUS.STARTED,
                     date: new Date("10/20/2022"),
                     price: 35,
                     duration: 60,
@@ -126,22 +126,51 @@ export class DogWalkingDatabaseMock extends BaseDatabase {
     }
     
     public getWalkById = async(id: string): Promise<IDogWalkingDB | undefined> => {
-        if(id === "01") {
-            const result: IDogWalkingDB = {
-                id: "01",
-                status: STATUS.FINISHED,
-                date: new Date("10/04/2022"),
-                price: 25,
-                duration: 30,
-                latitude: 20,
-                longitude: -100,
-                startTime: "12:30",
-                finishTime: "13:00"
-            }
+        switch (id) {
+            case "01":
+                const walk1: IDogWalkingDB = {
+                    id: "01",
+                    status: STATUS.FINISHED,
+                    date: new Date("10/04/2022"),
+                    price: 25,
+                    duration: 30,
+                    latitude: 20,
+                    longitude: -100,
+                    startTime: "12:30",
+                    finishTime: "13:00"
+                }
+        
+                return walk1
+            case "02":
+                const walk2: IDogWalkingDB = {
+                    id: "02",
+                    status: STATUS.STARTED,
+                    date: new Date("10/20/2022"),
+                    price: 35,
+                    duration: 60,
+                    latitude: 84,
+                    longitude: 40,
+                    startTime: "17:30",
+                    finishTime: "18:30"
+                }
 
-            return result
-        } else {
-            return undefined
+                return walk2
+            case "03":
+                const walk3: IDogWalkingDB = {
+                    id: "03",
+                    status: STATUS.NOT_STARTED,
+                    date: new Date("10/31/2022"),
+                    price: 55,
+                    duration: 30,
+                    latitude: 20,
+                    longitude: -100,
+                    startTime: "09:30",
+                    finishTime: "10:00"
+                }
+
+                return walk3
+            default:
+                return undefined
         }
     }
 
