@@ -94,11 +94,144 @@ describe("Testando a DogWalkingBusiness", () => {
         expect(message).toBe("Passeio agendado com sucesso")
     })
 
+    test("Testando o método createWalk: deve retornar uma mensagem de erro de parâmetros faltando", async() => {
+        expect.assertions(2)
+
+        try {
+            const input: IDogWalkingInput = {
+                date: "",
+                latitude: 33,
+                longitude: 102,
+                startTime: "12:00",
+                finishTime: "13:00",
+                pets: [
+                    "01",
+                    "02"
+                ]
+            }
+            const message = await dogWalkingBusiness.createWalk(input)
+        } catch (error) {
+            if(error instanceof BaseError) {
+                expect(error.message).toBe("Todas as informações são obrigatórias")
+                expect(error.statusCode).toBe(400)
+            }
+        }
+    })
+
+    test("Testando o método createWalk: deve retornar uma mensagem de erro de data inválida", async() => {
+        expect.assertions(2)
+
+        try {
+            const input: IDogWalkingInput = {
+                date: "20/1/2022",
+                latitude: 33,
+                longitude: 102,
+                startTime: "12:00",
+                finishTime: "13:00",
+                pets: [
+                    "01",
+                    "02"
+                ]
+            }
+            const message = await dogWalkingBusiness.createWalk(input)
+        } catch (error) {
+            if(error instanceof BaseError) {
+                expect(error.message).toBe("Parâmetro 'date' inválido: deve estar no formato mm/dd/aaaa")
+                expect(error.statusCode).toBe(400)
+            }
+        }
+    })
+
+    test("Testando o método createWalk: deve retornar uma mensagem de erro de hora inválida", async() => {
+        expect.assertions(2)
+
+        try {
+            const input: IDogWalkingInput = {
+                date: "11/01/2022",
+                latitude: 33,
+                longitude: 102,
+                startTime: "2400",
+                finishTime: "12:00",
+                pets: [
+                    "01",
+                    "02"
+                ]
+            }
+            const message = await dogWalkingBusiness.createWalk(input)
+        } catch (error) {
+            if(error instanceof BaseError) {
+                expect(error.message).toBe("Parâmetro 'startTime' inválido: deve estar no formato hh:mm")
+                expect(error.statusCode).toBe(400)
+            }
+        }
+    })
+
+    test("Testando o método createWalk: deve retornar uma mensagem de erro de duração do passeio inválida", async() => {
+        expect.assertions(2)
+
+        try {
+            const input: IDogWalkingInput = {
+                date: "11/01/2022",
+                latitude: 33,
+                longitude: 102,
+                startTime: "14:00",
+                finishTime: "23:10",
+                pets: [
+                    "01",
+                    "02"
+                ]
+            }
+            const message = await dogWalkingBusiness.createWalk(input)
+        } catch (error) {
+            if(error instanceof BaseError) {
+                expect(error.message).toBe("Duração do passeio inválida: dever ser ou 30 minutos ou 1 hora")
+                expect(error.statusCode).toBe(400)
+            }
+        }
+    })
+
+    test("Testando o método createWalk: deve retornar uma mensagem de erro de pet não encontrado", async() => {
+        expect.assertions(2)
+
+        try {
+            const input: IDogWalkingInput = {
+                date: "11/01/2022",
+                latitude: 33,
+                longitude: 102,
+                startTime: "12:00",
+                finishTime: "13:00",
+                pets: [
+                    "10",
+                ]
+            }
+            const message = await dogWalkingBusiness.createWalk(input)
+        } catch (error) {
+            if(error instanceof BaseError) {
+                expect(error.message).toBe("Pet não encontrado")
+                expect(error.statusCode).toBe(404)
+            }
+        }
+    })
+
     test("Testando o método startWalk: deve retornar uma mensagem de sucesso", async() => {
         const id = "03"
         const message = await dogWalkingBusiness.startWalk(id)
 
         expect(message).toBe("Passeio iniciado")
+    })
+
+    test("Testando o método startWalk: deve retornar uma mensagem de erro de passeio não encontrado", async() => {
+        expect.assertions(2)
+
+        try {
+            const id = "05"
+            const message = await dogWalkingBusiness.startWalk(id)
+        } catch (error) {
+            if(error instanceof BaseError) {
+                expect(error.message).toBe("Passeio não encontrado")
+                expect(error.statusCode).toBe(404)
+            }
+        }
     })
 
     test("Testando o método startWalk: deve retornar uma mensagem de erro de passeio já encerrado", async() => {
