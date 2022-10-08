@@ -18,11 +18,11 @@ POST http://localhost:3003/dog_walking/create
 Content-Type: application/json
 
 {
-    "date": "10/07/2022",
+    "date": "11/25/2022",
     "latitude": 10,
     "longitude": 82,
-    "startTime": "20:30",
-    "finishTime": "21:30",
+    "startTime": "16:30",
+    "finishTime": "17:30",
     "pets": [
         "3e2fb2b5-4871-4ec3-ad6d-1e801f2c380a",
         "18b5ab95-6194-46ec-ba6d-5f263a340f29"

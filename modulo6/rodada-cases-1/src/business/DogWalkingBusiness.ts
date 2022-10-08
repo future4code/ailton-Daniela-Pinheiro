@@ -2,7 +2,13 @@ import { DogWalkingDatabase } from "../database/DogWalkingDatabase"
 import { ConflictError } from "../errors/ConflictError"
 import { NotFoundError } from "../errors/NotFoundError"
 import { ParamsError } from "../errors/ParamsError"
-import { DogWalking, IChangeStatusInput, IDogWalkingInput, IPetWalkRelationInput, STATUS } from "../model/DogWalking"
+import {
+    DogWalking,
+    IChangeStatusInput,
+    IDogWalkingInput,
+    IPetWalkRelationInput,
+    STATUS
+} from "../model/DogWalking"
 import { Pet } from "../model/Pet"
 import { IdGenerator } from "../services/IdGenerator"
 

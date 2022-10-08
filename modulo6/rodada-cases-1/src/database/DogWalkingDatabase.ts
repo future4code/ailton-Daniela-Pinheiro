@@ -1,4 +1,9 @@
-import { DogWalking, IChangeStatusInput, IDogWalkingDB, IPetWalkRelationInput, STATUS } from "../model/DogWalking"
+import {
+    DogWalking,
+    IChangeStatusInput,
+    IDogWalkingDB,
+    IPetWalkRelationInput
+} from "../model/DogWalking"
 import { IPetDB } from "../model/Pet"
 import { BaseDatabase } from "./BaseDatabase"
 
@@ -35,20 +40,28 @@ export class DogWalkingDatabase extends BaseDatabase {
         return result
     }
     
-    public getWalkById = async(id: string): Promise<IDogWalkingDB> => {
+    public getWalkById = async(id: string): Promise<IDogWalkingDB | undefined> => {
         const result = await BaseDatabase.connection(DogWalkingDatabase.TABLE_DOG_WALKING)
             .select('*')
             .where({ id })
 
-        return result[0]
+        if(!result.length) {
+            return undefined
+        } else {
+            return result[0]
+        }
     }
-    
-    public getPetById = async(id: string): Promise<IPetDB> => {
+
+    public getPetById = async(id: string): Promise<IPetDB | undefined> => {
         const result = await BaseDatabase.connection(DogWalkingDatabase.TABLE_PETS)
         .select('*')
         .where({ id })
         
-        return result[0]
+        if(!result.length) {
+            return undefined
+        } else {
+            return result[0]
+        }
     }
     
     public getDuration = async(startTime: string, finishTime: string): Promise<number | undefined> => {

@@ -4,8 +4,7 @@ import { IdGenerator } from "../services/IdGenerator"
 
 export class PetBusiness {
     constructor(
-        public petDatabase: PetDatabase,
-        public idGenerator: IdGenerator
+        public petDatabase: PetDatabase
     ) {}
 
     public getPets = async(): Promise<Pet[]> => {
