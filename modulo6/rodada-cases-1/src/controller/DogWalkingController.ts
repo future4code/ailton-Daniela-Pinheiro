@@ -12,9 +12,9 @@ export class DogWalkingController {
         try {
             // filtragem e paginação
             // Apenas os próximos passeios a partir de hoje ou todos
-            // const date = req.query
+            const filter: string = req.query.filter as string
             
-            const walks = await this.dogWalkingBusiness.index()
+            const walks = await this.dogWalkingBusiness.index(filter)
             
             res.status(200).send({ walks })
         } catch (error) {

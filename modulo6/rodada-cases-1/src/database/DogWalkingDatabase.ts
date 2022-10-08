@@ -7,11 +7,23 @@ export class DogWalkingDatabase extends BaseDatabase {
     public static TABLE_PETS = 'Pets'
     public static TABLE_WALKS = 'Walks'
     
-    public getAllWalks = async(): Promise<IDogWalkingDB[]> => {
-        const result = await BaseDatabase.connection(DogWalkingDatabase.TABLE_DOG_WALKING)
-        .select('*')
-        
-        return result
+    public getAllWalks = async(filter?: string): Promise<IDogWalkingDB[]> => {
+        if(filter && filter === "date") {
+            const today: string = new Date().toJSON().slice(0, 10)
+
+            const result = await BaseDatabase.connection(DogWalkingDatabase.TABLE_DOG_WALKING)
+                .select('*')
+                .where('date', '>=', today)
+                .orderBy('date')
+            
+            return result
+        } else {
+            const result = await BaseDatabase.connection(DogWalkingDatabase.TABLE_DOG_WALKING)
+                .select('*')
+                .orderBy('date')
+            
+            return result
+        }
     }
     
     public getPetsForWalk = async(walkId: string): Promise<IPetDB[]> => {

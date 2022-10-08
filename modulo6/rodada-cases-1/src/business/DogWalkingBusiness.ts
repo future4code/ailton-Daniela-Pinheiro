@@ -12,12 +12,8 @@ export class DogWalkingBusiness {
         public idGenerator: IdGenerator
     ) {}
 
-    public index = async(): Promise<DogWalking[]> => {
-
-        // filtragem e paginação
-        // Apenas os próximos passeios a partir de hoje ou todos
-
-        const result = await this.dogWalkingDatabase.getAllWalks()
+    public index = async(filter?: string): Promise<DogWalking[]> => {
+        const result = await this.dogWalkingDatabase.getAllWalks(filter)
 
         const walks: DogWalking[] = []
 
@@ -32,12 +28,12 @@ export class DogWalkingBusiness {
                     pet.age
                 )
             })
-            
-            // arrumar o display de data > string
+
+
             const dogWalking = new DogWalking(
                 walk.id,
                 walk.status,
-                walk.date,
+                walk.date.toLocaleDateString(),
                 walk.price,
                 walk.duration,
                 walk.latitude,
