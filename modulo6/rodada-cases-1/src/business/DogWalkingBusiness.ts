@@ -49,6 +49,39 @@ export class DogWalkingBusiness {
         return walks
     }
 
+    public show = async(id: string): Promise<DogWalking> => {
+        const result = await this.dogWalkingDatabase.getWalkById(id)
+
+        if(!result) {
+            throw new NotFoundError("Passeio não encontrado")
+        }
+
+        const petsDB = await this.dogWalkingDatabase.getPetsForWalk(result.id)
+        const pets = petsDB.map(pet => {
+            return new Pet(
+                pet.id,
+                pet.name,
+                pet.breed,
+                pet.age
+            )
+        })
+
+        const walk = new DogWalking(
+            result.id,
+            result.status,
+            result.date.toLocaleDateString(),
+            result.price,
+            result.duration,
+            result.latitude,
+            result.longitude,
+            pets,
+            result.startTime,
+            result.finishTime
+        )
+
+        return walk
+    }
+
     public calculatePrice = (duration: number, pets: string[]): number => {
         switch(duration) {
             case 30:

@@ -10,8 +10,7 @@ export class DogWalkingController {
 
     public index = async(req: Request, res: Response) => {
         try {
-            // filtragem e paginação
-            // Apenas os próximos passeios a partir de hoje ou todos
+            // paginação
             const filter: string = req.query.filter as string
             
             const walks = await this.dogWalkingBusiness.index(filter)
@@ -29,9 +28,9 @@ export class DogWalkingController {
         try {
             const id: string = req.params.id
 
-
+            const walk = await this.dogWalkingBusiness.show(id)
             
-            res.status(200).send({ walk: {} })
+            res.status(200).send({ walk })
         } catch (error) {
             if (error instanceof BaseError) {
                 return res.status(error.statusCode).send({ message: error.message })

@@ -10,6 +10,10 @@ GET http://localhost:3003/dog_walking?filter=date
 
 ###
 
+GET http://localhost:3003/dog_walking/show/1a40fa86-4736-4b95-9c4d-f2c0c918d867
+
+###
+
 POST http://localhost:3003/dog_walking/create
 Content-Type: application/json
 
@@ -27,10 +31,10 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:3003/dog_walking/start_walk/650a9b41-338b-45cb-bab5-417b25492368
+PUT http://localhost:3003/dog_walking/start_walk/2aa2ef83-bd3e-43dc-bf0e-cd88da2ed306
 
 ###
 
-PUT http://localhost:3003/dog_walking/finish_walk/650a9b41-338b-45cb-bab5-417b25492368
+PUT http://localhost:3003/dog_walking/finish_walk/2aa2ef83-bd3e-43dc-bf0e-cd88da2ed306
 
 ###

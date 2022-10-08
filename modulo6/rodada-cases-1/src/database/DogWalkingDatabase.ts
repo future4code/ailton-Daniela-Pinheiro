@@ -19,8 +19,8 @@ export class DogWalkingDatabase extends BaseDatabase {
             return result
         } else {
             const result = await BaseDatabase.connection(DogWalkingDatabase.TABLE_DOG_WALKING)
-                .select('*')
-                .orderBy('date')
+            .select('*')
+            .orderBy('date')
             
             return result
         }
@@ -33,6 +33,14 @@ export class DogWalkingDatabase extends BaseDatabase {
         .where({ 'w.walk_id': `${walkId}` })
         
         return result
+    }
+    
+    public getWalkById = async(id: string): Promise<IDogWalkingDB> => {
+        const result = await BaseDatabase.connection(DogWalkingDatabase.TABLE_DOG_WALKING)
+            .select('*')
+            .where({ id })
+
+        return result[0]
     }
     
     public getPetById = async(id: string): Promise<IPetDB> => {
@@ -80,14 +88,6 @@ export class DogWalkingDatabase extends BaseDatabase {
                 pet_id: input.petId,
                 walk_id: input.walkId
             })
-    }
-
-    public getWalkById = async(id: string): Promise<IDogWalkingDB> => {
-        const result = await BaseDatabase.connection(DogWalkingDatabase.TABLE_DOG_WALKING)
-            .select('*')
-            .where({ id })
-
-        return result[0]
     }
 
     public changeStatus = async(input: IChangeStatusInput) => {
