@@ -45,8 +45,8 @@ export class DogWalkingBusiness {
                 walk.latitude,
                 walk.longitude,
                 pets,
-                walk.startTime,
-                walk.finishTime
+                walk.start_time,
+                walk.finish_time
             )
 
             walks.push(dogWalking)
@@ -81,8 +81,8 @@ export class DogWalkingBusiness {
             result.latitude,
             result.longitude,
             pets,
-            result.startTime,
-            result.finishTime
+            result.start_time,
+            result.finish_time
         )
 
         return walk

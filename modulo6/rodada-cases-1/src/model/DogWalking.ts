@@ -69,8 +69,8 @@ export interface IDogWalkingDB {
     duration: number,
     latitude: number,
     longitude: number,
-    startTime: string,
-    finishTime: string
+    start_time: string,
+    finish_time: string
 }
 
 export interface IDogWalkingInput {
