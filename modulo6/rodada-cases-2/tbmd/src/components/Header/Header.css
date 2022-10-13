@@ -2,8 +2,15 @@ header{
     background-color: var(--light-purple);
     width: 100%;
     height: 50px;
-    color: white;
     display: flex;
     align-items: center;
     padding-left: 20px;
+}
+
+#title {
+    color: white;
+}
+
+#title:hover {
+    cursor: pointer;
 }
