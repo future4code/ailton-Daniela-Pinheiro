@@ -15,8 +15,22 @@
 
 .Popular-movies {
     grid-row-start: 2;
-    padding: 8px 8%;
+    padding: 8px 10%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    row-gap: 8px;
+    column-gap: 8px;
+    justify-content: center;
+}
+
+.Pagination {
+    width: 100%;
+    padding-bottom: 8px;
+    display: flex;
+    justify-content: center;
+    color: var(--light-purple);
+}
+
+.Pagination p {
+    margin: 4px;
 }
