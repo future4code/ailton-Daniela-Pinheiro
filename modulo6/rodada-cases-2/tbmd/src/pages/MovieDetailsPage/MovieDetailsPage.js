@@ -27,6 +27,42 @@ export default function MovieDetailsPage() {
         </div>
     })
 
+    const crew = []
+    if(credits && credits.crew && credits.crew.length <= 5) {
+        for(let item of credits.crew) {
+            crew.push(item)
+        }
+    } else {
+        const characters = credits && credits.crew && credits.crew.find(item => {
+            return item.job === "Characters"
+        })
+        characters && crew.push(characters)
+
+        const director = credits && credits.crew && credits.crew.find(item => {
+            return item.job === "Director"
+        })
+        director && crew.push(director)
+
+        const screenplay = credits && credits.crew && credits.crew.find(item => {
+            return item.job === "Screenplay"
+        })
+        screenplay && crew.push(screenplay)
+
+        if(crew.length < 5) {
+            const producer = credits && credits.crew && credits.crew.find(item => {
+                return item.job === "Producer"
+            })
+            producer && crew.push(producer)
+        }
+    }
+
+    const crewCard = crew.map(item => {
+        return <div className="Crew-card">
+            <h4 className="Crew-title">{item.name}</h4>
+            <p>{item.job}</p>
+        </div>
+    })
+
     const genres = movie && movie.genres && movie.genres.map(genre => {
         return genre.name
     }).join(", ")
@@ -39,13 +75,16 @@ export default function MovieDetailsPage() {
             <div className="Movie-details">
                 <h2 id="Movie-title">{movie.title} ({releaseYear})</h2>
                 <div className="Technical-info">
-                    <p>{movie.vote_average}</p> {/* porcentagem (popularity???) */}
+                    <p>{movie.vote_average}</p>
                     <p>{releaseDateBR} (BR)</p>
                     <p>{genres}</p>
                     <p>{movie.runtime} min</p>
                 </div>
                 <h3>Sinopse</h3>
                 <p id="Details-overview">{movie.overview}</p>
+                <div className="Crew-container">
+                    {crewCard}
+                </div>
             </div>
 
             
