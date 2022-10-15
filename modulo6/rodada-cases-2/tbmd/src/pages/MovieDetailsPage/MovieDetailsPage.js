@@ -18,6 +18,15 @@ export default function MovieDetailsPage() {
 
     const releaseYear = movie && new Date(movie.release_date).getFullYear()
 
+    const credits = useRequestData({}, `/movie/${params.id}/credits`)
+    const cast = credits && credits.cast && credits.cast.map(item => {
+        return <div className="Cast-card">
+            <img className="Cast-photo" src={IMG_BASE_URL + item.profile_path} alt={item.name} />
+            <h4>{item.name}</h4>
+            <p><strong>{item.character}</strong></p>
+        </div>
+    })
+
     const genres = movie && movie.genres && movie.genres.map(genre => {
         return genre.name
     }).join(", ")
@@ -39,8 +48,12 @@ export default function MovieDetailsPage() {
                 <p id="Details-overview">{movie.overview}</p>
             </div>
 
+            
             <div className="Movie-cast">
-                <p>Elenco</p>
+                <h2 id="Cast-title">Elenco original</h2>
+                <div className="Cast-container">
+                    {cast}
+                </div>
             </div>
 
             <div className="Movie-trailer">
