@@ -105,11 +105,22 @@
 }
 
 .Movie-trailer {
-    grid-area: 5 / 1 / 6 / 4;
+    grid-area: 5 / 2 / 6 / 4;
     border: 1px solid grey;
 }
 
-.Recomendations {
-    grid-area: 6 / 1 / 7 / 4;
-    border: 1px solid grey;
+.Recommendations {
+    grid-area: 6 / 2 / 7 / 4;
+}
+
+#Rec-title {
+    text-align: left;
+    color: var(--title);
+    margin-bottom: 0;
+}
+
+.Rec-container {
+    display: flex;
+    padding: 4px;
+    padding-left: 0;
 }

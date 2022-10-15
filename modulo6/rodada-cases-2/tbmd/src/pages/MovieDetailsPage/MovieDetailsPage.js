@@ -3,6 +3,7 @@ import "./MovieDetailsPage.css"
 import { useParams } from "react-router-dom"
 import { IMG_BASE_URL } from "../../constants/urls"
 import { useRequestData } from "../../hooks/useRequestData"
+import MovieCard from "../../components/MovieCard/MovieCard"
 
 export default function MovieDetailsPage() {
     const params = useParams()
@@ -67,6 +68,11 @@ export default function MovieDetailsPage() {
         return genre.name
     }).join(", ")
 
+    const recommendations = useRequestData([], `/movie/${params.id}/recommendations`)
+    const recommendedMovies = recommendations && recommendations.results && recommendations.results.map(item => {
+        return <MovieCard movie={item} />
+    })
+    
     return movie && <div className="Details-container">
             <div className="Details-background" />
 
@@ -99,8 +105,12 @@ export default function MovieDetailsPage() {
                 <p>Trailer</p>
             </div>
 
-            <div className="Recomendations">
-                <p>Recomendações</p>
+            <div className="Recommendations">
+                <h2 id="Rec-title">Recomendações</h2>
+                <div className="Rec-container">
+                    {recommendedMovies}
+                </div>
+                
             </div>
         </div>
 }

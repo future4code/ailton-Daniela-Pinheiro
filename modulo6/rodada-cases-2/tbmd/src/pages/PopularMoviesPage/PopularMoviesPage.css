@@ -34,3 +34,6 @@
 .Pagination p {
     margin: 4px;
 }
+.Pagination p:hover {
+    cursor: pointer;
+}

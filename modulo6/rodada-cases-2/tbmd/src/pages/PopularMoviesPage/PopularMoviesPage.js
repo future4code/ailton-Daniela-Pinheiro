@@ -12,6 +12,7 @@ export default function PopularMoviesPage() {
 
     const movies = useRequestData([], '/movie/popular', `&page=${page}`)
 
+    console.log(page)
     return <div className="Movies-container">
         <div className="Tags">
             <h1>Milhões de filmes, séries e pessoas para descobrir. Explore já.</h1>
