@@ -1,7 +1,7 @@
 import React from "react"
 import "./MovieDetailsPage.css"
 import { useParams } from "react-router-dom"
-import { IMG_BASE_URL } from "../../constants/urls"
+import { IMG_BASE_URL, YOUTUBE_BASE_URL } from "../../constants/urls"
 import { useRequestData } from "../../hooks/useRequestData"
 import MovieCard from "../../components/MovieCard/MovieCard"
 
@@ -72,7 +72,11 @@ export default function MovieDetailsPage() {
     const recommendedMovies = recommendations && recommendations.results && recommendations.results.map(item => {
         return <MovieCard movie={item} />
     })
-    
+
+    const videos = useRequestData([], `/movie/${params.id}/videos`)
+    const videoKey = videos && videos.results && videos.results[0] && videos.results[0].key
+    const videoUrl = videoKey && `${YOUTUBE_BASE_URL}${videoKey}`
+
     return movie && <div className="Details-container">
             <div className="Details-background" />
 
@@ -102,7 +106,16 @@ export default function MovieDetailsPage() {
             </div>
 
             <div className="Movie-trailer">
-                <p>Trailer</p>
+                <h2 id="Trailer-title">Trailer</h2>
+                {videoKey?
+                <iframe
+                    width="560"
+                    height="315"
+                    src={videoUrl}
+                    title="Trailer"
+                    frameborder="0"
+                />
+                : <p>Não há trailer para este filme.</p>}
             </div>
 
             <div className="Recommendations">
