@@ -54,15 +54,6 @@
     justify-content: space-between;
 }
 
-.Crew-card {
-    margin: 4px 20px 0 0;
-    text-align: left;
-}
-
-.Crew-title {
-    margin-bottom: 0;
-}
-
 .Movie-cast {
     grid-area: 4 / 2 / 5 / 4;
 }
@@ -98,30 +89,6 @@
     background: var(--dark-text);
 }
 
-.Cast-card {
-    min-width: 160px;
-    padding: 8px;
-    margin: 16px;
-    margin-left: 0;
-    border-radius: 4px;
-    box-shadow: 0 4px 10px var(--light-text);
-    text-align: left;
-}
-
-.Cast-photo {
-    width: 160px;
-    height: auto;
-    border-radius: 4px;
-}
-
-.Cast-card h4 {
-    margin: 0;
-}
-
-.Cast-card p {
-    margin: 0;
-    color: var(--dark-text);
-}
 
 .Movie-trailer {
     grid-area: 5 / 2 / 6 / 4;
