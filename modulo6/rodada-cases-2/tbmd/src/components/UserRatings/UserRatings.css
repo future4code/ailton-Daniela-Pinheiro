@@ -1,0 +1,34 @@
+.Ratings-container {
+    width: 132px;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+}
+
+.Ratings-container p {
+    margin: 0;
+    margin-left: 8px;
+    font-size: small;
+}
+
+.Ratings {
+    background-color: var(--title);
+    padding: 12px 6px;
+    border-radius: 40px;
+}
+
+.Ratings-container h3 {
+    margin: 0;
+}
+
+#Ratings-low {
+    color: firebrick;
+}
+
+#Ratings-medium {
+    color: orange;
+}
+
+#Ratings-high {
+    color: limegreen;
+}

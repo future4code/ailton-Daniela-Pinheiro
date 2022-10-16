@@ -1,5 +1,4 @@
 import React from "react"
-import "./TechnicalInfo.css"
 
 export default function TechnicalInfo(props) {
     const {movie, releaseDates } = props
@@ -19,7 +18,6 @@ export default function TechnicalInfo(props) {
     const minutes = movie.runtime && movie.runtime % 60
 
     return <>
-        <p>{movie.vote_average}</p> 
         <p>{releaseDateBR} (BR)</p>
         <p>{genres}</p>
         <p>{hours}h {minutes}min</p>

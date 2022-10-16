@@ -7,6 +7,7 @@ import MovieCard from "../../components/MovieCard/MovieCard"
 import CastCard from "../../components/CastCard/CastCard"
 import CrewCards from "../../components/CrewCards/CrewCards"
 import TechnicalInfo from "../../components/TechnicalInfo/TechnicalInfo"
+import UserRatings from "../../components/UserRatings/UserRatings"
 
 export default function MovieDetailsPage() {
     const params = useParams()
@@ -45,6 +46,7 @@ export default function MovieDetailsPage() {
                 <div className="Technical-info">
                     {technicalInfo}
                 </div>
+                {movie && <UserRatings movie={movie} />}
                 <h3>Sinopse</h3>
                 <p id="Details-overview">{movie.overview}</p>
                 <div className="Crew-container">
