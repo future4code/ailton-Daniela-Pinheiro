@@ -22,3 +22,14 @@
     margin: 0;
     color: var(--dark-text);
 }
+
+
+@media (max-width: 500px) {
+    .Cast-card {
+        min-width: 132px;
+    }
+    
+    .Cast-photo {
+        width: 132px;
+    }
+}

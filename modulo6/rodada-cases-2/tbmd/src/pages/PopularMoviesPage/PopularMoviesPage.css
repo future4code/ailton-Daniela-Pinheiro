@@ -24,16 +24,50 @@
 }
 
 .Pagination {
-    width: 100%;
     padding-bottom: 8px;
     display: flex;
-    justify-content: center;
-    color: var(--light-purple);
+    justify-content: space-around;
+    margin: 0 28% 0 28%;
 }
 
 .Pagination p {
     margin: 4px;
 }
+
 .Pagination p:hover {
     cursor: pointer;
+}
+
+.Pages-index {
+    border: none;
+    background-color: transparent;
+    color: var(--light-purple);
+}
+
+.Pages-index:hover {
+    cursor: pointer;
+}
+
+.Current-page {
+    border: none;
+    background-color: transparent;
+    color: var(--dark-purple);
+    font-size:large
+}
+
+.Current-page:hover {
+    cursor: pointer;
+}
+
+@media (max-width: 500px) {    
+    .Tags {
+        padding: 12px;
+        text-align: left;
+    }
+    
+    .Popular-movies {
+        padding: 8px;
+        row-gap: 4px;
+        column-gap: 4px;
+    }
 }

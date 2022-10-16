@@ -6,13 +6,23 @@ import { useRequestData } from "../../hooks/useRequestData"
 export default function PopularMoviesPage() {
     const [page, setPage] = useState(1)
 
-    const onClickPage = (number) => {
-        setPage(number)
-    }
+    const totalPages = 6
+
+    const pages = Array.from(Array(totalPages), (item, index) => {
+        if ((index + 1) === page) {
+            return <button className="Current-page" key={index} onClick={() => setPage(index + 1)}>
+                <strong>{index + 1}</strong>
+            </button>
+        } else {
+            return <button className="Pages-index" key={index} onClick={() => setPage(index + 1)}>
+                <strong>{index + 1}</strong>
+            </button>
+        }
+        
+    })
 
     const movies = useRequestData([], '/movie/popular', `&page=${page}`)
 
-    console.log(page)
     return <div className="Movies-container">
         <div className="Tags">
             <h1>Milhões de filmes, séries e pessoas para descobrir. Explore já.</h1>
@@ -23,10 +33,7 @@ export default function PopularMoviesPage() {
             })}
         </div>
         <div className="Pagination">
-            <p onClick={() => onClickPage(1)}><strong>1</strong></p>
-            <p onClick={() => onClickPage(2)}><strong>2</strong></p>
-            <p onClick={() => onClickPage(3)}><strong>3</strong></p>
-            <p onClick={() => onClickPage(4)}><strong>4</strong></p>
+            {pages}
         </div>
     </div>
 }

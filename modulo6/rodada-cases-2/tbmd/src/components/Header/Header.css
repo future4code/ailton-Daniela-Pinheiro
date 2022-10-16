@@ -14,3 +14,10 @@ header{
 #title:hover {
     cursor: pointer;
 }
+
+@media (max-width: 500px) {
+    header{
+        justify-content: center;
+        padding: 0;
+    }
+}

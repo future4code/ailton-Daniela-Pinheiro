@@ -48,3 +48,20 @@
     margin: 0;
     color: var(--light-text)
 }
+
+@media (max-width: 500px) {
+    .Movie-card {
+        width: 160px;
+        padding: 4px;
+        margin: 2px;
+    }
+    
+    .Poster {
+        width: 160px;
+        height: auto;
+    }
+    
+    .Title-card {
+        width: 160px;
+    }
+}

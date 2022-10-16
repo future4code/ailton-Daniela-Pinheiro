@@ -138,3 +138,75 @@
 .Rec-container::-webkit-scrollbar-thumb:hover {
     background: var(--dark-text);
 }
+
+@media (max-width: 500px) {
+    .Details-container {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    }
+    
+    .Details-background {
+        grid-area: 1 / 1 / 3 / 2;
+        background-color: var(--dark-purple);
+    }
+    
+    .Details-poster {
+        grid-area: 1 / 1 / 2 / 2;
+        width: 60%;
+        height: auto;
+        margin: 16px 0;
+        justify-self: center;
+    }
+
+    .Technical-info {
+        display: flex;
+        flex-direction: column;
+        margin: 4px 0;
+    }
+
+    .Technical-info p {
+        margin: 2px 0;
+    }
+    
+    .Movie-details {
+        grid-area: 2 / 1 / 3 / 2;
+        color: white;
+    }
+    
+    #Details-overview {
+        max-width: 90%;
+    }
+    
+    .Crew-container {
+        max-width: 90%;
+    }
+    
+    .Movie-cast {
+        grid-area: 3 / 1 / 4 / 2;
+        padding: 2px;
+    }
+    
+    .Movie-trailer {
+        grid-area: 4 / 1 / 5 / 2;
+        padding: 2px;
+    }
+
+    .Movie-trailer iframe {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    .Recommendations {
+        grid-area: 5 / 1 / 6 / 2;
+        padding: 2px;
+    }
+    
+    .Rec-container {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 4px;
+    }
+}
