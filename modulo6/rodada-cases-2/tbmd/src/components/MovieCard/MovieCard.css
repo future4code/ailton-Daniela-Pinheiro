@@ -1,0 +1,67 @@
+.Movie-card {
+    width: 160px;
+    min-height: 340px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4px;
+    margin: 8px;
+}
+
+.Movie-card:hover {
+    cursor: pointer;
+}
+
+.Movie-card:hover div{
+    transition: 1s;
+    width: 172px;
+    font-size: 1.1em;
+}
+
+.Movie-card:hover img{
+    transition: 1s;
+    width: 172px;
+    height: 256px;
+}
+
+.Poster {
+    width: 160px;
+    height: 240px;
+    border-radius: 4px;
+    border: 1px solid var(--light-text);
+}
+
+.Title-card {
+    width: 160px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.Movie-title {
+    margin-top: 8px;
+    margin-bottom: 6px;
+    text-align: left;
+}
+
+.Release-date {
+    margin: 0;
+    color: var(--light-text)
+}
+
+@media (max-width: 500px) {
+    .Movie-card {
+        width: 160px;
+        padding: 4px;
+        margin: 2px;
+    }
+    
+    .Poster {
+        width: 160px;
+        height: auto;
+    }
+    
+    .Title-card {
+        width: 160px;
+    }
+}

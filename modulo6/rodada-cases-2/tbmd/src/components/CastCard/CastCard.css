@@ -1,0 +1,35 @@
+.Cast-card {
+    min-width: 160px;
+    padding: 8px;
+    margin: 16px;
+    margin-left: 0;
+    border-radius: 4px;
+    box-shadow: 0 4px 10px var(--light-text);
+    text-align: left;
+}
+
+.Cast-photo {
+    width: 160px;
+    height: auto;
+    border-radius: 4px;
+}
+
+.Cast-card h4 {
+    margin: 0;
+}
+
+.Cast-card p {
+    margin: 0;
+    color: var(--dark-text);
+}
+
+
+@media (max-width: 500px) {
+    .Cast-card {
+        min-width: 132px;
+    }
+    
+    .Cast-photo {
+        width: 132px;
+    }
+}
