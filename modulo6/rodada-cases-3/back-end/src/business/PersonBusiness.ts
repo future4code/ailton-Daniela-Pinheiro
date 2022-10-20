@@ -12,19 +12,15 @@ export class PersonBusiness {
     public createPerson = async(input: IPersonInput): Promise<string> => {
         const { name, surname, participation } = input
 
-        if(!name || !surname || !participation) {
-            throw new ParametersError("Missing parameters 'name', 'surname' or 'participation'")
-        }
-
-        if(typeof name != "string") {
+        if(!name || typeof name != "string") {
             throw new ParametersError("Invalid 'name', must be a string")
         }
 
-        if(typeof surname != "string") {
+        if(!surname || typeof surname != "string") {
             throw new ParametersError("Invalid 'surname', must be a string")
         }
 
-        if(isNaN(participation)) {
+        if(!participation || isNaN(participation)) {
             throw new ParametersError("Invalid 'participation', must be a number")
         }
 

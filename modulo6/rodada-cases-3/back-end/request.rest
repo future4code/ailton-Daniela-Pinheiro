@@ -8,5 +8,5 @@ Content-Type: application/json
 {
     "name": "Dan",
     "surname": "Castro",
-    "participation": 2
+    "participation": 8
 }
