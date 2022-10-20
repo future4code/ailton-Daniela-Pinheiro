@@ -1,8 +1,8 @@
-GET http://localhost:3003/person
+GET https://case-3-cubo.herokuapp.com/person/
 
 ###
 
-POST http://localhost:3003/person
+POST https://case-3-cubo.herokuapp.com/person/
 Content-Type: application/json
 
 {
