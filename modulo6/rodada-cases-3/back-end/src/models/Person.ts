@@ -5,6 +5,12 @@ export interface IPersonDB {
     participation: number
 }
 
+export interface IPersonInput {
+    name: string,
+    surname: string,
+    participation: number
+}
+
 export class Person {
     constructor(
         private id: string,
