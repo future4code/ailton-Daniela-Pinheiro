@@ -1,1 +1,1 @@
-export const BASE_URL = "https://case-3-cubo.herokuapp.com/person"
+export const BASE_URL = "https://case-3-cubo.herokuapp.com/person/"
