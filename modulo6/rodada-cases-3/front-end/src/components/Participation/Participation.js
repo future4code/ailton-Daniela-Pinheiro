@@ -6,11 +6,8 @@ import { useRequestData } from "../../hooks/useRequestData"
 
 export default function Participation() {
     const participationData = useRequestData([])
-    
     const persons = participationData && participationData.persons
-
-    // FUNÇÃO PARA CALCULAR A PORCENTAGEM
-
+  
     return <ParticipationContainer>
         <Table persons={persons} />
         <Graph persons={persons} />
