@@ -4,7 +4,7 @@ import { TitleContainer } from "./Title-styled"
 export default function Title() {
 
     return <TitleContainer>
-        <h2>DATA</h2>
+        <h1>DATA</h1>
         <p>Lorem ipsum dolor sit amet</p>
     </TitleContainer>
 }

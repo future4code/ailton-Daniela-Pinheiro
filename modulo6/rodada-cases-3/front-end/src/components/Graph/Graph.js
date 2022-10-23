@@ -1,6 +1,6 @@
 import React from 'react'
 import { PieChart, Pie, Cell, Legend } from 'recharts'
-import { COLORS } from '../../constants/colors'
+import { GRAPH_COLORS } from '../../constants/colors'
 
 export default function Graph(props) {
     const persons = props.persons
@@ -31,7 +31,7 @@ export default function Graph(props) {
         {data && data.map((item, index) => (
             <Cell
                 key={`cell-${index}`}
-                fill={COLORS[index % COLORS.length]}
+                fill={GRAPH_COLORS[index % GRAPH_COLORS.length]}
             />
         ))}
         </Pie>
