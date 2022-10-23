@@ -6,11 +6,11 @@ export const useRequestData = (initialData) => {
     const [ data, setData ] = useState(initialData)
 
     useEffect(() => {
-        axios.get(BASE_URL, {
-        }).then(response => {
+        axios.get(BASE_URL)
+        .then(response => {
             setData(response.data)
         }).catch(error => {
-            console.log(error.response.data.message)
+            alert(error.response.data.message)
         })
 
     }, [data])

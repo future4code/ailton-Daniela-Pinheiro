@@ -1,4 +1,6 @@
-export const HEADER_COLOR = "#00b8e2"
+export const FORM_COLOR = "#00b8e2"
+
+export const BUTTON_COLOR = "#008ead"
 
 export const TEXT_COLOR = "#394b50"
 
