@@ -11,6 +11,6 @@ export default function Header() {
     }
 
     return <header>
-        <h2 id="title" onClick={onClickTitle}>TBMD</h2>
+        <h2 id="title" onClick={onClickTitle}>TMDB</h2>
     </header>
 }
