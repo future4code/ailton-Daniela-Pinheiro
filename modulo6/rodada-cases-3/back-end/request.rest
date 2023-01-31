@@ -1,0 +1,12 @@
+GET https://case-3.onrender.com/person/
+
+###
+
+POST https://case-3.onrender.com/person/
+Content-Type: application/json
+
+{
+    "name": "Dan",
+    "surname": "Castro",
+    "participation": 8
+}

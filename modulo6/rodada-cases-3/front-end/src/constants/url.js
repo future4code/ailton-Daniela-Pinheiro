@@ -1,0 +1,1 @@
+export const BASE_URL = "https://case-3.onrender.com/person/"
