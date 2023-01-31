@@ -1,8 +1,8 @@
-GET https://case-3-cubo.herokuapp.com/person/
+GET https://case-3.onrender.com/person/
 
 ###
 
-POST https://case-3-cubo.herokuapp.com/person/
+POST https://case-3.onrender.com/person/
 Content-Type: application/json
 
 {

@@ -1,5 +1,8 @@
 ## Case Cubo
 
+### Link do case
+<https://github.com/cubonetwork/fullstack-challenge>
+
 ### Front-End
 
 #### Formulário
@@ -16,7 +19,7 @@
 - Atualizado automaticamente com novas informações cadastradas através do formulário.
 
 #### Surge
-<https://ablaze-protest.surge.sh/>
+<https://last-queen.surge.sh/>
 
 ### Back-End
 
